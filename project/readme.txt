@@ -49,6 +49,65 @@ The user is provided with predictions from two top Machine Learning algorithms f
 
 
 +========================================
+INFO - Astronomy of Transients
+Details on the dataset, with introduction to the field of time-series (transient) astronomy is provided in data_note.pdf that comes with the Kaggle dataset https://www.kaggle.com/c/PLAsTiCC-2018/data.
+In summary:
+The data is time-series measurements of intensity (flux) from stars.  Flux is measured at 6 frequency bands.  At most once meaurement per band is taken every two weeks however measurements are aperiodic due to schedule and weather, and there may even be monthlong gaps if the object is not visible due seasonal position of objet in the sky. 
+Difference imaging is used - the intensity measured on a particular night is compared to a prior measurement and the difference is reported.  Thus a star that is unchanging would record a flux of zero, and a star changing in flux would record a positive or negative value.  The manner in which the flux changes (it's frequency composition, rate of change, and duration of change) are indicators as to the type of event that is occurring.  There are 15 classes of objects in the dataset, 14 of which are reflected in the training data.
+
+Behavior can be roughly categorized as aperiodic (one-time), periodic (repeating at a specific period), and episotic (repeating at a non-periodic interval). Examples are (respectively) supernova, pulsar, and <???>.
+
+Red-shift is a property whereby more distant objects are observed to have a shifted, and broadened, frequency spectrum.
+
+Stars in the our our Milky-way galaxy can be individually observed.  Stars in other galaxies are not measured individually, rather are measured using the above difference technique, where the contribution of the galaxy is considered 'background' and contribution from the transient is represented as the difference.
+
+3) The Data
+
+Metadata Table:
+object_id (int32) = primary key
+ra    (float32) = right ascension
+decl  (float32) = declination
+gal_l (float32) = galactic longitude
+gal_b (float32) = galactic latitude
+ddf   (boolean) = indicator of Deep Drilling Field (will have low measure of flux error).
+
+hostgal_specz (float32) = spectroscopic redshift of host galaxy = accurate measure of redshift
+hostgal_photoz (float32) = photometric redshift of host galaxy = proxy for specz and less accurate
+hostgal_photoz_err (float32) = uncertainty in hostgal_photoz 
+distmod (float32) = distance calculated from hostgal_photoz
+MWEBV (float32) = measure of extinction of light for object in Milky Way galaxy 
+target (int8) = class of object
+
+Time-series Table:
+object_id (int32 and foreign key to Metadata table)
+mjd (float64) = Modified Julian Date
+passband (int8) = one of [0,1,2,3,4,5]
+flux (float32) = measure of intensity at the passband
+flux_err (floaat32) = uncertainty on the measurement of flux
+detected (boolean) = indicator the brightness is significant relative to threshold
+
+Note:
+Milky-way objects are identified  
+
+
+CREATING DATA FOR THE GAME:
+For the game we only need a small subset of the data, but we want to understand what we're including.
+Questions:
+How many object in the training set?
+How many data points in the training set?
+How many objects in training set are galactic (Milky-Way)?  [redshift=0]
+How many objects in training set are galactic AND are DDF ?
+THEN -
+With that galactic+DDF subset - what is the distribution (count) of classes ?
+
+
+
+
+
+
+
+
++========================================
 Dataset
 timeseries table =  measurments of "flux" (intensity) for one of 6 frequency bands.  Samples are taken aperiodically.  There is a foreign key to Object Identifier.
 Object identifier table = object ID and 
