@@ -81,11 +81,8 @@ fmt_i3 = '{:3}'
 	create a home.html
 	create a views.py
 
-
-2) Move/clean up so files/format are in the correct places.
-
-3) Create Model classes (schema) and populate a few entries by hand.
-
+8) extend the user model to add a "total score" attribute
+https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
 
 
 https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+
+<body>
+    <h1>Welcome, {{ user.username }}</h1>
+
+    Stars you chased:
+    <ul>
+        {% for r in rounds %}
+        <li>Round {{ r.id }}: {{ r.name }} </li>
+        {% endfor %}
+    </ul>
+    <p></p>
+    Your total score is {{ user.profile.total_score }}
+
+    <p></p>
+    Leaderboard:
+    <ul>
+        {% for l in leader_board %}
+        <li>Player {{ l.id }}: {{ l.username }} {{ l.profile.total_score}} </li>
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>
