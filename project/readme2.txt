@@ -84,6 +84,36 @@ fmt_i3 = '{:3}'
 8) extend the user model to add a "total score" attribute
 https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
 
+9) now (temporarily) add code in the view to extract data for the home page
+list of games this user (player's status)
+list of users (leaderboard)
+
+    rounds_this_player = GameplayRound.objects.filter(player=request.user)
+    rounds_this_player_list = list(rounds_this_player)
+
+    leader_board = User.objects.all()
+    leader_board_list = list(leader_board)
+
+    return render(request, "app_player/home.html",
+                  {'rounds': rounds_this_player_list,
+                   'leader_board': leader_board_list}
+                  )
+
+10) now move the model-specific logic into the model - as advised at https://app.pluralsight.com/course-player?clipId=2a19bcef-0aae-45f7-9cfb-bb6ed672c3c4
+to do this:
+  a) create a custom queryset class (derive from QuerySet class")
+     this will represent a collection of objects from the database
+     can call "filter" and "exclude" on it
+     e.g. an object that represents all game objects...
+  b) within that QuerySet create a method "all_games" or whatever
+  c) within the **Games** class, assign "object = GamesQuerySet.as_manager()"
+     that over-rides the default "objects" (examples of use earlier).  Whoh!
+
+ 
+
+
+
+
 
 https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
 
