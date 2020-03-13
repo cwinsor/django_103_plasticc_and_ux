@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from app_gameplay.models import GameplayRound
 
+
 def home(request):
 
     rounds_this_player = GameplayRound.objects.rounds_this_player(request.user)
