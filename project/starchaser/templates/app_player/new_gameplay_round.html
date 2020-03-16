@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+New Gameplay Round
+{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url 'new_gameplay_round' %}">
+    {{ form }}
+    <button type="submit">Create the gameplay round</button>
+</form>
+{% endblock %}

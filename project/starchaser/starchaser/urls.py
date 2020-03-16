@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import welcome
+from .views import welcome, info
 
 urlpatterns = [
-    path('', welcome, name='star_chaser_welcome'),
+    path('',  welcome, name='star_chaser_welcome'),
+    path('info/', info, name="star_chaser_info"),
     path('player/', include('app_player.urls')),
     path('admin/', admin.site.urls),
 ]

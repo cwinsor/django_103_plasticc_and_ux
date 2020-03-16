@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+New Plasticc Sample
+{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url 'new_plasticc_sample' %}">
+    {{ form }}
+    <button type="submit">Create the sample</button>
+</form>
+{% endblock %}

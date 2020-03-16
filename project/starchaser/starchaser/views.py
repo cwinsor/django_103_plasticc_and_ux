@@ -1,5 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def welcome(request):
-    return render(request, 'app_player/welcome.html')
+    if request.user.is_authenticated:
+        return redirect('player_home')
+    else:
+        return render(request, 'starchaser/welcome.html')
+
+
+def info(request):
+    return render(request, 'starchaser/info.html')

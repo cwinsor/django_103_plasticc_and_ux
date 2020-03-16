@@ -1,7 +1,11 @@
 
 Procedure:
-This is adapted from "Django Fundamentals" By Reindert-Jan Ekker (https://app.pluralsight.com/library/courses/django-fundamentals-update/table-of-contents)
 
+This is the steps to deploy the application.  It is adapted from "Django Fundamentals" By Reindert-Jan Ekker (https://app.pluralsight.com/library/courses/django-fundamentals-update/table-of-contents)
+
+It assumes you already identified target customer, designed and verified wireframes, and have a database schema and site layout.  Database schema is at bottom of this file.
+
++==========================
 
 0) Create a virtual environment using pip and requirements.txt.
 
@@ -10,7 +14,7 @@ This is adapted from "Django Fundamentals" By Reindert-Jan Ekker (https://app.pl
 	cd starchaser
 	python manage.py runserver
 
-2) Within Django, create an App
+2) Within Django, create a project and project-app
 	python manage.py startapp app_gameplay
 	edit settings.py to add app_gameplay to the INSTALLED_APPS list
 
@@ -84,7 +88,7 @@ fmt_i3 = '{:3}'
 8) extend the user model to add a "total score" attribute
 https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
 
-9) now (temporarily) add code in the view to extract data for the home page
+9) add temporary code in the view to extract data for the home page
 list of games this user (player's status)
 list of users (leaderboard)
 
@@ -99,7 +103,7 @@ list of users (leaderboard)
                    'leader_board': leader_board_list}
                   )
 
-10) now move the model-specific logic into the model - as advised at https://app.pluralsight.com/course-player?clipId=2a19bcef-0aae-45f7-9cfb-bb6ed672c3c4
+10) move the model-specific logic into the model - as advised at https://app.pluralsight.com/course-player?clipId=2a19bcef-0aae-45f7-9cfb-bb6ed672c3c4
 to do this:
   a) create a custom queryset class (derive from QuerySet class")
      this will represent a collection of objects from the database
@@ -109,17 +113,48 @@ to do this:
   c) within the **Games** class, assign "object = GamesQuerySet.as_manager()"
      that over-rides the default "objects" (examples of use earlier).  Whoh!
 
+11a) static content:  establish folder for CSS, javascript, images.
+Use django markup in .html to refer to these
+
+11b) use template inheritance to "extend" and re-use html
+decouple static templates from our app - putting everything at a top-level in the Project.
+this is identified in settings.py "TEMPLATES" -> DIRS
+STATICFILES_DIRS - list of static files
+as identified at https://app.pluralsight.com/course-player?clipId=d87db3e0-e7b0-479d-ad70-41e2bd2a78da
+
+12 name your URLs in url.py
+
+13 add @login_required before the methods in views.py
+is_authenticated = if statement in a view or template
+login_required - decorate entire view function
+redirect to named URL
+
+14 create a login page, use build-in view classes and login template, and configuration
+https://app.pluralsight.com/course-player?clipId=f05d370f-6e7f-4a8f-9840-a1066943a313
+redirect login to our home page - this is done in settings.py LOGIN_REDIRECT_URL
+
+same for logout
+
+15 Forms  (add a ModelForm class, add a View function, render with a Template)
+https://app.pluralsight.com/course-player?clipId=5ba2f661-dcc1-40ad-b5e7-93c1a13498ba
+create a form based on a model... (derive from ModelForm)
+
+
+
+
+
+
+is_authenticated
+login_required
+redirection and name URLs
+
+
+
  
 
 
-
-
-
-https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone
-
-
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
++===============
+Database schema
 
 download PLAsTiCC dataset from Kaggle
 Save into dedicated folder and unzip.
@@ -157,7 +192,5 @@ object_id (foreign key to PlasticcObject)
 star_name (string)
 bet_1 = small int
 ...
-bet_13
 
 
-To
