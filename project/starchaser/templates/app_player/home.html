@@ -20,14 +20,12 @@ Leaderboard:
     {% endfor %}
 </ul>
 
-<a href="{% url 'new_plasticc_star' %}">
-    Add a new star
-</a>
-<a href="{% url 'new_plasticc_sample' %}">
-    Add a new sample
-</a>
-<a href="{% url 'new_gameplay_round' %}">
-    Add a new gameplay round
-</a>
+<br>
+<button type="submit" value="foo" onclick="window.location.href='{% url 'player_pick_star' %}'" name='mybtn2'>Select a star</button>
+
+<br>
+<a href="{% url 'new_plasticc_star' %}">Add a new star</a>
+<a href="{% url 'new_plasticc_sample' %}">Add a new sample</a>
+<a href="{% url 'new_gameplay_round' %}">Add a new gameplay round</a>
 
 {% endblock %}

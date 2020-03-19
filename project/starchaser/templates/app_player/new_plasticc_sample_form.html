@@ -7,6 +7,7 @@ New Plasticc Sample
 {% block content %}
 <form method="post" action="{% url 'new_plasticc_sample' %}">
     {{ form }}
+    {% csrf_token %}
     <button type="submit">Create the sample</button>
 </form>
 {% endblock %}

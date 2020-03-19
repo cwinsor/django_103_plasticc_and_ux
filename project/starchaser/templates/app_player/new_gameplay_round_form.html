@@ -7,6 +7,7 @@ New Gameplay Round
 {% block content %}
 <form method="post" action="{% url 'new_gameplay_round' %}">
     {{ form }}
+    {% csrf_token %}
     <button type="submit">Create the gameplay round</button>
 </form>
 {% endblock %}

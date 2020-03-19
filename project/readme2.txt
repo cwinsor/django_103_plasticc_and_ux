@@ -22,6 +22,7 @@ It assumes you already identified target customer, designed and verified wirefra
 	class PlasticcObject(models.Model):  <from schema spec...>
 	python manage.py makemigrations
 	python manage.py migrate
+----> test for migration
 
 4) Register Models with the Admin interface
 	in admin.py - add:
@@ -34,6 +35,7 @@ It assumes you already identified target customer, designed and verified wirefra
 4) Create superuser account
 	python manage.py createsuperuser
 	visit /admin to confirm, add some elements of data using "admin"
+---> test there should be an admin account, and should be able to add elements
 
 5) Add _str_ method to the Models
 best practice:
@@ -103,7 +105,8 @@ list of users (leaderboard)
                    'leader_board': leader_board_list}
                   )
 
-10) move the model-specific logic into the model - as advised at https://app.pluralsight.com/course-player?clipId=2a19bcef-0aae-45f7-9cfb-bb6ed672c3c4
+10) move the model-specific logic into the model
+https://app.pluralsight.com/course-player?clipId=2a19bcef-0aae-45f7-9cfb-bb6ed672c3c4
 to do this:
   a) create a custom queryset class (derive from QuerySet class")
      this will represent a collection of objects from the database
@@ -128,6 +131,7 @@ as identified at https://app.pluralsight.com/course-player?clipId=d87db3e0-e7b0-
 is_authenticated = if statement in a view or template
 login_required - decorate entire view function
 redirect to named URL
+---> test - all pages should require login
 
 14 create a login page, use build-in view classes and login template, and configuration
 https://app.pluralsight.com/course-player?clipId=f05d370f-6e7f-4a8f-9840-a1066943a313
@@ -135,22 +139,43 @@ redirect login to our home page - this is done in settings.py LOGIN_REDIRECT_URL
 
 same for logout
 
-15 Forms  (add a ModelForm class, add a View function, render with a Template)
+15 Create our own Form using ModelForm
+Procedure is add a ModelForm class, add a View function, render with a Template.
 https://app.pluralsight.com/course-player?clipId=5ba2f661-dcc1-40ad-b5e7-93c1a13498ba
-create a form based on a model... (derive from ModelForm)
+To do this:
+create a form based on a model... (derive from ModelForm).  This is done in forms.py
+create a view function that renders the template.  This does a return render (.html) is in views.py
+create the template (.html) that render the form... i.e.   {{ form }} and submit button.  This is in blah.html
+add the url map to the view function in urls.py
+to get to the page - add a link to your homepage
 
+16 add form submit handling and CSRF protection
+Procedure is to discern GET vs POST, validate user input, show validation errors, redirect on success.
+https://app.pluralsight.com/course-player?clipId=98f0ce7f-bb5e-4970-bd7c-6509c3211205
 
+always perform server-side validation of user input - this is becuase client-side form validation can easily be edited
+also - always add the <CSRF> (Cross Site Request Forgery).  When Django displays a form the Django server creates a special token, and the browser needs to send the token back when we submit the form.
 
+----> test for CSRF.  This needs to be done on every post URL.
 
+----> test for server-side validation of POST.  What that means is that a rogue user cannot 
 
+----> test - the user authentication should take advantage of some base infrastructure
 
-is_authenticated
-login_required
-redirection and name URLs
-
-
-
+----> test - server-side input validation (individual fields) - for each field the server disallows invalid values.  THIS SHOULD BE PART OF INFRASTRUCTURE AROUND MODEL.  MANUAL CHECK IS REQUIRED FOR ANY FIELDS THAT ARE FREEFORM OR NOT CONSTRAINED IN MODEL DEFINITION.
+----> test - server-side input validation (relationships) - for each combination of fields the server enforces relationships.  This is entirely hand-coded.
  
+17 Create our own Form without ModelForm.  View that takes an argument.
+
+
+
+<!-- <button type="submit" value={{excel_path}} onclick="location.href='{% url 'downloadexcel' %}'" name='mybtn2'>Download Excel file</button> -->
+
+
+
+<!--onclick="{% url 'player_pick_star' %}" value="Choose a star"/> -->
+
+
 
 
 +===============
