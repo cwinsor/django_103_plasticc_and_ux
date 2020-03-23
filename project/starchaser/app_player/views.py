@@ -28,25 +28,20 @@ def home(request):
 def pick_star(request):
 
     logger = logging.getLogger(__name__)
-    logger.debug('this is debug')
-    logger.info('this is info')
-    logger.warning('this is warning')
-    logger.error('this is error')
-    logger.critical('this is critical')
-
 
     num_stars = 4
     num_starclasses = 13
 
-    star_queryset = PlasticcStar.objects.random_set(num_stars)
+    star_queryset_allfields = PlasticcStar.objects.random_set(num_stars)
     #star_list = star_queryset.values_list('ra', flat=True).get(pk=1)
     #star_list = star_queryset.values_list('star_id', flat=True).get(pk=100)
     #star_list = star_queryset.values_list('star_id', 'ra').get(pk=100)
     #star_list = star_queryset.values_list('star_id', 'ra')
     #star_list = star_queryset.values_list('ra')
-    #star_list = star_queryset.values_list('star_id', flat=True)
-    #star_list = star_queryset.values('star_id')
-    star_list = star_queryset.values_list('star_id')
+    #star_queryset_id = star_queryset_allfields.values_list('star_id', flat=True)
+    #star_queryset_id = star_queryset_allfields.values('star_id')
+    star_queryset_id  = star_queryset_allfields.values('star_id')
+    logger.debug(type(star_queryset_id))
 
     #evals_btrotta = pd.DataFrame(
     #    data=np.random.randint(0, 100, size=(13, 2)),
@@ -55,7 +50,7 @@ def pick_star(request):
     
     evals_btrotta = pd.DataFrame(
         data=np.random.randint(0, 100, size=(13, 2)),
-        columns=star_list).T
+        columns=star_queryset_id).T
 
     evals_btrotta_html = evals_btrotta.to_html()
 
@@ -76,8 +71,8 @@ def pick_star(request):
         request,
         "app_player/pick_star.html",
         {
-            'star_queryset': star_queryset,
-            'star_list': star_list,
+            'star_queryset_allfields': star_queryset_allfields,
+            'star_queryset_id': star_queryset_id,
             'evals_btrotta_html': evals_btrotta_html
             }
         )
