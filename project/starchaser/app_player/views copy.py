@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import logging
 
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -27,60 +26,44 @@ def home(request):
 @login_required
 def pick_star(request):
 
-    logger = logging.getLogger(__name__)
-    logger.debug('this is debug')
-    logger.info('this is info')
-    logger.warning('this is warning')
-    logger.error('this is error')
-    logger.critical('this is critical')
-
-
-    num_stars = 4
+    num_stars = 10
     num_starclasses = 13
 
-    star_queryset = PlasticcStar.objects.random_set(num_stars)
-    #star_list = star_queryset.values_list('ra', flat=True).get(pk=1)
-    #star_list = star_queryset.values_list('star_id', flat=True).get(pk=100)
-    #star_list = star_queryset.values_list('star_id', 'ra').get(pk=100)
-    #star_list = star_queryset.values_list('star_id', 'ra')
-    #star_list = star_queryset.values_list('ra')
-    #star_list = star_queryset.values_list('star_id', flat=True)
-    #star_list = star_queryset.values('star_id')
-    star_list = star_queryset.values_list('star_id')
+    the_data = PlasticcStar.objects.random_set(num_stars)
 
-    #evals_btrotta = pd.DataFrame(
-    #    data=np.random.randint(0, 100, size=(13, 2)),
-    #    columns=['star00','star01']
-    #    ).T
-    
+    the_table = pd.DataFrame(
+        columns=['starId']
+        data=the_data
+    )
+
+      evals_btrotta = pd.DataFrame(
+        data=np.random.randint(0, 100, size=(13, 2)),
+        columns=['star00','star01']
+        ).T
+
+
+
+    stars_available = PlasticcStar.objects.random_set()
+    stars_available_list = list(stars_available)[:num_stars]
+
+    # example
+    # df = pd.DataFrame(np.random.randint(0,100,size=(15, 4)), columns=list('ABCD'))
     evals_btrotta = pd.DataFrame(
         data=np.random.randint(0, 100, size=(13, 2)),
-        columns=star_list).T
-
+        columns=['star00','star01']
+        ).T
+    evals_btrotta = evals_btrotta.T
     evals_btrotta_html = evals_btrotta.to_html()
+    evals_btrotta_list = evals_btrotta.to_numpy().tolist()
 
-
-
-
-
-    #mytype = type(star_list)
-    #mytype = "hello"
-    #stars_available = pd.DataFrame(
-    #    columns=['starId'],
-    #    data=the_data
-    #)
-
-    #star_list_html = star_list.to_html()
-
-    return render(
-        request,
-        "app_player/pick_star.html",
-        {
-            'star_queryset': star_queryset,
-            'star_list': star_list,
-            'evals_btrotta_html': evals_btrotta_html
-            }
-        )
+    evals_kboone = [[0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+                    [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]]
+    return render(request, "app_player/pick_star.html",
+                  {'stars_available': stars_available_list,
+                   'evals_btrotta_html': evals_btrotta_html,
+                   'evals_btrotta_list': evals_btrotta_list,
+                   'evals_kboone': evals_kboone}
+                  )
 
 
 @login_required

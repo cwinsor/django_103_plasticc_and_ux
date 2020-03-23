@@ -2,6 +2,7 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
 from .views import home, pick_star, place_bets, well_done
+from .views import game_info, game_help
 from .views import new_plasticc_star, new_plasticc_sample, new_gameplay_round
 
 
@@ -39,6 +40,16 @@ urlpatterns = [
         'logout/',
         LogoutView.as_view(),
         name='player_logout'),
+
+    path(
+        'game_info/',
+        game_info,
+        name="game_info"),
+
+    path(
+        'game_help/',
+        game_help,
+        name="game_help"),
 
     path(
         'add_star/',

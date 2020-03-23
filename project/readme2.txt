@@ -166,20 +166,39 @@ also - always add the <CSRF> (Cross Site Request Forgery).  When Django displays
 ----> test - server-side input validation (relationships) - for each combination of fields the server enforces relationships.  This is entirely hand-coded.
  
 17 Create our own Form without ModelForm.  View that takes an argument.
+https://app.pluralsight.com/course-player?clipId=9504e04d-c886-4555-9ca8-2fc646a4f432
 
 
+17 Hooking the TensorFlow model into Django web app:
+Four aproaches:
 
-<!-- <button type="submit" value={{excel_path}} onclick="location.href='{% url 'downloadexcel' %}'" name='mybtn2'>Download Excel file</button> -->
+Offline:  run the classifier on the entire dataset in advance and store classification results in the database.  This avoids delays in displaying the pages so a good approach if the model is slow.  It does require data be available in advance.  
+
+Realtime classification: run the classifier on demand (when serving the page).  This will work if the model is fast (sub-second) as it will preclude page load.
+
+Classify in pre-fetch:  run the classifier when serving pages, but start that classification early (when item has been selected but before results are needed).  The goal is the classification results would be available by the time they are needed.
+
+Relatime classification with dynamic loadeing of page:  run the classifier on demand, but display the page first without the classification, then update the page when the classification becomes available.
 
 
+18) "Tensorflow Serving"
+https://www.youtube.com/watch?v=T_afaArR0E8
 
-<!--onclick="{% url 'player_pick_star' %}" value="Choose a star"/> -->
 
+xxxxxxxxxxxxxxxxxxxxxxxxxx
+<br>
+{% for x in evals_btrotta.columns %}
+{% for y in evals_btrotta.index %}
+x={{ x }}
+{% endfor %}
 
+test123= {{ evals_btrotta.loc['0','star00'] }}
+
+https://django-pandas.readthedocs.io/en/latest/#
 
 
 +===============
-Database schema
+Database schema for Star Chaser App
 
 download PLAsTiCC dataset from Kaggle
 Save into dedicated folder and unzip.

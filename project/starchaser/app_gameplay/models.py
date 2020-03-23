@@ -13,7 +13,35 @@ fmt_is = '{:1}'
 fmt_i3 = '{:3}'
 
 
+# a subclass of QuerySet representing a subset of PlasticcStar
+class PlasticcStarQuerySet(models.QuerySet):
+
+    def random_set(self, num):
+        #temp = self.only("star_id")
+        #return temp.order_by("?")[:num]
+
+        #queryset = User.objects.filter(
+        #    first_name__startswith='R'
+        #    ).only("first_name", "last_name")
+
+        #return self.all.only("star_id", "ra")
+        return self.all()
+        #return self.only("ra")
+
+    #def rounds_this_player(self, user):
+    #    return self.filter(
+    #        Q(player=user)
+    #    )
+
+
+
+
+
 class PlasticcStar(models.Model):
+
+    # override "objects" property replacing it with custom QuerySet
+    objects = PlasticcStarQuerySet.as_manager()
+
     star_id = models.IntegerField(primary_key=True)
     ra = models.FloatField()
     decl = models.FloatField()
@@ -97,6 +125,10 @@ class GameplayRoundQuerySet(models.QuerySet):
 
 
 class GameplayRound(models.Model):
+
+    # override "objects" property replacing it with custom QuerySet
+    objects = GameplayRoundQuerySet.as_manager()
+
     player = models.ForeignKey(
         User,
         related_name="player",
@@ -131,9 +163,6 @@ class GameplayRound(models.Model):
                                       MinValueValidator(0), MaxValueValidator(100)])
     bid_13 = models.SmallIntegerField(null=False, default=0, validators=[
                                       MinValueValidator(0), MaxValueValidator(100)])
-
-    # override "objects" property replacing it with custom QuerySet
-    objects = GameplayRoundQuerySet.as_manager()
 
     def __str__(self):
         msg = '{}'

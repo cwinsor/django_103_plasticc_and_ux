@@ -5,36 +5,15 @@
 {% endblock %}
 
 {% block content %}
-{{ mytype }}
 Select a star from the available list.
 
-<br> -------------- star_queryset
-<br> {{ star_queryset }}
-
-<br> -------------- iterating star_queryset
-<ul>
-    {% for s in star_queryset %}
-    <li>Star {{ s.star_id }}: {{ s.ra }} </li>
-    {% endfor %}
-</ul>
-
-<br> ------------------ star_list
-<br> {{ star_list }}
-
-
-<br> ------------------ iterating star_list
-{% for s in star_list %}
-<li>Star {{ s }} </li>
-{% endfor %}
-
-
-
-<br>
------------------- evals_btrotta_html
 <br>
 {% autoescape off %}
 {{ evals_btrotta_html }}
 {% endautoescape %}
+
+<br>
+------------------
 
 <br>
 evals_btrotta_list... individual components...

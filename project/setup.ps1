@@ -51,6 +51,6 @@ $Env:PYTHONPATH=$ENV:PYTHONPATH + '/lib;'
 "  http://127.0.0.1:8000 (user login)"
 "  http://127.0.0.1:8000/admin/ (admin login)"
 "  accounts are:"
-"    alice   aabbddcc (no admin)"
-"    cwinsor aabbddcc (admin)"
+"    alice   abc (no admin)"
+"    cwinsor abc (admin)"
 " "
