@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+{{ mytype }}
+Select a star from the available list.
+
+<br> -------------- star_queryset_allfields
+<br> {{ star_queryset_allfields }}
+
+<br> -------------- star_queryset_id
+<br> {{ star_queryset_id }}
+
+<br>------------------ data_frame_star_html
+<br>
+{% autoescape off %}
+{{ data_frame_star_html }}
+{% endautoescape %}
+
+<br>
+-----------
+
+</div>
+-----------
+
+<div class="row">
+
+    <div class="col-md-4">
+        <h3>Available:</h3>
+        <div class="col-md-4">
+
+            <table>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for sa in stars_available %}
+                <tr>
+                    <!--available-->
+                    <td> <input type="radio" name="star_select"></td>
+                    <td>{{ sa.star_id }}</td>
+
+                    <!--btrotta predictions-->
+                    <td>bt
+                        {% for class_num in num_classes %}
+                        {{ class_num }} ,
+                        {% endfor %}
+                    </td>
+                    <!--kboone predictions -->
+                    <td>kb</td>
+
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <!--
+    <div class="col-md-8">
+        <h3> Choose wisely!</h3>
+        <div class="col-md-4">
+            <h4>B. Trotta</h4>
+            {% for ev in evals_btrotta %}
+            <li>{{ ev }} </li>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <h4>K. Boone</h4>
+            {% for ev in evals_kboone %}
+            <li>{{ ev }} </li>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+-->
+
+    <br>
+    <button type="submit" value="foo" onclick="window.location.href='{% url 'player_place_bets' %}'" name='mybtn2'>Chase
+        it</button>
+    <button type="help" value="foo" onclick="window.location.href='{% url 'game_help' %}'" name='mybtn2'>Help</button>
+    <button type="info" value="foo" onclick="window.location.href='{% url 'game_info' %}'" name='mybtn2'>Info</button>
+
+
+
+    {% endblock %}

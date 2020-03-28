@@ -8,106 +8,85 @@
 {{ mytype }}
 Select a star from the available list.
 
-<br> -------------- star_queryset_allfields
-<br> {{ star_queryset_allfields }}
-
-<br> -------------- star_queryset_id
-<br> {{ star_queryset_id }}
-
-<br> -------------- iterating star_queryset_allfields
-<ul>
-    {% for s in star_queryset_allfields %}
-    <li>Star {{ s }} </li>
-    <li>Star {{ s.star_id }} {{ s.ra }} </li>
-    {% endfor %}
-</ul>
-
-<br> ------------------ iterating star_queryset_id
-<ul>
-    {% for s in star_queryset_id %}
-    <li>Star {{ s }} </li>
-    <li>Star {{ s.star_id }} </li>
-    {% endfor %}
-</ul>
-
-<br>------------------ evals_btrotta_html
+<!--
+<br>------------------ df_star_html
 <br>
-{% autoescape off %}
-{{ evals_btrotta_html }}
-{% endautoescape %}
-
-<br>
-evals_btrotta_list... individual components...
-{% for x in evals_btrotta_list %}
-<br>
-{% for y in x %}
-y = {{ y }}
-{% endfor %}
-{% endfor %}
-
-<br>
------------
-
-</div>
------------
-
-<div class="row">
-
-    <div class="col-md-4">
-        <h3>Available:</h3>
-        <div class="col-md-4">
-
-            <table>
-                <tr>
-                    <th></th>
-                    <th></th>
-                </tr>
-                {% for sa in stars_available %}
-                <tr>
-                    <!--available-->
-                    <td> <input type="radio" name="star_select"></td>
-                    <td>{{ sa.star_id }}</td>
-
-                    <!--btrotta predictions-->
-                    <td>bt
-                        {% for class_num in num_classes %}
-                        {{ class_num }} ,
-                        {% endfor %}
-                    </td>
-                    <!--kboone predictions -->
-                    <td>kb</td>
-
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-    <!--
-    <div class="col-md-8">
-        <h3> Choose wisely!</h3>
-        <div class="col-md-4">
-            <h4>B. Trotta</h4>
-            {% for ev in evals_btrotta %}
-            <li>{{ ev }} </li>
-            {% endfor %}
-        </div>
-
-        <div class="col-md-4">
-            <h4>K. Boone</h4>
-            {% for ev in evals_kboone %}
-            <li>{{ ev }} </li>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+{ % autoescape off % }
+{ { df_star_html } }
+{ % endautoescape % }
+<br>------------------
 -->
 
+<br>
+<div class="col-md-12">
+    <table border="1">
+
+        <tr>
+            <th>-</th>
+            <th colspan={{present_pick_star.star_hdr_len}}>Available</th>
+            <th>-</th>
+            <th colspan={{present_pick_star.btrotta_hdr_len}}>B.Trotta</th>
+            <th>-</th>
+            <th colspan={{present_pick_star.kboone_hdr_len}}>K.Boone</th>
+        </tr>
+
+        <tr>
+            <th>sel</th>
+
+            {% for colhdr in present_pick_star.star_hdr %}
+            <th>{{colhdr}}</th>
+            {% endfor %}
+
+            <th>-</th>
+
+            {% for colhdr in present_pick_star.btrotta_hdr %}
+            <th>{{colhdr}}</th>
+            {% endfor %}
+
+            <th>-</th>
+
+            {% for colhdr in present_pick_star.kboone_hdr %}
+            <th>{{colhdr}}</th>
+            {% endfor %}
+
+        </tr>
+
+        {% for row in present_pick_star.rows %}
+        <tr>
+            <td> <input type="radio" name="star_select"></td>
+
+            {% for value in row.star_values %}
+            <td>{{value}}</td>
+            {% endfor %}
+
+            <td>-</td>
+
+            {% for value in row.btrotta_values %}
+            <td>{{value}}</td>
+            {% endfor %}
+
+            <td>-</td>
+
+            {% for value in row.btrotta_values %}
+            <td>{{value}}</td>
+            {% endfor %}
+
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<div class="col-md-12">
     <br>
     <button type="submit" value="foo" onclick="window.location.href='{% url 'player_place_bets' %}'" name='mybtn2'>Chase
         it</button>
+    <br>
     <button type="help" value="foo" onclick="window.location.href='{% url 'game_help' %}'" name='mybtn2'>Help</button>
+    <br>
     <button type="info" value="foo" onclick="window.location.href='{% url 'game_info' %}'" name='mybtn2'>Info</button>
+</div>
 
 
-
-    {% endblock %}
+{% endblock %}

@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from app_gameplay.models import GameplayRound, PlasticcStar
+from app_gameplay.present_pick_star import PresentPickStar
 from .forms import PlasticcStarForm, PlasticcSampleForm, GameplayRoundForm
 
 
@@ -27,53 +28,34 @@ def home(request):
 @login_required
 def pick_star(request):
 
-    logger = logging.getLogger(__name__)
+    chooser_list_size = 2
+    columns = [
+        'star_id', 'ra', 'decl', 'hostgal_specz', 'target']
+    qs_star = PlasticcStar.objects.random_set(chooser_list_size)
+    qs_star_values_allfields = qs_star.values(*columns)
 
-    num_stars = 4
-    num_starclasses = 13
+    df_btrotta = pd.DataFrame(
+        data=np.random.randint(0, 100, size=(chooser_list_size, 14))
+        )
+    df_btrotta.loc[[0], [0]] = 100
+    df_btrotta.loc[[1], [0]] = 101
 
-    star_queryset_allfields = PlasticcStar.objects.random_set(num_stars)
-    #star_list = star_queryset.values_list('ra', flat=True).get(pk=1)
-    #star_list = star_queryset.values_list('star_id', flat=True).get(pk=100)
-    #star_list = star_queryset.values_list('star_id', 'ra').get(pk=100)
-    #star_list = star_queryset.values_list('star_id', 'ra')
-    #star_list = star_queryset.values_list('ra')
-    #star_queryset_id = star_queryset_allfields.values_list('star_id', flat=True)
-    #star_queryset_id = star_queryset_allfields.values('star_id')
-    star_queryset_id  = star_queryset_allfields.values('star_id')
-    logger.debug(type(star_queryset_id))
+    df_kboone = pd.DataFrame(
+        data=np.random.randint(0, 100, size=(chooser_list_size, 14))
+        )
+    df_kboone.loc[[0], [0]] = 100
+    df_kboone.loc[[1], [0]] = 101
 
-    #evals_btrotta = pd.DataFrame(
-    #    data=np.random.randint(0, 100, size=(13, 2)),
-    #    columns=['star00','star01']
-    #    ).T
-    
-    evals_btrotta = pd.DataFrame(
-        data=np.random.randint(0, 100, size=(13, 2)),
-        columns=star_queryset_id).T
-
-    evals_btrotta_html = evals_btrotta.to_html()
-
-
-
-
-
-    #mytype = type(star_list)
-    #mytype = "hello"
-    #stars_available = pd.DataFrame(
-    #    columns=['starId'],
-    #    data=the_data
-    #)
-
-    #star_list_html = star_list.to_html()
+    present_pick_star = PresentPickStar(qs_star, df_btrotta, df_kboone)
+    #logger = logging.getLogger(__name__)
+    #logger.debug("\n---here7\n" + str(present_pick_star.star_hdr()))
+    #logger.debug("\n---here8\n" + str(len(present_pick_star.star_hdr())))
 
     return render(
         request,
         "app_player/pick_star.html",
         {
-            'star_queryset_allfields': star_queryset_allfields,
-            'star_queryset_id': star_queryset_id,
-            'evals_btrotta_html': evals_btrotta_html
+            'present_pick_star': present_pick_star
             }
         )
 

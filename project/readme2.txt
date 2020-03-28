@@ -181,7 +181,33 @@ Classify in pre-fetch:  run the classifier when serving pages, but start that cl
 Relatime classification with dynamic loadeing of page:  run the classifier on demand, but display the page first without the classification, then update the page when the classification becomes available.
 
 
-18) "Tensorflow Serving"
+18)
+Logging
+https://docs.djangoproject.com/en/3.0/topics/logging/
+in settings.py
+#logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+        #'level': 'WARNING',
+    },
+}
+
+in code
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.debug("here")
+
+
+19) "Tensorflow Serving"
 https://www.youtube.com/watch?v=T_afaArR0E8
 
 
