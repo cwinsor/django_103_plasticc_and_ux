@@ -24,12 +24,12 @@ class PresentPickStar():
         #logger.debug("\n---here7\n" + str(self._star_hdr))
         #logger.debug("\n---here8\n" + str(len(present_pick_star.star_hdr())))
 
-
         merge_result_1 = self._df_starlist.merge(
             right = self._df_btrotta,
             how = 'outer',
             left_on = 'star_id',
-            right_on = 0
+            right_on = 'a',
+            suffixes=('_s', '_x')
         )
 
         logger.debug("\n---merge_result_1\n" + str(merge_result_1))
@@ -38,9 +38,21 @@ class PresentPickStar():
             right = self._df_kboone,
             how = 'outer',
             left_on = 'star_id',
-            right_on = 0
+            right_on = 'a',
+            suffixes=('_x', '_y')
         )
         logger.debug("\n---merge_result_2\n" + str(merge_result_2))
+
+        self._row_data = []
+        #for x in merge_result_2.iterrows():
+        for x in merge_result_2.itertuples():
+            logger.debug("\n---type" + str(type(x)))
+            logger.debug("\n---vals" + str(x))
+            #logger.debug("\n---..." + str(x.star_id) + " " + str(x.ra))
+            self._row_data.append(x)
+
+        logger.debug("\n---row_data\n" + str(self._row_data))
+
 
         #row1 = {'star_values': [1, 2, 3], 'btrotta_values': [4, 5, 6], 'kboone_values': [0,1,2]}
         #row2 = {'star_values': [0, 2, 3], 'btrotta_values': [4, 5, 6], 'kboone_values': [0,1,2]}

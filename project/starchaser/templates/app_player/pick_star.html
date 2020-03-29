@@ -23,54 +23,116 @@ Select a star from the available list.
 
         <tr>
             <th>-</th>
-            <th colspan={{present_pick_star.star_hdr_len}}>Available</th>
+            <th colspan=12>Available</th>
             <th>-</th>
-            <th colspan={{present_pick_star.btrotta_hdr_len}}>B.Trotta</th>
+            <th colspan=14>B.Trotta</th>
             <th>-</th>
-            <th colspan={{present_pick_star.kboone_hdr_len}}>K.Boone</th>
+            <th colspan=14>K.Boone</th>
         </tr>
 
         <tr>
             <th>sel</th>
 
-            {% for colhdr in present_pick_star.star_hdr %}
-            <th>{{colhdr}}</th>
-            {% endfor %}
+            <td>star_id</td>
+            <td>ra</td>
+            <td>decl</td>
+            <td>gal_l</td>
+            <td>gal_b</td>
+            <td>ddf</td>
+            <td>hostgal_specz</td>
+            <td>hostgal_photoz</td>
+            <td>hostgal_photoz_err</td>
+            <td>distmod</td>
+            <td>MWEBV</td>
+            <td>target</td>
 
             <th>-</th>
 
-            {% for colhdr in present_pick_star.btrotta_hdr %}
-            <th>{{colhdr}}</th>
-            {% endfor %}
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
 
             <th>-</th>
 
-            {% for colhdr in present_pick_star.kboone_hdr %}
-            <th>{{colhdr}}</th>
-            {% endfor %}
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+
 
         </tr>
 
         {% for row in present_pick_star.rows %}
+
         <tr>
             <td> <input type="radio" name="star_select"></td>
-
-            {% for value in row.star_values %}
-            <td>{{value}}</td>
-            {% endfor %}
+            <td>{{ row.star_id }}</td>
+            <td>{{ row.ra }}</td>
+            <td>{{ row.decl }}</td>
+            <td>{{ row.gal_l }}</td>
+            <td>{{ row.gal_b }}</td>
+            <td>{{ row.ddf }}</td>
+            <td>{{ row.hostgal_specz }}</td>
+            <td>{{ row.hostgal_photoz }}</td>
+            <td>{{ row.hostgal_photoz_err }}</td>
+            <td>{{ row.distmod }}</td>
+            <td>{{ row.MWEBV }}</td>
+            <td>{{ row.target }}</td>
 
             <td>-</td>
 
-            {% for value in row.btrotta_values %}
-            <td>{{value}}</td>
-            {% endfor %}
+            <td>{{row.a_x}}</td>
+            <td>{{row.b_x}}</td>
+            <td>{{row.c_x}}</td>
+            <td>{{row.d_x}}</td>
+            <td>{{row.e_x}}</td>
+            <td>{{row.f_x}}</td>
+            <td>{{row.g_x}}</td>
+            <td>{{row.h_x}}</td>
+            <td>{{row.i_x}}</td>
+            <td>{{row.j_x}}</td>
+            <td>{{row.k_x}}</td>
+            <td>{{row.l_x}}</td>
+            <td>{{row.m_x}}</td>
+            <td>{{row.n_x}}</td>
 
             <td>-</td>
 
-            {% for value in row.btrotta_values %}
-            <td>{{value}}</td>
-            {% endfor %}
-
+            <td>{{row.a_y}}</td>
+            <td>{{row.b_y}}</td>
+            <td>{{row.c_y}}</td>
+            <td>{{row.d_y}}</td>
+            <td>{{row.e_y}}</td>
+            <td>{{row.f_y}}</td>
+            <td>{{row.g_y}}</td>
+            <td>{{row.h_y}}</td>
+            <td>{{row.i_y}}</td>
+            <td>{{row.j_y}}</td>
+            <td>{{row.k_y}}</td>
+            <td>{{row.l_y}}</td>
+            <td>{{row.m_y}}</td>
+            <td>{{row.n_y}}</td>
 
         </tr>
         {% endfor %}

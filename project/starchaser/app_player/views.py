@@ -35,16 +35,21 @@ def pick_star(request):
     qs_star_values_allfields = qs_star.values(*columns)
 
     df_btrotta = pd.DataFrame(
-        data=np.random.randint(0, 100, size=(chooser_list_size, 14))
+        data=np.random.randint(0, 100, size=(chooser_list_size, 14)),
+        columns=['a','b','c','d','e','f','g','h','i','j','k','l','m','n']
+        #columns=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
         )
-    df_btrotta.loc[[0], [0]] = 100
-    df_btrotta.loc[[1], [0]] = 101
+    df_btrotta.loc[[0], ['a']] = 100
+    df_btrotta.loc[[1], ['a']] = 101
 
     df_kboone = pd.DataFrame(
-        data=np.random.randint(0, 100, size=(chooser_list_size, 14))
+        data=np.random.randint(0, 100, size=(chooser_list_size, 14)),
+        columns=['a','b','c','d','e','f','g','h','i','j','k','l','m','n']
+        #columns=['0','1','2','3','4','5','6','7','8','9','10','11','12','13']
+        #columns=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
         )
-    df_kboone.loc[[0], [0]] = 100
-    df_kboone.loc[[1], [0]] = 101
+    df_kboone.loc[[0], ['a']] = 100
+    df_kboone.loc[[1], ['a']] = 101
 
     present_pick_star = PresentPickStar(qs_star, df_btrotta, df_kboone)
     #logger = logging.getLogger(__name__)
