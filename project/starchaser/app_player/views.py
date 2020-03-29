@@ -3,12 +3,12 @@ import pandas as pd
 import logging
 
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from app_gameplay.models import GameplayRound, PlasticcStar
 from app_gameplay.present_pick_star import PresentPickStar
-from .forms import PlasticcStarForm, PlasticcSampleForm, GameplayRoundForm
+from .forms import PlasticcStarForm, PlasticcSampleForm, GameplayRoundForm, BetForm
 
 
 @login_required
@@ -36,18 +36,20 @@ def pick_star(request):
 
     df_btrotta = pd.DataFrame(
         data=np.random.randint(0, 100, size=(chooser_list_size, 14)),
-        columns=['a','b','c','d','e','f','g','h','i','j','k','l','m','n']
+        columns=['a', 'b', 'c', 'd', 'e', 'f',
+                 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
         #columns=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-        )
+    )
     df_btrotta.loc[[0], ['a']] = 100
     df_btrotta.loc[[1], ['a']] = 101
 
     df_kboone = pd.DataFrame(
         data=np.random.randint(0, 100, size=(chooser_list_size, 14)),
-        columns=['a','b','c','d','e','f','g','h','i','j','k','l','m','n']
-        #columns=['0','1','2','3','4','5','6','7','8','9','10','11','12','13']
+        columns=['a', 'b', 'c', 'd', 'e', 'f',
+                 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+        # columns=['0','1','2','3','4','5','6','7','8','9','10','11','12','13']
         #columns=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-        )
+    )
     df_kboone.loc[[0], ['a']] = 100
     df_kboone.loc[[1], ['a']] = 101
 
@@ -61,13 +63,67 @@ def pick_star(request):
         "app_player/pick_star.html",
         {
             'present_pick_star': present_pick_star
-            }
-        )
+        }
+    )
 
 
 @login_required
-def place_bets(request):
-    return render(request, "app_player/place_bets.html")
+def new_bet(request):
+
+    logger = logging.getLogger(__name__)
+    logger.debug("\n---here2\n" + str(type(request)))
+    logger.debug("\n---here3\n" + str(request))
+    logger.debug("\n---here4\n")
+    logger.debug(request)
+    logger.debug("\n")
+
+    star_id = 101
+
+    if request.method == "POST":
+
+        form = BetForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('player_well_done')
+        #pass
+    else:
+        form = BetForm()
+
+    return render(
+        request,
+        "app_player/new_bet_form.html",
+        {
+            'form': form,
+            'star_id': star_id
+        }
+    )
+
+    #return render(
+    #    request,
+    #    "app_player/pick_star.html",
+    #    {
+    #        'present_pick_star': present_pick_star
+    #    }
+    #)
+
+
+    #x = 5
+    #star = get_object_or_404(PlasticcStar, pk=id)
+    # if request.method == 'POST':
+    #    if 'accept' in request.POST:
+    #        bet = Bet.objects.create(
+    #            star = bet.
+    #        )
+    #    blah
+    # else:
+    #    return render(
+
+    #            return render(request, "app_player/place_bets.html")
+
+    #    )
+    #    bet = Bet.objects.create(
+    #        class_0 = star.
+    #    )
 
 
 @login_required

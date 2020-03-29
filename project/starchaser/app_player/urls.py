@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
-from .views import home, pick_star, place_bets, well_done
+from .views import home, pick_star, new_bet, well_done
 from .views import game_info, game_help
 from .views import new_plasticc_star, new_plasticc_sample, new_gameplay_round
 
@@ -22,9 +22,9 @@ urlpatterns = [
         name="player_pick_star"),
 
     path(
-        'place_bets/',
-        place_bets,
-        name="player_place_bets"),
+        'place_bet/',
+        new_bet,
+        name="new_bet"),
 
     path(
         'well_done/',

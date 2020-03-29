@@ -1,3 +1,5 @@
+import logging
+
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -18,23 +20,20 @@ class PlasticcStarQuerySet(models.QuerySet):
 
     def random_set(self, num):
         #temp = self.only("star_id")
-        #return temp.order_by("?")[:num]
+        # return temp.order_by("?")[:num]
 
-        #queryset = User.objects.filter(
+        # queryset = User.objects.filter(
         #    first_name__startswith='R'
         #    ).only("first_name", "last_name")
 
-        #return self.all.only("star_id", "ra")
+        # return self.all.only("star_id", "ra")
         return self.all()
-        #return self.only("ra")
+        # return self.only("ra")
 
-    #def rounds_this_player(self, user):
+    # def rounds_this_player(self, user):
     #    return self.filter(
     #        Q(player=user)
     #    )
-
-
-
 
 
 class PlasticcStar(models.Model):
@@ -199,6 +198,129 @@ class GameplayRound(models.Model):
             self.bid_11,
             self.bid_12,
             self.bid_13)
+
+
+class Bet(models.Model):
+
+    star = models.ForeignKey(
+        PlasticcStar,
+        related_name="the_star",
+        on_delete=models.CASCADE)
+
+    user = models.ForeignKey(
+        User,
+        related_name="the_user",
+        on_delete=models.CASCADE)
+
+    timestamp = models.DateTimeField(
+        auto_now_add=True)
+
+    bid_1 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_2 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_3 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_4 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_5 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_6 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_7 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_8 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_9 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_10 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_11 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_12 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+    bid_13 = models.SmallIntegerField(
+        null=False, default=0,
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)])
+
+    def __str__(self):
+
+        #msg = '  1:{}'
+        fmt = '{:10}'
+        msg = ''
+        msg += ('  1:' + fmt)
+        msg += ('  2:' + fmt)
+        msg += ('  3:' + fmt)
+        msg += ('  4:' + fmt)
+        #msg += ('  5:' + fmt)
+        #msg += ('  6:' + fmt)
+        #msg += ('  7:' + fmt)
+        #msg += ('  8:' + fmt)
+        #msg += ('  9:' + fmt)
+        #msg += (' 10:' + fmt)
+        #msg += (' 11:' + fmt)
+        #msg += (' 12:' + fmt)
+        #msg += (' 13:' + fmt)
+
+        logger = logging.getLogger(__name__)
+        logger.debug("\n---here2\n" + msg)
+
+        temp = msg.format(
+             self.bid_1,
+             self.bid_2,
+             self.bid_3,
+             self.bid_4)
+             #self.bid_5,
+             #self.bid_6,
+             #self.bid_7,
+             #self.bid_8,
+             #s#elf.bid_9,
+             #se#lf.bid_10,
+             #self.bid_11,
+             #self.bid_12,
+             #self.bid_13)
+    
+        logger.debug("\n---here3\n" + temp)
+
+        return temp
 
 
 class Profile(models.Model):

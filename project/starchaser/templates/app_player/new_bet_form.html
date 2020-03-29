@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+New Bet
+{% endblock %}
+
+{% block content %}
+<h1>Place your Bets!</h1>
+Guidance is provided by B.Trotta and K.Boone using Tensorflow AI.
+<br>
+You can preview your score but that would cheating.
+<p>
+<label>User: </label> {{ user }}
+<br>
+<label>Star: </label> {{ star }}
+<br>
+<label>Timestamp: </label> {{ timestamp }}
+
+<form method="post" action="{% url 'new_bet' %}">
+    {{ form }}
+    {% csrf_token %}
+    <br>
+    <button type="submit">Submit</button>
+    <br>
+    <button type="submit">Cheat</button>
+</form>
+{% endblock %}
