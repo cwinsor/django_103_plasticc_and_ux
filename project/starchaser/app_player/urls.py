@@ -8,62 +8,62 @@ from .views import new_plasticc_star, new_plasticc_sample, new_gameplay_round
 
 urlpatterns = [
     path(
-        '',
-        home),
+        route='',
+        view=home),
 
     path(
-        'home/',
-        home,
+        route='home/',
+        view=home,
         name="player_home"),
 
     path(
-        'pick_star/',
-        pick_star,
+        route='pick_star/',
+        view=pick_star,
         name="player_pick_star"),
 
     path(
-        'place_bet/',
-        new_bet,
+        route='new_bet/<int:id>',
+        view=new_bet,
         name="new_bet"),
 
     path(
-        'well_done/',
-        well_done,
+        route='well_done/',
+        view=well_done,
         name="player_well_done"),
 
     path(
-        'login/',
-        LoginView.as_view(template_name='app_player/login_form.html'),
+        route='login/',
+        view=LoginView.as_view(template_name='app_player/login_form.html'),
         name='player_login'),
 
     path(
-        'logout/',
-        LogoutView.as_view(),
+        route='logout/',
+        view=LogoutView.as_view(),
         name='player_logout'),
 
     path(
-        'game_info/',
-        game_info,
+        route='game_info/',
+        view=game_info,
         name="game_info"),
 
     path(
-        'game_help/',
-        game_help,
+        route='game_help/',
+        view=game_help,
         name="game_help"),
 
     path(
-        'add_star/',
-        new_plasticc_star,
+        route='add_star/',
+        view=new_plasticc_star,
         name="new_plasticc_star"),
 
     path(
-        'add_sample/',
-        new_plasticc_sample,
+        route='add_sample/',
+        view=new_plasticc_sample,
         name="new_plasticc_sample"),
 
     path(
-        'add_gamplay_round/',
-        new_gameplay_round,
+        route='add_gamplay_round/',
+        view=new_gameplay_round,
         name="new_gameplay_round"),
 
 ]

@@ -83,6 +83,13 @@ class PlasticcStar(models.Model):
             self.MWEBV,
             self.target)
 
+    def new_bet(self):
+        """Returns a new Bet object with star_ID preset"""
+
+        return Bet(
+            star=self
+        )
+
 
 class PlasticcSample(models.Model):
     star = models.ForeignKey(

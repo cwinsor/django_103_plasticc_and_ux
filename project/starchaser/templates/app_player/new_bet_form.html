@@ -6,22 +6,22 @@ New Bet
 
 {% block content %}
 <h1>Place your Bets!</h1>
-Guidance is provided by B.Trotta and K.Boone using Tensorflow AI.
+Guidance is provided by B.Trotta and K.Boone using TensorFlow AI.
 <br>
-You can preview your score but that would cheating.
-<p>
+You can preview your score (but that would cheating).
+<br>
 <label>User: </label> {{ user }}
 <br>
-<label>Star: </label> {{ star }}
+<label>Star: </label> {{ star.star_id }}
 <br>
-<label>Timestamp: </label> {{ timestamp }}
 
-<form method="post" action="{% url 'new_bet' %}">
+<form method="post" action="{% url 'new_bet' id=star.star_id %}">
     {{ form }}
     {% csrf_token %}
     <br>
-    <button type="submit">Submit</button>
-    <br>
     <button type="submit">Cheat</button>
+    <br>
+    <button type="submit">Submit</button>
+
 </form>
 {% endblock %}

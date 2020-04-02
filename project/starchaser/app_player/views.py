@@ -29,6 +29,23 @@ def home(request):
 def pick_star(request):
 
     chooser_list_size = 2
+    qs_star = PlasticcStar.objects.random_set(chooser_list_size)
+
+
+    logger = logging.getLogger(__name__)
+    logger.debug("\n---here7\n" + str(qs_star))
+    #logger.debug("\n---here8\n" + str(len(present_pick_star.star_hdr())))
+
+
+    return render(
+            request=request,
+            template_name="app_player/pick_staaar.html",
+            context = {
+                'qs_star': qs_star
+                }
+    )
+
+    ############# the rest is not currently used
     columns = [
         'star_id', 'ra', 'decl', 'hostgal_specz', 'target']
     qs_star = PlasticcStar.objects.random_set(chooser_list_size)
@@ -68,7 +85,9 @@ def pick_star(request):
 
 
 @login_required
-def new_bet(request):
+def new_bet(request, id):
+
+    star = get_object_or_404(PlasticcStar, pk=id)
 
     logger = logging.getLogger(__name__)
     logger.debug("\n---here2\n" + str(type(request)))
@@ -77,26 +96,23 @@ def new_bet(request):
     logger.debug(request)
     logger.debug("\n")
 
-    star_id = 101
-
     if request.method == "POST":
-
         form = BetForm(data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('player_well_done')
-        #pass
     else:
-        form = BetForm()
+        bet = star.new_bet()
+        form = BetForm(instance=bet)
+
+    context = {}
+    context['star'] = star
+    context['form'] = form
 
     return render(
-        request,
-        "app_player/new_bet_form.html",
-        {
-            'form': form,
-            'star_id': star_id
-        }
-    )
+        request=request,
+        template_name="app_player/new_bet_form.html",
+        context=context)
 
     #return render(
     #    request,

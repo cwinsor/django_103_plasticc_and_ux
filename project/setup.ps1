@@ -46,10 +46,10 @@ $Env:PYTHONPATH=$ENV:PYTHONPATH + '/lib;'
 # to run the web application
 " "
 "to run the application:"
-"cd starchaser; python manage.py runserver"
+"cd starchaser; python manage.py runserver 8001"
 "URLs are:"
-"  http://127.0.0.1:8000 (user login)"
-"  http://127.0.0.1:8000/admin/ (admin login)"
+"  http://127.0.0.1:8001 (user login)"
+"  http://127.0.0.1:8001/admin/ (admin login)"
 "  accounts are:"
 "    alice   abc (no admin)"
 "    cwinsor abc (admin)"

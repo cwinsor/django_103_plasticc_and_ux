@@ -53,9 +53,6 @@ class BetForm(ModelForm):
         b.append(cleaned_data.get('bid_13'))
         sumb = sum(b)
 
-        #sum = cleaned_data.get('')
-        #x = self.cleaned_data.get('x')
-        #y = self.cleaned_data.get('y')
         try:
             #game = self.instance.game
             if sumb != 100:

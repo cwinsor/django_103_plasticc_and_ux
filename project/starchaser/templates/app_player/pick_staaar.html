@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+Pick Star
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    Choose a star:
+</h1>
+
+{{ qs_star }}
+
+<br>
+
+<div class='row'>
+    <div class='col-md-6'>
+
+        <h3>Available:</h3>
+        <!-- the following could become a 'snippet' -->
+        <div class="list-group bg-info">
+            {% for star in qs_star %}
+            <a class="list-group-item list-group-item-info" href="{% url 'new_bet' id=star.star_id %}">
+
+                Star {{ star.star_id }} ra: {{ star.ra }} decl: {{ star.decl }} 
+                <span class="badge">{{ star.star_id }}</span>
+            </a>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <div class='col-md-6'>
+        <h3>Charts:</h3>
+    </div>
+</div>
+{% endblock %}
+
