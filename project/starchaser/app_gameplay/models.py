@@ -83,12 +83,6 @@ class PlasticcStar(models.Model):
             self.MWEBV,
             self.target)
 
-    def new_bet(self):
-        """Returns a new Bet object with star_ID preset"""
-
-        return Bet(
-            star=self
-        )
 
 
 class PlasticcSample(models.Model):
@@ -287,6 +281,11 @@ class Bet(models.Model):
         validators=[
             MinValueValidator(0),
             MaxValueValidator(100)])
+
+    def __init__(self, star, user):
+        super.__init__()
+        self.star = star
+        self.user = user
 
     def __str__(self):
 

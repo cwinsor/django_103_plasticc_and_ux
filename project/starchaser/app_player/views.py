@@ -31,16 +31,10 @@ def pick_star(request):
     chooser_list_size = 2
     qs_star = PlasticcStar.objects.random_set(chooser_list_size)
 
-
-    logger = logging.getLogger(__name__)
-    logger.debug("\n---here7\n" + str(qs_star))
-    #logger.debug("\n---here8\n" + str(len(present_pick_star.star_hdr())))
-
-
     return render(
             request=request,
             template_name="app_player/pick_staaar.html",
-            context = {
+            context={
                 'qs_star': qs_star
                 }
     )
@@ -89,57 +83,45 @@ def new_bet(request, id):
 
     star = get_object_or_404(PlasticcStar, pk=id)
 
-    logger = logging.getLogger(__name__)
-    logger.debug("\n---here2\n" + str(type(request)))
-    logger.debug("\n---here3\n" + str(request))
-    logger.debug("\n---here4\n")
-    logger.debug(request)
-    logger.debug("\n")
-
+    ###### POST #####
     if request.method == "POST":
         form = BetForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            form.save() # save to db.. to be implemented becuase this is not based on model...
             return redirect('player_well_done')
+
+    ###### GET #####
     else:
-        bet = star.new_bet()
-        form = BetForm(instance=bet)
+        
+        # ======== get non-user-provided bid data (DataFrames)
+        df_btrotta = pd.DataFrame(
+            data=np.random.randint(0, 100, size=(1, 14)),
+            columns=['a', 'b', 'c', 'd', 'e', 'f',
+                    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+        )
+        df_kboone = pd.DataFrame(
+            data=np.random.randint(0, 100, size=(1, 14)),
+            columns=['a', 'b', 'c', 'd', 'e', 'f',
+                    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+        )
+        
+        form = BetForm(
+            star_id=star.star_id,
+            df_btrotta=df_btrotta,
+            df_kboone=df_kboone)
 
     context = {}
-    context['star'] = star
     context['form'] = form
+    context['star_id'] = star.star_id
+
+    logger = logging.getLogger(__name__)
+    logger.debug("\n---here2\n" + str(type(request)))
+    logger.debug("\n")
 
     return render(
         request=request,
         template_name="app_player/new_bet_form.html",
         context=context)
-
-    #return render(
-    #    request,
-    #    "app_player/pick_star.html",
-    #    {
-    #        'present_pick_star': present_pick_star
-    #    }
-    #)
-
-
-    #x = 5
-    #star = get_object_or_404(PlasticcStar, pk=id)
-    # if request.method == 'POST':
-    #    if 'accept' in request.POST:
-    #        bet = Bet.objects.create(
-    #            star = bet.
-    #        )
-    #    blah
-    # else:
-    #    return render(
-
-    #            return render(request, "app_player/place_bets.html")
-
-    #    )
-    #    bet = Bet.objects.create(
-    #        class_0 = star.
-    #    )
 
 
 @login_required
