@@ -10,23 +10,61 @@ Guidance is provided by B.Trotta and K.Boone using TensorFlow AI.
 <br>
 You can preview your score (but that would cheating).
 <br>
-<label>User: </label> {{ user }}
 <br>
-<label>Star: </label> {{ star.star_id }}
-<br>
-<div class='row'>
-    <div class='col-md-3'>
-        <br>
-        <form method="post" action="{% url 'new_bet' id=star_id %}">
-            {{ form }}
-            {% csrf_token %}
-            <br>
-            <button type="submit">Cheat</button>
-            <br>
-            <button type="submit">Submit</button>
-        </form>
+
+
+
+<form method="post" action="{% url 'new_bet' id=star_id %}">
+    <label>User: </label> {{ form.user }}
+    <br>
+    <label>Star: </label> {{ form.star_id }}
+    <br>
+
+    <br>
+    <div class="row">
+        <div class="col-sm-2"> <b>Class</b> </div>
+        <div class="col-sm-1"> <b>Your Bet </b></div>
+        <div class="col-sm-1"> <b>B.Trotta</b> </div>
+        <div class="col-sm-1"> <b>K.Boone</b> </div>
     </div>
 
-</div>
+    <div class="row">
+        <div class="col-sm-2"> Supernova type 1A </div>
+        <div class="col-sm-1"> {{ form.bid_a1 }} </div>
+        <div class="col-sm-1"> {{ form.bid_a2 }} </div>
+        <div class="col-sm-1"> {{ form.bid_a3 }} </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"> Supernova type 7C </div>
+        <div class="col-sm-1"> {{ form.bid_b1 }} </div>
+        <div class="col-sm-1"> {{ form.bid_b2 }} </div>
+        <div class="col-sm-1"> {{ form.bid_b3 }} </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"> Supernova type 7C </div>
+        <div class="col-sm-1"> {{ form.bid_c1 }} </div>
+        <div class="col-sm-1"> {{ form.bid_c2 }} </div>
+        <div class="col-sm-1"> {{ form.bid_c3 }} </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-2"> sum--> </div>
+        <div class="col-sm-1"> {{ form.sum_1 }} </div>
+        <div class="col-sm-1"> {{ form.sum_2 }} </div>
+        <div class="col-sm-1"> {{ form.sum_3 }} </div>
+    </div>
+
+    <font color="red"> <b> {{ form.non_field_errors }} </b> </font>
+
+    {% csrf_token %}
+    <br>
+    <button type="submit">Preview</button>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+
+
 
 {% endblock %}

@@ -1,0 +1,71 @@
+
+<br>
+Reference:  https://arxiv.org/pdf/1810.00001.pdf
+
+https://arxiv.org/pdf/1810.00001.pdf
+
+
+
+
+<br>
+Header file
+<br>
+• object id: the Object ID, unique identifier (given as int32 numbers).
+• ra: right ascension, sky coordinate: longitude, units are degrees (given as float32
+numbers).
+• decl: declination, sky coordinate: latitude, units are degrees (given as float32 numbers).
+• gal l: Galactic longitude, units are degrees (given as float32 numbers).
+• gal b: Galactic lattitude, units are degrees (given as float32 numbers).
+• ddf: A Boolean flag to identify the object as coming from the DDF survey area (with
+value ddf = 1 for the DDF). Note that while the DDF fields are contained within the
+full WFD survey area, the DDF fields have significantly smaller uncertainties, given
+that the data are provided as additions of all observations in a given night.
+
+• hostgal specz: the spectroscopic redshift of the source
+. This is an extremely accurate measure of redshift, provided for the training set and a small fraction of the
+test set (given as float32 numbers).
+• hostgal photoz: The photometric redshift of the host galaxy of the astronomical
+source. While this is meant to be a proxy for hostgal specz, there can be large
+differences between the two and hostgal photoz should be regarded as a far less
+accurate version of hostgal specz. The hostgal photoz is given as float32 numbers.
+• hostgal photoz err: The uncertainty on the hostgal photoz based on LSST survey projections, given as float32 numbers.
+• distmod: The distance (modulus) calculated from the hostgal photoz since this
+redshift is given for all objects (given as float32 numbers). Computing the distance
+modulus requires knowledge of General Relativity, and assumed values of the dark
+energy and dark matter content of the Universe, as mentioned in the introduction
+section.
+• MWEBV = MW E(B-V): this ‘extinction’ of light is a property of the Milky Way (MW)
+dust along the line of sight to the astronomical source, and is thus a function of
+the sky coordinates of the source ra, decl. This is used to determine a passband
+dependent dimming and reddening of light from astronomical sources as described
+in subsection 2.1, and is given as float32 numbers.
+• target: The class of the astronomical source. This is provided in the training data.
+Correctly determining the target (correctly assigning classification probabilities to
+the objects) is the goal of the classification challenge for the test data. The target
+is given as int8 numbers.
+
+
+
+<br>
+Light-curve data:
+<br>
+• object id: Same key as in the metadata table above, given as int32 numbers.
+• mjd: the time in Modified Julian Date (MJD) of the observation. The MJD is a unit
+of time introduced by the Smithsonian Astrophysical Observatory in 1957 to record
+the orbit of Sputnik. The MJD is defined to have a starting point of midnight on
+November 17, 1858. The 25th of September 2018 has an MJD of 58386. The MJD can
+be converted to Unix epoch time with the formula unix time = (MJD40587)86400.
+The units are days, and the numbers are given as float64 numbers.
+• passband: The specific LSST passband integer, such that u, g, r, i, z, y = 0, 1, 2, 3, 4, 5
+in which it was viewed. These are given as int8 numbers.
+• flux: the measured flux (brightness) in the passband of observation as listed in the
+passband column. The flux is corrected for MWEBV, but for large dust extinctions the
+uncertainty will be much larger in spite of the correction. The dust is given as a
+float32 number (note that the units for both flux and flux err are arbitrary).
+• flux err: the uncertainty on the measurement of the flux listed above, given as
+float32 number.
+• detected: If detected= 1, the object’s brightness is significantly different at the 3σ
+level relative to the reference template. This is given as a Boolean flag.
+
+
+

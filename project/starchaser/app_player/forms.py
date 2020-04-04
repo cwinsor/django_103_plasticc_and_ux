@@ -1,3 +1,5 @@
+import logging
+
 from django import forms
 from django.forms import ModelForm, Form, ValidationError
 
@@ -25,51 +27,68 @@ class GameplayRoundForm(ModelForm):
 
 class BetForm(Form):
 
-    star_id = forms.IntegerField(label='Star IDD', disabled=True)
+    user = forms.CharField      (required=False, label='user', disabled=True)
+    star_id = forms.IntegerField(required=False, label='object_id', disabled=True)
 
-    bid_1 = forms.IntegerField(
-        label='bid_1', initial=56, min_value=0, max_value=100,
-        help_text='this is some help text')
+    bid_a1 = forms.IntegerField(required=False, label='bid_a1', min_value=0, max_value=100)
+    bid_b1 = forms.IntegerField(required=False, label='bid_b1', min_value=0, max_value=100)
+    bid_c1 = forms.IntegerField(required=False, label='bid_c1', min_value=0, max_value=100)
 
-    def __init__(self, star_id, df_btrotta, df_kboone):
-        super().__init__() 
+    bid_a2 = forms.IntegerField(required=False, label='bid_a2', min_value=0, max_value=100, disabled=True)
+    bid_b2 = forms.IntegerField(required=False, label='bid_b2', min_value=0, max_value=100, disabled=True)
+    bid_c2 = forms.IntegerField(required=False, label='bid_c2', min_value=0, max_value=100, disabled=True)
 
-        self._star_id = star_id
-        self._df_btrotta = df_btrotta
-        self._df_kboone = df_kboone
+    bid_a3 = forms.IntegerField(required=False, label='bid_a3', min_value=0, max_value=100, disabled=True)
+    bid_b3 = forms.IntegerField(required=False, label='bid_b3', min_value=0, max_value=100, disabled=True)
+    bid_c3 = forms.IntegerField(required=False, label='bid_c3', min_value=0, max_value=100, disabled=True)
+
+    sum_1 = forms.IntegerField(required=False, label='sum_1', min_value=0, max_value=100, disabled=True)
+    sum_2 = forms.IntegerField(required=False, label='sum_2', min_value=0, max_value=100, disabled=True)
+    sum_3 = forms.IntegerField(required=False, label='sum_3', min_value=0, max_value=100, disabled=True)
 
 
-    # # reference https://docs.djangoproject.com/en/3.0/ref/forms/validation/#validating-fields-with-clean
-    # def clean(self):
 
-    #     cleaned_data = super().clean()
 
-    #     star = cleaned_data.get('star')
-    #     user = cleaned_data.get('user')
-    #     timestamp = cleaned_data.get('timestamp')
+    # reference https://docs.djangoproject.com/en/3.0/ref/forms/validation/#validating-fields-with-clean
+    def clean(self):
 
-    #     b = []
-    #     b.append(cleaned_data.get('bid_1'))
-    #     b.append(cleaned_data.get('bid_2'))
-    #     b.append(cleaned_data.get('bid_3'))
-    #     b.append(cleaned_data.get('bid_4'))
-    #     b.append(cleaned_data.get('bid_5'))
-    #     b.append(cleaned_data.get('bid_6'))
-    #     b.append(cleaned_data.get('bid_7'))
-    #     b.append(cleaned_data.get('bid_8'))
-    #     b.append(cleaned_data.get('bid_9'))
-    #     b.append(cleaned_data.get('bid_10'))
-    #     b.append(cleaned_data.get('bid_11'))
-    #     b.append(cleaned_data.get('bid_12'))
-    #     b.append(cleaned_data.get('bid_13'))
-    #     sumb = sum(b)
+        cleaned_data = super().clean()
 
-    #     try:
-    #         #game = self.instance.game
-    #         if sumb != 100:
-    #             raise ValidationError("Bets need to sum to 100")
-    #     except IndexError:
-    #         raise ValidationError("Index error")
-    #     except AttributeError:
-    #         raise ValidationError("Attribute error")
-    #     return self.cleaned_data
+        #star = cleaned_data.get('star')
+        #user = cleaned_data.get('user')
+        #timestamp = cleaned_data.get('timestamp')
+
+        the_sum = cleaned_data.get('sum_1')
+
+        #b = []
+        #b.append(cleaned_data.get('bid_a1'))
+        #b.append(cleaned_data.get('bid_b1'))
+        #b.append(cleaned_data.get('bid_c1'))
+        #sumb = sum(b)
+
+        #try:
+        #    sumb = int(cleaned_data.get('bid_a1')) + \
+        #        int(cleaned_data.get('bid_b1')) + \
+        #        int(cleaned_data.get('bid_c1'))
+        #    sumb = 456
+        #except ValueError:
+        #    raise ValidationError('(internal) cannot convert str to int', code='bid_not_an_int')
+
+        #cleaned_data.get('sum_1') = 55
+        #cleaned_data.get('bid_c1'))
+
+        #logger = logging.getLogger(__name__)
+        #logger.debug("\n---here9\n")
+        #logger.debug(str(self.cleaned_data))
+        #logger.debug("\n")
+        #logger.debug("\n---here7" + str(sumb) + "\n")
+
+        try:
+            #if sumb != 100:
+            if the_sum != 100:
+                raise ValidationError('Your bets need to sum to 100', code='sum_bets_ne_100')
+        except IndexError:
+            raise ValidationError("Index error")
+        except AttributeError:
+            raise ValidationError("Attribute error")
+        #return self.cleaned_data

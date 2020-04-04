@@ -80,19 +80,42 @@ def pick_star(request):
 
 @login_required
 def new_bet(request, id):
+    
+    logger = logging.getLogger(__name__)
+    logger.debug("\n---here8")
+    logger.debug("\n" + str(request))
+
 
     star = get_object_or_404(PlasticcStar, pk=id)
 
     ###### POST #####
     if request.method == "POST":
+
+        logger = logging.getLogger(__name__)
+        logger.debug("\n---here2\n")
+        logger.debug("\n" + str(request))
+        logger.debug("\n" + str(request.POST))
+        logger.debug("\n" + str(request.POST.get("bid_b1")))
+        logger.debug("\n")
+
         form = BetForm(data=request.POST)
+        bet_form_set_disabled_fields(form, request, star)
+        bet_form_set_reduction_fields(form, request)
+
+        logger.debug("\n---here91")
         if form.is_valid():
-            form.save() # save to db.. to be implemented becuase this is not based on model...
+            logger.debug("\n---here92")
+            form.save()  # save to db.. to be implemented becuase this is not based on model...
             return redirect('player_well_done')
+            #return HttpResponseRedirect('/thanks/')
+
 
     ###### GET #####
     else:
-        
+        logger = logging.getLogger(__name__)
+        logger.debug("\n---here1\n")
+
+
         # ======== get non-user-provided bid data (DataFrames)
         df_btrotta = pd.DataFrame(
             data=np.random.randint(0, 100, size=(1, 14)),
@@ -104,24 +127,67 @@ def new_bet(request, id):
             columns=['a', 'b', 'c', 'd', 'e', 'f',
                     'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
         )
-        
-        form = BetForm(
-            star_id=star.star_id,
-            df_btrotta=df_btrotta,
-            df_kboone=df_kboone)
+
+        form = BetForm()
+        bet_form_set_enabled_fields(form)
+        bet_form_set_disabled_fields(form, request, star)
+        bet_form_set_reduction_fields(form, request)
 
     context = {}
     context['form'] = form
     context['star_id'] = star.star_id
 
-    logger = logging.getLogger(__name__)
-    logger.debug("\n---here2\n" + str(type(request)))
-    logger.debug("\n")
-
     return render(
         request=request,
         template_name="app_player/new_bet_form.html",
         context=context)
+
+
+# on the bet form, set the fields that are enabled
+# this only needs to happen on GET as a POST provides this data in request.POST
+def bet_form_set_enabled_fields(form):
+
+    form.fields['bid_a1'].initial = 0
+    form.fields['bid_b1'].initial = 0
+    form.fields['bid_c1'].initial = 0
+
+
+# on the bet form, set the fields that are disabled
+# this needs to happen on both GET and POST as POST does not provides this data in request.POST
+def bet_form_set_disabled_fields(form, request, star):
+
+    form.fields['user'].initial = request.user
+    form.fields['star_id'].initial = star.star_id
+
+    form.fields['bid_a2'].initial = 4 #btrotta
+    form.fields['bid_b2'].initial = 5
+    form.fields['bid_c2'].initial = 6
+
+    form.fields['bid_a3'].initial = 7 #kboone
+    form.fields['bid_b3'].initial = 8
+    form.fields['bid_c3'].initial = 9
+
+    #sum = form.fields['bid_a1'] + form.fields['bid_b1'] + form.fields['bid_c1']
+    #sum = 1234
+    #form.fields['sum_1'].initial = sum
+    #form.fields['sum_2'].initial = 12
+    #form.fields['sum_3'].initial = 13
+
+    #'bid_a1': 0, 'bid_b1': 0, 'bid_c1': 0,
+    #{'bid_a1': ['0'], 'bid_b1': ['0'], 'bid_c1': ['0'],
+
+
+def bet_form_set_reduction_fields(form, request):
+    if request.method == "POST":
+        #sum = 444
+        #  'bid_a1': ['1'], 'bid_b1': ['0'], 'bid_c1': ['0'],
+        sum = int(request.POST.get("bid_a1")) + \
+            int(request.POST.get("bid_b1")) + \
+            int(request.POST.get("bid_c1"))
+        form.fields['sum_1'].initial = sum
+    else:
+        form.fields['sum_1'].initial = 0
+
 
 
 @login_required
