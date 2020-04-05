@@ -65,9 +65,6 @@ def pick_star(request):
     df_kboone.loc[[1], ['a']] = 101
 
     present_pick_star = PresentPickStar(qs_star, df_btrotta, df_kboone)
-    #logger = logging.getLogger(__name__)
-    #logger.debug("\n---here7\n" + str(present_pick_star.star_hdr()))
-    #logger.debug("\n---here8\n" + str(len(present_pick_star.star_hdr())))
 
     return render(
         request,
@@ -81,40 +78,26 @@ def pick_star(request):
 @login_required
 def new_bet(request, id):
     
-    logger = logging.getLogger(__name__)
-    logger.debug("\n---here8")
-    logger.debug("\n" + str(request))
-
+    #logger = logging.getLogger(__name__)
+    #logger.debug("\n---here8")
+    #logger.debug("\n" + str(request))
 
     star = get_object_or_404(PlasticcStar, pk=id)
 
     ###### POST #####
     if request.method == "POST":
 
-        logger = logging.getLogger(__name__)
-        logger.debug("\n---here2\n")
-        logger.debug("\n" + str(request))
-        logger.debug("\n" + str(request.POST))
-        logger.debug("\n" + str(request.POST.get("bid_b1")))
-        logger.debug("\n")
-
         form = BetForm(data=request.POST)
         bet_form_set_disabled_fields(form, request, star)
         bet_form_set_reduction_fields(form, request)
 
-        logger.debug("\n---here91")
         if form.is_valid():
-            logger.debug("\n---here92")
             #form.save()  # save to db.. to be implemented becuase this is not based on model...
             return redirect('player_well_done')
-            #return HttpResponseRedirect('/thanks/')
 
 
     ###### GET #####
     else:
-        logger = logging.getLogger(__name__)
-        logger.debug("\n---here1\n")
-
 
         # ======== get non-user-provided bid data (DataFrames)
         df_btrotta = pd.DataFrame(
@@ -139,7 +122,7 @@ def new_bet(request, id):
 
     return render(
         request=request,
-        template_name="app_player/new_bet_form.html",
+        template_name="app_player/bet_form.html",
         context=context)
 
 
@@ -167,20 +150,9 @@ def bet_form_set_disabled_fields(form, request, star):
     form.fields['bid_b3'].initial = 8
     form.fields['bid_c3'].initial = 9
 
-    #sum = form.fields['bid_a1'] + form.fields['bid_b1'] + form.fields['bid_c1']
-    #sum = 1234
-    #form.fields['sum_1'].initial = sum
-    #form.fields['sum_2'].initial = 12
-    #form.fields['sum_3'].initial = 13
-
-    #'bid_a1': 0, 'bid_b1': 0, 'bid_c1': 0,
-    #{'bid_a1': ['0'], 'bid_b1': ['0'], 'bid_c1': ['0'],
-
 
 def bet_form_set_reduction_fields(form, request):
     if request.method == "POST":
-        #sum = 444
-        #  'bid_a1': ['1'], 'bid_b1': ['0'], 'bid_c1': ['0'],
         sum = int(request.POST.get("bid_a1")) + \
             int(request.POST.get("bid_b1")) + \
             int(request.POST.get("bid_c1"))
