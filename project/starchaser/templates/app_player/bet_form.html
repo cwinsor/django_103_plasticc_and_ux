@@ -14,7 +14,7 @@ You can preview your score (but that would cheating).
 
 
 
-<form method="post" action="{% url 'new_bet' id=star_id %}">
+<form method="post" action="{% url 'place_bet' id=star_id %}">
     <label>User: </label> {{ form.user }}
     <br>
     <label>Star: </label> {{ form.star_id }}

@@ -76,7 +76,7 @@ def pick_star(request):
 
 
 @login_required
-def new_bet(request, id):
+def place_bet(request, id):
     
     #logger = logging.getLogger(__name__)
     #logger.debug("\n---here8")
