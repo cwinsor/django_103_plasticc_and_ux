@@ -1,154 +1,39 @@
 {% extends "base.html" %}
 
 {% block title %}
-
+Pick Star
 {% endblock %}
 
 {% block content %}
-{{ mytype }}
-Select a star from the available list.
 
-<!--
-<br>------------------ df_star_html
-<br>
-{ % autoescape off % }
-{ { df_star_html } }
-{ % endautoescape % }
-<br>------------------
--->
+<h1>
+    Choose a star:
+</h1>
+
+{{ qs_star }}
 
 <br>
-<div class="col-md-12">
-    <table border="1">
 
-        <tr>
-            <th>-</th>
-            <th colspan=12>Available</th>
-            <th>-</th>
-            <th colspan=14>B.Trotta</th>
-            <th>-</th>
-            <th colspan=14>K.Boone</th>
-        </tr>
+<div class='row'>
+    <div class='col-md-6'>
 
-        <tr>
-            <th>sel</th>
+        <h3>Available:</h3>
+        <!-- the following could become a 'snippet' -->
+        <div class="list-group bg-info">
+            {% for star in qs_star %}
+            <a class="list-group-item list-group-item-info" href="{% url 'place_bet' id=star.star_id %}">
 
-            <td>star_id</td>
-            <td>ra</td>
-            <td>decl</td>
-            <td>gal_l</td>
-            <td>gal_b</td>
-            <td>ddf</td>
-            <td>hostgal_specz</td>
-            <td>hostgal_photoz</td>
-            <td>hostgal_photoz_err</td>
-            <td>distmod</td>
-            <td>MWEBV</td>
-            <td>target</td>
+                Star {{ star.star_id }} ra: {{ star.ra }} decl: {{ star.decl }} 
+                <span class="badge">{{ star.star_id }}</span>
+            </a>
+            {% endfor %}
+        </div>
 
-            <th>-</th>
+    </div>
 
-            <td>0</td>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-            <td>13</td>
-
-            <th>-</th>
-
-            <td>0</td>
-            <td>1</td>
-            <td>2</td>
-            <td>3</td>
-            <td>4</td>
-            <td>5</td>
-            <td>6</td>
-            <td>7</td>
-            <td>8</td>
-            <td>9</td>
-            <td>10</td>
-            <td>11</td>
-            <td>12</td>
-            <td>13</td>
-
-
-        </tr>
-
-        {% for row in present_pick_star.rows %}
-
-        <tr>
-            <td> <input type="radio" name="star_select"></td>
-            <td>{{ row.star_id }}</td>
-            <td>{{ row.ra }}</td>
-            <td>{{ row.decl }}</td>
-            <td>{{ row.gal_l }}</td>
-            <td>{{ row.gal_b }}</td>
-            <td>{{ row.ddf }}</td>
-            <td>{{ row.hostgal_specz }}</td>
-            <td>{{ row.hostgal_photoz }}</td>
-            <td>{{ row.hostgal_photoz_err }}</td>
-            <td>{{ row.distmod }}</td>
-            <td>{{ row.MWEBV }}</td>
-            <td>{{ row.target }}</td>
-
-            <td>-</td>
-
-            <td>{{row.a_x}}</td>
-            <td>{{row.b_x}}</td>
-            <td>{{row.c_x}}</td>
-            <td>{{row.d_x}}</td>
-            <td>{{row.e_x}}</td>
-            <td>{{row.f_x}}</td>
-            <td>{{row.g_x}}</td>
-            <td>{{row.h_x}}</td>
-            <td>{{row.i_x}}</td>
-            <td>{{row.j_x}}</td>
-            <td>{{row.k_x}}</td>
-            <td>{{row.l_x}}</td>
-            <td>{{row.m_x}}</td>
-            <td>{{row.n_x}}</td>
-
-            <td>-</td>
-
-            <td>{{row.a_y}}</td>
-            <td>{{row.b_y}}</td>
-            <td>{{row.c_y}}</td>
-            <td>{{row.d_y}}</td>
-            <td>{{row.e_y}}</td>
-            <td>{{row.f_y}}</td>
-            <td>{{row.g_y}}</td>
-            <td>{{row.h_y}}</td>
-            <td>{{row.i_y}}</td>
-            <td>{{row.j_y}}</td>
-            <td>{{row.k_y}}</td>
-            <td>{{row.l_y}}</td>
-            <td>{{row.m_y}}</td>
-            <td>{{row.n_y}}</td>
-
-        </tr>
-        {% endfor %}
-    </table>
+    <div class='col-md-6'>
+        <h3>Charts:</h3>
+    </div>
 </div>
-
-
-<div class="col-md-12">
-    <br>
-    <button type="submit" value="foo" onclick="window.location.href='{% url 'new_bet' %}'" name='mybtn2'>Chase
-        it</button>
-    <br>
-    <button type="help" value="foo" onclick="window.location.href='{% url 'game_help' %}'" name='mybtn2'>Help</button>
-    <br>
-    <button type="info" value="foo" onclick="window.location.href='{% url 'game_info' %}'" name='mybtn2'>Info</button>
-</div>
-
-
 {% endblock %}
+

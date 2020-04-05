@@ -33,7 +33,7 @@ def pick_star(request):
 
     return render(
             request=request,
-            template_name="app_player/pick_staaar.html",
+            template_name="app_player/pick_star.html",
             context={
                 'qs_star': qs_star
                 }
