@@ -105,7 +105,7 @@ def new_bet(request, id):
         logger.debug("\n---here91")
         if form.is_valid():
             logger.debug("\n---here92")
-            form.save()  # save to db.. to be implemented becuase this is not based on model...
+            #form.save()  # save to db.. to be implemented becuase this is not based on model...
             return redirect('player_well_done')
             #return HttpResponseRedirect('/thanks/')
 

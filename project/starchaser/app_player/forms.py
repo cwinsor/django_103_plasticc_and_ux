@@ -46,42 +46,12 @@ class BetForm(Form):
     sum_2 = forms.IntegerField(required=False, label='sum_2', min_value=0, max_value=100, disabled=True)
     sum_3 = forms.IntegerField(required=False, label='sum_3', min_value=0, max_value=100, disabled=True)
 
-
-
-
     # reference https://docs.djangoproject.com/en/3.0/ref/forms/validation/#validating-fields-with-clean
     def clean(self):
 
         cleaned_data = super().clean()
 
-        #star = cleaned_data.get('star')
-        #user = cleaned_data.get('user')
-        #timestamp = cleaned_data.get('timestamp')
-
         the_sum = cleaned_data.get('sum_1')
-
-        #b = []
-        #b.append(cleaned_data.get('bid_a1'))
-        #b.append(cleaned_data.get('bid_b1'))
-        #b.append(cleaned_data.get('bid_c1'))
-        #sumb = sum(b)
-
-        #try:
-        #    sumb = int(cleaned_data.get('bid_a1')) + \
-        #        int(cleaned_data.get('bid_b1')) + \
-        #        int(cleaned_data.get('bid_c1'))
-        #    sumb = 456
-        #except ValueError:
-        #    raise ValidationError('(internal) cannot convert str to int', code='bid_not_an_int')
-
-        #cleaned_data.get('sum_1') = 55
-        #cleaned_data.get('bid_c1'))
-
-        #logger = logging.getLogger(__name__)
-        #logger.debug("\n---here9\n")
-        #logger.debug(str(self.cleaned_data))
-        #logger.debug("\n")
-        #logger.debug("\n---here7" + str(sumb) + "\n")
 
         try:
             #if sumb != 100:
