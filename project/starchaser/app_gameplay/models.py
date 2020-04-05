@@ -11,6 +11,7 @@ fmt = '{}'
 # fmt_f = '{:5.2f}'
 fmt_f = '{:.2f}'
 fmt_starid = '{:8}'
+fmt_betid = '{:8}'
 fmt_is = '{:1}'
 fmt_i3 = '{:3}'
 
@@ -124,83 +125,6 @@ class GameplayRoundQuerySet(models.QuerySet):
         )
 
 
-class GameplayRound(models.Model):
-
-    # override "objects" property replacing it with custom QuerySet
-    objects = GameplayRoundQuerySet.as_manager()
-
-    player = models.ForeignKey(
-        User,
-        related_name="player",
-        on_delete=models.CASCADE)
-    star = models.ForeignKey(
-        PlasticcStar,
-        on_delete=models.CASCADE)
-    name = models.CharField(max_length=10)
-    bid_1 = models.SmallIntegerField(null=False, default=0, validators=[
-                                     MinValueValidator(0), MaxValueValidator(100)])
-    bid_2 = models.SmallIntegerField(null=False, default=0, validators=[
-                                     MinValueValidator(0), MaxValueValidator(100)])
-    bid_3 = models.SmallIntegerField(null=False, default=0, validators=[
-                                     MinValueValidator(0), MaxValueValidator(100)])
-    bid_4 = models.SmallIntegerField(null=False, default=0, validators=[
-                                     MinValueValidator(0), MaxValueValidator(100)])
-    bid_5 = models.SmallIntegerField(null=False, default=0, validators=[
-                                     MinValueValidator(0), MaxValueValidator(100)])
-    bid_6 = models.SmallIntegerField(null=False, default=0, validators=[
-                                     MinValueValidator(0), MaxValueValidator(100)])
-    bid_7 = models.SmallIntegerField(null=False, default=0, validators=[
-                                     MinValueValidator(0), MaxValueValidator(100)])
-    bid_8 = models.SmallIntegerField(null=False, default=0, validators=[
-                                     MinValueValidator(0), MaxValueValidator(100)])
-    bid_9 = models.SmallIntegerField(null=False, default=0, validators=[
-                                     MinValueValidator(0), MaxValueValidator(100)])
-    bid_10 = models.SmallIntegerField(null=False, default=0, validators=[
-                                      MinValueValidator(0), MaxValueValidator(100)])
-    bid_11 = models.SmallIntegerField(null=False, default=0, validators=[
-                                      MinValueValidator(0), MaxValueValidator(100)])
-    bid_12 = models.SmallIntegerField(null=False, default=0, validators=[
-                                      MinValueValidator(0), MaxValueValidator(100)])
-    bid_13 = models.SmallIntegerField(null=False, default=0, validators=[
-                                      MinValueValidator(0), MaxValueValidator(100)])
-
-    def __str__(self):
-        msg = '{}'
-        msg += ' "{:10}"'
-        msg += ' star_id ' + fmt_starid
-        msg += ' bets:' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-        msg += ' ' + fmt_i3
-
-        return msg.format(
-            self.id,
-            self.name,
-            self.star.star_id,
-            self.bid_1,
-            self.bid_2,
-            self.bid_3,
-            self.bid_4,
-            self.bid_5,
-            self.bid_6,
-            self.bid_7,
-            self.bid_8,
-            self.bid_9,
-            self.bid_10,
-            self.bid_11,
-            self.bid_12,
-            self.bid_13)
-
-
 class Bet(models.Model):
 
     star = models.ForeignKey(
@@ -282,51 +206,119 @@ class Bet(models.Model):
             MinValueValidator(0),
             MaxValueValidator(100)])
 
-    def __init__(self, star, user):
-        super.__init__()
-        self.star = star
-        self.user = user
+    #def __init__(self, star, user):
+    #    super.__init__()
+    #    self.star = star
+    #    self.user = user
 
     def __str__(self):
 
-        #msg = '  1:{}'
-        fmt = '{:10}'
         msg = ''
-        msg += ('  1:' + fmt)
-        msg += ('  2:' + fmt)
-        msg += ('  3:' + fmt)
-        msg += ('  4:' + fmt)
-        #msg += ('  5:' + fmt)
-        #msg += ('  6:' + fmt)
-        #msg += ('  7:' + fmt)
-        #msg += ('  8:' + fmt)
-        #msg += ('  9:' + fmt)
-        #msg += (' 10:' + fmt)
-        #msg += (' 11:' + fmt)
-        #msg += (' 12:' + fmt)
-        #msg += (' 13:' + fmt)
-
-        logger = logging.getLogger(__name__)
-        logger.debug("\n---here2\n" + msg)
+        msg += '{}'
+        msg += ' user: {}'
+        msg += ' star: {} ='
+        msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
 
         temp = msg.format(
-             self.bid_1,
-             self.bid_2,
-             self.bid_3,
-             self.bid_4)
-             #self.bid_5,
-             #self.bid_6,
-             #self.bid_7,
-             #self.bid_8,
-             #s#elf.bid_9,
-             #se#lf.bid_10,
-             #self.bid_11,
-             #self.bid_12,
-             #self.bid_13)
-    
-        logger.debug("\n---here3\n" + temp)
+            self.id,
+            self.user.username,
+            self.star.star_id,
+            self.bid_1,
+            self.bid_2,
+            self.bid_3)
 
         return temp
+
+
+
+class GameplayRound(models.Model):
+
+    # override "objects" property replacing it with custom QuerySet
+    objects = GameplayRoundQuerySet.as_manager()
+
+    name = models.CharField(max_length=10)
+
+    player = models.ForeignKey(
+        User,
+        related_name="player",
+        on_delete=models.CASCADE)
+
+    bet = models.ForeignKey(
+        Bet,
+        related_name="bet",
+        on_delete=models.CASCADE)
+
+    # star = models.ForeignKey(
+    #     PlasticcStar,
+    #     on_delete=models.CASCADE)
+
+
+    
+    # bid_1 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                  MinValueValidator(0), MaxValueValidator(100)])
+    # bid_2 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                  MinValueValidator(0), MaxValueValidator(100)])
+    # bid_3 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                  MinValueValidator(0), MaxValueValidator(100)])
+    # bid_4 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                  MinValueValidator(0), MaxValueValidator(100)])
+    # bid_5 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                  MinValueValidator(0), MaxValueValidator(100)])
+    # bid_6 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                  MinValueValidator(0), MaxValueValidator(100)])
+    # bid_7 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                  MinValueValidator(0), MaxValueValidator(100)])
+    # bid_8 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                  MinValueValidator(0), MaxValueValidator(100)])
+    # bid_9 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                  MinValueValidator(0), MaxValueValidator(100)])
+    # bid_10 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                   MinValueValidator(0), MaxValueValidator(100)])
+    # bid_11 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                   MinValueValidator(0), MaxValueValidator(100)])
+    # bid_12 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                   MinValueValidator(0), MaxValueValidator(100)])
+    # bid_13 = models.SmallIntegerField(null=False, default=0, validators=[
+    #                                   MinValueValidator(0), MaxValueValidator(100)])
+
+    def __str__(self):
+        msg = '{}'
+        msg += ' "{:10}"'
+        msg += ' bet ' + fmt_betid
+        #msg += ' bets:' + fmt_i3
+        #msg += ' ' + fmt_i3
+        #msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+        # msg += ' ' + fmt_i3
+
+        return msg.format(
+            self.id,
+            self.name,
+            self.bet.id)
+            # self.bid_1,
+            # self.bid_2,
+            # self.bid_3,
+            # self.bid_4,
+            # self.bid_5,
+            # self.bid_6,
+            # self.bid_7,
+            # self.bid_8,
+            # self.bid_9,
+            # self.bid_10,
+            # self.bid_11,
+            # self.bid_12,
+            # self.bid_13)
+
 
 
 class Profile(models.Model):
