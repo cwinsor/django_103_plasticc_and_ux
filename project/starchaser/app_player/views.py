@@ -83,6 +83,7 @@ def place_bet(request, id):
     #logger.debug("\n" + str(request))
 
     star = get_object_or_404(PlasticcStar, pk=id)
+    user = request.user
 
     ###### POST #####
     if request.method == "POST":
@@ -92,8 +93,10 @@ def place_bet(request, id):
         bet_form_set_reduction_fields(form, request)
 
         if form.is_valid():
-            #form.save()  # save to db.. to be implemented becuase this is not based on model...
+            form.save()  # save to db.. to be implemented becuase this is not based on model...
             return redirect('player_well_done')
+        #pass
+
 
 
     ###### GET #####
@@ -112,7 +115,7 @@ def place_bet(request, id):
         )
 
         form = BetForm()
-        bet_form_set_enabled_fields(form)
+        #bet_form_set_enabled_fields(form)
         bet_form_set_disabled_fields(form, request, star)
         bet_form_set_reduction_fields(form, request)
 
@@ -128,38 +131,85 @@ def place_bet(request, id):
 
 # on the bet form, set the fields that are enabled
 # this only needs to happen on GET as a POST provides this data in request.POST
-def bet_form_set_enabled_fields(form):
+#def bet_form_set_enabled_fields(form):
+#
+#    form.fields['bid_a1'].initial = 0
+#    form.fields['bid_b1'].initial = 0
+#    form.fields['bid_c1'].initial = 0
 
-    form.fields['bid_a1'].initial = 0
-    form.fields['bid_b1'].initial = 0
-    form.fields['bid_c1'].initial = 0
 
-
-# on the bet form, set the fields that are disabled
+# on the bet form, set the fields that are not user_editable
 # this needs to happen on both GET and POST as POST does not provides this data in request.POST
 def bet_form_set_disabled_fields(form, request, star):
 
+    form.fields['user'].disabled = True
     form.fields['user'].initial = request.user
-    form.fields['star_id'].initial = star.star_id
 
-    form.fields['bid_a2'].initial = 4 #btrotta
-    form.fields['bid_b2'].initial = 5
-    form.fields['bid_c2'].initial = 6
+    form.fields['star'].disabled = True
+    form.fields['star'].initial = star
 
-    form.fields['bid_a3'].initial = 7 #kboone
-    form.fields['bid_b3'].initial = 8
-    form.fields['bid_c3'].initial = 9
+    form.fields['bid_a2'].initial = 1 #btrotta
+    form.fields['bid_b2'].initial = 2
+    form.fields['bid_c2'].initial = 3
+    form.fields['bid_d2'].initial = 4
+    form.fields['bid_e2'].initial = 5
+    form.fields['bid_f2'].initial = 6
+    form.fields['bid_g2'].initial = 7
+    form.fields['bid_h2'].initial = 8
+    form.fields['bid_i2'].initial = 9
+    form.fields['bid_j2'].initial = 10
+    form.fields['bid_k2'].initial = 11
+    form.fields['bid_l2'].initial = 12
+    form.fields['bid_m2'].initial = 13
+
+
+    form.fields['bid_a3'].initial = 5 #kboone
+    form.fields['bid_b3'].initial = 6
+    form.fields['bid_c3'].initial = 7
+    form.fields['bid_d3'].initial = 8
+    form.fields['bid_e3'].initial = 9
+    form.fields['bid_f3'].initial = 10
+    form.fields['bid_g3'].initial = 11
+    form.fields['bid_h3'].initial = 12
+    form.fields['bid_i3'].initial = 13
+    form.fields['bid_j3'].initial = 14
+    form.fields['bid_k3'].initial = 15
+    form.fields['bid_l3'].initial = 16
+    form.fields['bid_m3'].initial = 17
 
 
 def bet_form_set_reduction_fields(form, request):
+
     if request.method == "POST":
-        sum = int(request.POST.get("bid_a1")) + \
-            int(request.POST.get("bid_b1")) + \
-            int(request.POST.get("bid_c1"))
+        #sum = int(request.POST.get("bid_a")) + \
+        #    int(request.POST.get("bid_b")) + \
+        #    int(request.POST.get("bid_c"))
+        #form.fields['sum_1'].initial = sum
+
+        #sum = int(form.fields['bid_a'].value())
+        sum = \
+            int(request.POST.get("bid_a")) + \
+            int(request.POST.get("bid_b")) + \
+            int(request.POST.get("bid_c")) + \
+            int(request.POST.get("bid_d")) + \
+            int(request.POST.get("bid_e")) + \
+            int(request.POST.get("bid_f")) + \
+            int(request.POST.get("bid_g")) + \
+            int(request.POST.get("bid_h")) + \
+            int(request.POST.get("bid_i")) + \
+            int(request.POST.get("bid_j")) + \
+            int(request.POST.get("bid_k")) + \
+            int(request.POST.get("bid_l")) + \
+            int(request.POST.get("bid_m"))
+
         form.fields['sum_1'].initial = sum
+        #form.fields['sum_2'].initial = 50
+        #form.fields['sum_3'].initial = 50
+
     else:
         form.fields['sum_1'].initial = 0
-
+        #form.fields['sum_2'].initial = 20
+        #form.fields['sum_3'].initial = 30
 
 
 @login_required

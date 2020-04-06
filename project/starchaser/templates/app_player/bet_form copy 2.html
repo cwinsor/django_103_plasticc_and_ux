@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}
+New Bet
+{% endblock %}
+
+{% block content %}
+<h1>Place your Bets!</h1>
+Guidance is provided by B.Trotta and K.Boone using TensorFlow AI.
+<br>
+You can preview your score (but that would cheating).
+<br>
+<br>
+
+
+
+<form method="post" action="{% url 'place_bet' id=star_id %}">
+    <label>User1: </label> {{ form.user }}
+    <br>
+    <label>User2: </label> {{  user }}
+    <br>
+    <label>User3: </label> {{  user.username }}
+    <br>
+    <label>Star: </label> {{ form.star }}
+    <br>
+    <label>Star: </label> {{ star.id }}
+    <br>
+    <label>Star: </label> {{ star.star_id }}
+    <br>
+
+    <label>Foo: </label> {{ form.foo }}
+
+
+
+    <br>
+    <div class="row">
+        <div class="col-sm-2"> <b>Class</b> </div>
+        <div class="col-sm-1"> <b>Your Bet </b></div>
+        <div class="col-sm-1"> <b>B.Trotta</b> </div>
+        <div class="col-sm-1"> <b>K.Boone</b> </div>
+        <div class="col-sm-4"> <b>errors</b> </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"> Supernova type 1A </div>
+        <div class="col-sm-1"> {{ form.bid_a }} </div>
+        <div class="col-sm-1"> {{ form.bid_a2 }} </div>
+        <div class="col-sm-1"> {{ form.bid_a3 }} </div>
+        <div class="col-sm-4"> {{ form.bid_a.errors }} </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"> Supernova type 7C </div>
+        <div class="col-sm-1"> {{ form.bid_b }} </div>
+        <div class="col-sm-1"> {{ form.bid_b2 }} </div>
+        <div class="col-sm-1"> {{ form.bid_b3 }} </div>
+        <div class="col-sm-4"> {{ form.bid_b.errors }} </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"> Supernova type 7C </div>
+        <div class="col-sm-1"> {{ form.bid_c }} </div>
+        <div class="col-sm-1"> {{ form.bid_c2 }} </div>
+        <div class="col-sm-1"> {{ form.bid_c3 }} </div>
+        <div class="col-sm-4"> {{ form.bid_c.errors }} </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"> sum--> </div>
+        <div class="col-sm-1"> {{ form.sum_1 }} </div>
+        <div class="col-sm-1"> {{ form.sum_2 }} </div>
+        <div class="col-sm-1"> {{ form.sum_3 }} </div>
+    </div>
+
+    <font color="red"> <b> {{ form.non_field_errors }} </b> </font>
+
+    {% csrf_token %}
+    <br>
+    <button type="submit">Preview</button>
+    <br>
+    <button type="submit">Submit</button>
+
+    <br>
+    <h1>Errors:</h1>
+    {% if form.errors %}
+    {% for field in form %}
+    {% for error in field.errors %}
+    <div class="alert alert-danger">
+        <strong> {{ field.label }}: {{ error }}</strong>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+    <div class="alert alert-danger">
+        <strong>hmm: {{ error }}</strong>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+</form>
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+<br>
+HERE
+<br>
+
+<form method="post" action="{% url 'place_bet' id=star_id %}">
+    {{ form }}
+    {% csrf_token %}
+    <button type="submit">Submit</button>
+</form>
+
+
+<br>
+
+{% endblock %}
