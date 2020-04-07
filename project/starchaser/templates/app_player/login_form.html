@@ -19,4 +19,14 @@ Login
     <button type="submit" class="btn btn-success">Sign in</button>
 </form>
 
+===================
+
+<h2>Login Form</h2>
+<form action="{% url 'player_login' %}"   method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Login</button>
+</form>
+
+
 {% endblock %}

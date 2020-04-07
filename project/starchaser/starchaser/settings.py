@@ -92,13 +92,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+                'OPTIONS': {
+                    'min_length': 3,
+                }
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    #{
+    #    'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    #},
+    # {
+    #    'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
@@ -115,7 +118,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-#logging
+# logging
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -127,7 +130,7 @@ LOGGING = {
     'root': {
         'handlers': ['console'],
         'level': 'DEBUG',
-        #'level': 'WARNING',
+        # 'level': 'WARNING',
     },
 }
 

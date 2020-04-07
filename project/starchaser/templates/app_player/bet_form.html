@@ -23,10 +23,9 @@ You can preview your score (but that would cheating).
     <br>
     <div class="row">
         <div class="col-sm-2"> <b>Class</b> </div>
-        <div class="col-sm-1"> <b>Your Bet </b></div>
+        <div class="col-sm-1"> <b>Your Bet ($) </b></div>
         <div class="col-sm-1"> <b>B.Trotta</b> </div>
         <div class="col-sm-1"> <b>K.Boone</b> </div>
-        <div class="col-sm-4"> <b>errors</b> </div>
     </div>
 
     <div class="row">
@@ -60,7 +59,7 @@ You can preview your score (but that would cheating).
         <div class="col-sm-1"> {{ form.bid_d3 }} </div>
         <div class="col-sm-4"> {{ form.bid_d.errors }} </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2"> type e</div>
         <div class="col-sm-1"> {{ form.bid_e }} </div>
@@ -68,7 +67,7 @@ You can preview your score (but that would cheating).
         <div class="col-sm-1"> {{ form.bid_e3 }} </div>
         <div class="col-sm-4"> {{ form.bid_e.errors }} </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2"> type f</div>
         <div class="col-sm-1"> {{ form.bid_f }} </div>
@@ -76,7 +75,7 @@ You can preview your score (but that would cheating).
         <div class="col-sm-1"> {{ form.bid_f3 }} </div>
         <div class="col-sm-4"> {{ form.bid_f.errors }} </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2"> type g</div>
         <div class="col-sm-1"> {{ form.bid_g }} </div>
@@ -84,7 +83,7 @@ You can preview your score (but that would cheating).
         <div class="col-sm-1"> {{ form.bid_g3 }} </div>
         <div class="col-sm-4"> {{ form.bid_g.errors }} </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2"> type h</div>
         <div class="col-sm-1"> {{ form.bid_h }} </div>
@@ -92,7 +91,7 @@ You can preview your score (but that would cheating).
         <div class="col-sm-1"> {{ form.bid_h3 }} </div>
         <div class="col-sm-4"> {{ form.bid_h.errors }} </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2"> type i</div>
         <div class="col-sm-1"> {{ form.bid_i }} </div>
@@ -100,7 +99,7 @@ You can preview your score (but that would cheating).
         <div class="col-sm-1"> {{ form.bid_i3 }} </div>
         <div class="col-sm-4"> {{ form.bid_i.errors }} </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2"> type j</div>
         <div class="col-sm-1"> {{ form.bid_j }} </div>
@@ -108,7 +107,7 @@ You can preview your score (but that would cheating).
         <div class="col-sm-1"> {{ form.bid_j3 }} </div>
         <div class="col-sm-4"> {{ form.bid_j.errors }} </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2"> type k</div>
         <div class="col-sm-1"> {{ form.bid_k }} </div>
@@ -116,7 +115,7 @@ You can preview your score (but that would cheating).
         <div class="col-sm-1"> {{ form.bid_k3 }} </div>
         <div class="col-sm-4"> {{ form.bid_k.errors }} </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2"> type l</div>
         <div class="col-sm-1"> {{ form.bid_l }} </div>
@@ -124,7 +123,7 @@ You can preview your score (but that would cheating).
         <div class="col-sm-1"> {{ form.bid_l3 }} </div>
         <div class="col-sm-4"> {{ form.bid_l.errors }} </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-2"> type m</div>
         <div class="col-sm-1"> {{ form.bid_m }} </div>
@@ -134,9 +133,13 @@ You can preview your score (but that would cheating).
     </div>
 
     <div class="row">
-        <div class="col-sm-2"> sum--> </div>
+        <div class="col-sm-2"> Total Bet -----> </div>
         <div class="col-sm-1"> {{ form.sum_1 }} </div>
     </div>
+
+    <font color="green">
+        <h3>Your Projected Winnings $123</h3>
+    </font>
 
     <font color="red"> <b> {{ form.non_field_errors }} </b> </font>
 

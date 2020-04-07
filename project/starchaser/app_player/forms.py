@@ -105,7 +105,7 @@ class BetForm(ModelForm):
         try:
             #if sumb != 100:
             if the_sum != 100:
-                raise ValidationError('Your bets need to sum to 100', code='sum_bets_ne_100')
+                raise ValidationError('Bets need to sum to 100', code='sum_bets_ne_100')
         except IndexError:
             raise ValidationError("Index error")
         except AttributeError:

@@ -130,8 +130,6 @@ class GameplayRoundQuerySet(models.QuerySet):
 
 class Bet(models.Model):
 
-
-
     star = models.ForeignKey(
         PlasticcStar,
         related_name="the_star",
@@ -150,7 +148,7 @@ class Bet(models.Model):
         validators=[
             MinValueValidator(0),
             MaxValueValidator(100)])
-            
+
     bid_a = models.SmallIntegerField(
         null=False, default=0,
         validators=[
@@ -226,6 +224,16 @@ class Bet(models.Model):
         msg += ' {}'
         msg += ' {}'
         msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
+        msg += ' {}'
 
         temp = msg.format(
             self.id,
@@ -233,7 +241,17 @@ class Bet(models.Model):
             self.star.star_id,
             self.bid_a,
             self.bid_b,
-            self.bid_c)
+            self.bid_c,
+            self.bid_d,
+            self.bid_e,
+            self.bid_f,
+            self.bid_g,
+            self.bid_h,
+            self.bid_i,
+            self.bid_j,
+            self.bid_k,
+            self.bid_l,
+            self.bid_m)
 
         return temp
 
