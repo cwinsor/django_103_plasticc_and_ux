@@ -16,14 +16,14 @@ import sys
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'starchaser.settings')
 
 try:
-        application = get_wsgi_application()
-            print 'WSGI without exception'
+    application = get_wsgi_application()
+    print('WSGI without exception')
 except Exception:
-        print 'handling WSGI exception'
-            # Error loading applications
-                if 'mod_wsgi' in sys.modules:
-                            traceback.print_exc()
-                                    os.kill(os.getpid(), signal.SIGINT)
-                                            time.sleep(2.5)
+    print('handling WSGI exception')
+    # Error loading applications
+    if 'mod_wsgi' in sys.modules:
+        traceback.print_exc()
+        os.kill(os.getpid(), signal.SIGINT)
+        time.sleep(2.5)
 
 application = get_wsgi_application()

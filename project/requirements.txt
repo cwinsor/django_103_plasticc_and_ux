@@ -3,8 +3,7 @@ awsebcli
 
 numpy
 pandas
-
-Django==3.0.3
-django-crispy-forms==1.8.1
+Django
+django-crispy-forms
 
 
