@@ -1,6 +1,5 @@
 
 awsebcli 
-mod_wsgi
 
 numpy
 pandas
