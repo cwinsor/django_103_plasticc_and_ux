@@ -25,7 +25,7 @@ SECRET_KEY = '_acymu1c#rs!x(4qd_02r7nmzsfjjg!adpv$+c-ine=zo#=b96'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
 
 # Application definition
 
