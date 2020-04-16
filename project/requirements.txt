@@ -1,5 +1,6 @@
 
 awsebcli 
+psycopg2-binary
 
 numpy
 pandas

@@ -25,7 +25,9 @@ SECRET_KEY = '_acymu1c#rs!x(4qd_02r7nmzsfjjg!adpv$+c-ine=zo#=b96'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
+#ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
+#ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -75,13 +77,37 @@ WSGI_APPLICATION = 'starchaser.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+###### this is the in-the-box database
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
+
+###### this is connection to postgresql database all done on windows-side
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'plasticc',
+#        'USER': 'postgres',
+#        'PASSWORD': '??????',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
+#    }
+#}
+
+###### this is connection to postgresql database all done on WSL
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'plasticc',
+        'USER': 'postgres',
+        'PASSWORD': '1232erts$',
+        'HOST': '127.0.0.1',
+        'PORT': '5433',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

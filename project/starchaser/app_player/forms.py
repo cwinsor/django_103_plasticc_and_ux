@@ -48,8 +48,6 @@ class BetForm(ModelForm):
             'bid_l',
             'bid_m'] 
 
-    def clean_foo(self):
-        raise forms.ValidationError("i tried foo and do not like it")
 
 
     #user = forms.CharField      (required=False, label='user', disabled=True)

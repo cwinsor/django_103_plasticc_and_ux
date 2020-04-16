@@ -40,12 +40,6 @@ class PlasticcStar(models.Model):
     # override "objects" property replacing it with custom QuerySet
     objects = PlasticcStarQuerySet.as_manager()
 
-    foo = models.SmallIntegerField(
-        null=False, default=0,
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100)])
-
     star_id = models.IntegerField(primary_key=True)
     ra = models.FloatField()
     decl = models.FloatField()
@@ -90,14 +84,20 @@ class PlasticcStar(models.Model):
 
 
 class PlasticcSample(models.Model):
+    id = models.IntegerField(primary_key=True)
     star = models.ForeignKey(
         PlasticcStar,
         on_delete=models.CASCADE)
-    mjd = models.DateTimeField()
+    mjd = models.FloatField(default=0)
     passband = models.SmallIntegerField()
     flux = models.FloatField()
     flux_err = models.FloatField()
     detected = models.BooleanField()
+
+    import_order = ["id", "star", "mjd", "passband", "flux",
+                    "flux_err", "detected"]
+    export_order = ["id", "star", "mjd", "passband", "flux",
+                    "flux_err", "detected"]
 
     def __str__(self):
         msg = '{}'
@@ -142,12 +142,6 @@ class Bet(models.Model):
 
     timestamp = models.DateTimeField(
         auto_now_add=True)
-
-    foo = models.SmallIntegerField(
-        null=False, default=0,
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100)])
 
     bid_a = models.SmallIntegerField(
         null=False, default=0,
