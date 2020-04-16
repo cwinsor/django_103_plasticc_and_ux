@@ -84,7 +84,6 @@ class PlasticcStar(models.Model):
 
 
 class PlasticcSample(models.Model):
-    id = models.IntegerField(primary_key=True)
     star = models.ForeignKey(
         PlasticcStar,
         on_delete=models.CASCADE)

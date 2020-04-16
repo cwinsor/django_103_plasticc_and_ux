@@ -1,8 +1,8 @@
 #!/bin/sh
 export PYTHONPATH=$PYTHONPATH:$(pwd):.
 python -m pip install virtualenv
-python -m virtualenv pymote_env
-source pymote_env/bin/activate
+python -m virtualenv pymote_env_linux
+source pymote_env_linux/bin/activate
 dos2unix requirements.txt
 pip install -r requirements.txt
 

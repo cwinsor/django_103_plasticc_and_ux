@@ -24,34 +24,48 @@ class Command(BaseCommand):
 
         with open(path) as csvfile:
             reader = csv.DictReader(f=csvfile, fieldnames=fieldnames)
+            count = 0
             for row in reader:
-                self.stdout.write("here0")
-                self.stdout.write("{}".format(row['object_id']))
+                #self.stdout.write("here0")
+                count+=1
+                self.stdout.write("{} {}".format(count, row['object_id']))
 
                 # verification and conversion
                 # as needed...
                 star_id = row['object_id']
-                star_inst = PlasticcStar.objects.filter(star_id=star_id)[0]
-                #Entry.objects.all()[:10:2]
-                #self.stdout.write("here1{}".format(str(type(x))))
 
-                # create Model and save
-                plasticcSample = PlasticcSample(
-                    star=star_inst,
-                    mjd=row['mjd'],
-                    passband=row['passband'],
-                    flux=row['flux'],
-                    flux_err=row['flux_err'],
-                    #detected=row['detected']
-                    detected=True
-                    )
+                #self.stdout.write(star_id)
                 try:
+                    star_inst = PlasticcStar.objects.get(pk=star_id)
+                    #obj = Class.objects.get(pk=this_object_id)
+
+                    #self.stdout.write("here3" + str(type(star_inst)))
+
+                    #Entry.objects.all()[:10:2]
+                    #self.stdout.write("here1{}".format(str(type(x))))
+
+                    # create Model and save
+                    plasticcSample = PlasticcSample(
+                        star=star_inst,
+                        mjd=row['mjd'],
+                        passband=row['passband'],
+                        flux=row['flux'],
+                        flux_err=row['flux_err'],
+                        detected=row['detected']
+                        )
+
                     #plasticcSample.full_clean()
                     plasticcSample.save()
                 except ValidationError as exc:
                     # if the're a problem anywhere, you wanna know about it
                     self.stdout.write(self.style.NOTICE('there was a problem with line:'))
                     self.stdout.write(str(row))
-                    raise ValidationError("ValidationError...") from exc
+                    #raise ValidationError("ValidationError...") from exc
+
+                except ValueError as exc:
+                    # if the're a problem anywhere, you wanna know about it
+                    self.stdout.write(self.style.NOTICE('there was a problem with line:'))
+                    self.stdout.write(str(row))
+                    #raise ValidationError("ValueError...") from exc
 
 
