@@ -27,7 +27,10 @@ DEBUG = True
 
 #ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
 #ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['starchaser-dev.us-east-2.elasticbeanstalk.com']
+#ALLOWED_HOSTS = ['127.0.0.1']
+
+
 
 # Application definition
 
