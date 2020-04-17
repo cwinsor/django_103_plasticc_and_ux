@@ -1,6 +1,6 @@
 branch-defaults:
   default:
-    environment: Starchaser-dev
+    environment: null
 global:
   application_name: Starchaser
   branch: null
