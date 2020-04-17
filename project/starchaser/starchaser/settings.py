@@ -27,8 +27,16 @@ DEBUG = True
 
 #ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
 #ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
-ALLOWED_HOSTS = ['starchaser-dev.us-east-2.elasticbeanstalk.com']
-#ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'starchaser-dev.us-east-2.elasticbeanstalk.com',
+    '.elasticbeanstalk.com',
+    '172.31.10.77'
+    ]
+
+
+Starchaser-dev.us-east-2.elasticbeanstalk.com
 
 
 
