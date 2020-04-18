@@ -35,11 +35,6 @@ ALLOWED_HOSTS = [
     '172.31.10.77'
     ]
 
-
-Starchaser-dev.us-east-2.elasticbeanstalk.com
-
-
-
 # Application definition
 
 INSTALLED_APPS = [
