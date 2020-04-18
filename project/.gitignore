@@ -2,4 +2,8 @@
 # Elastic Beanstalk Files
 #.elasticbeanstalk/*
 #!.elasticbeanstalk/*.cfg.yml
-#!.elasticbeanstalk/*.global.yml
+#!.elasti3cbeanstalk/*.global.yml
+#te_env_win/a
+#
+pymote_env_linux/*
+pymote_env_win/*
