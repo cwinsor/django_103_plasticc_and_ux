@@ -1,4 +1,6 @@
 
+pyyaml
+
 awsebcli 
 psycopg2-binary
 

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import yaml
+import logging
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,11 +21,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
+# get passwords
+passwords = yaml.safe_load(open("passwords.yml"))
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_acymu1c#rs!x(4qd_02r7nmzsfjjg!adpv$+c-ine=zo#=b96'
+SECRET_KEY = passwords['django']['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = passwords['django']['debug']
 
 #ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
 #ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
@@ -108,10 +113,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'plasticc',
-        'USER': 'postgres',
-        'PASSWORD': '1232erts$',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'USER': passwords['eb_database']['username'],
+        'PASSWORD': passwords['eb_database']['password'],
+        'HOST': passwords['eb_database']['host'],
+        'PORT': passwords['eb_database']['port'],
     }
 }
 
