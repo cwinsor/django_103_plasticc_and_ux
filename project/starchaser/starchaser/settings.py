@@ -22,7 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # get passwords
-passwords = yaml.safe_load(open("passwords.yml"))
+passwords_path = os.path.join(BASE_DIR, "passwords.yml")
+passwords = yaml.safe_load(open(passwords_path))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = passwords['django']['secret_key']
