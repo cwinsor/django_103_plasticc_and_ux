@@ -7,9 +7,7 @@ For more information on this file, see
 https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/
 """
 
-import signal, os
-import time
-import sys, traceback
+import signal, os, sys, traceback, time
 
 from django.core.wsgi import get_wsgi_application
 
