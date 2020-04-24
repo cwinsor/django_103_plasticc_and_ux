@@ -38,7 +38,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'starchaser-dev.us-east-2.elasticbeanstalk.com',
     '.elasticbeanstalk.com',
-    '172.31.10.77'
+    '172.31.10.77',
+    '172.31.19.165',
     ]
 
 # Application definition
