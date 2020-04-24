@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
     '.elasticbeanstalk.com',
     '172.31.10.77',
     '172.31.19.165',
+    'awseb-awseb-16zn1aeks9bag-150722902.us-east-2.elb.amazonaws.com',
     ]
 
 # Application definition
