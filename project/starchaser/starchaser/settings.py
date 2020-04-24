@@ -109,17 +109,41 @@ WSGI_APPLICATION = 'starchaser.wsgi.application'
 #    }
 #}
 
-###### this is connection to postgresql database all done on WSL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'plasticc',
-        'USER': passwords['eb_database']['username'],
-        'PASSWORD': passwords['eb_database']['password'],
-        'HOST': passwords['eb_database']['host'],
-        'PORT': passwords['eb_database']['port'],
+
+# Database
+# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+if 'RDS_DB_NAME' in os.environ:
+    print("---here1---")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    print("---here2---")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            #'NAME': 'iotd',
+            #'USER': 'postgres',
+            #'PASSWORD': '1234rtyd%',
+            #'HOST' : 'localhost',
+            #'PORT' : '5433',
+            #'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'plasticc',
+            'USER': passwords['wsl_database']['username'],
+            'PASSWORD': passwords['wsl_database']['password'],
+            'HOST': passwords['wsl_database']['host'],
+            'PORT': passwords['wsl_database']['port'],
+        }
+    }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
