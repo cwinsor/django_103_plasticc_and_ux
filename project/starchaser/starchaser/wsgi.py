@@ -11,7 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-import sys
+import sys, traceback
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'starchaser.settings')
 
