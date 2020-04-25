@@ -83,7 +83,8 @@ TEMPLATES = [
     },
 ]
 
-ROOT_URLCONF = 'starchaser.urls'
+#ROOT_URLCONF = 'starchaser.urls'
+ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'starchaser.wsgi.application'
 
