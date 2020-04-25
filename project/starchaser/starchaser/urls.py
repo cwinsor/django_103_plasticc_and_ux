@@ -20,12 +20,13 @@ from django.contrib.auth import views as auth_views
 from .views import welcome, info, signup
 
 urlpatterns = [
-    path('',  welcome, name='star_chaser_welcome'),
+    # path('admin/', admin.site.urls),
+    url(r'^admin/', include(admin.site.urls)),
+    #path('',  welcome, name='star_chaser_welcome'),
+    url(r'^$', welcome, name='star_chaser_welcome'),
     path('info/', info, name="star_chaser_info"),
     path('player/', include('app_player.urls')),
-    path('admin/', admin.site.urls),
     #path('login', auth_views.login, name='login'),
     #path('logout', auth_views.logout, name='logout'),
     path('signup', signup, name='signup'),
-
 ]
