@@ -1,5 +1,5 @@
 #!/bin/sh
-export PYTHONPATH=$PYTHONPATH:$(pwd):.
+export PYTHONPATH=$(pwd):$(pwd)/starchaser:$(pwd)/starchaser/starchaser:
 python -m pip install virtualenv
 python -m virtualenv pymote_env_linux
 source pymote_env_linux/bin/activate
