@@ -4,11 +4,43 @@
 Star Chaser
 {% endblock %}
 
+here
+
 {% block content %}
 <div class="jumbotron">
     <div class="container">
         <h1>Hello</h1>
-        <p>Let's play Star Chaser!</p>
+        <p>Let's play Starchaser!</p>
+
+        <li>
+            In this competition you are an astronomer classifying Supernovas (stars that have exploded).
+        </li>
+        <li>
+            You'll be given a Supernova and need to determine what <i>kind</i> of Supernova it was (there are 13 different
+            types!)
+        </li>
+        <li>
+            Top researchers are available to help you - they have lots of experience.
+        </li>
+        <li>
+            It's a winner-take-all competition - you against your peers.
+        </li>
+      <p>
+            Congratulations on your new role, astronomer, and good luck!
+    </p>
+
+
     </div>
 </div>
+{% endblock %}
+
+
+{% block context %}
+<h3>Context</h3>
+<li><a href="{% url 'ref01_why_game' %}" target="_blank">Why Make a Game?</a></li>
+<li><a href="{% url 'ref05_this_web_application' %}" target="_blank">The Design</a></li>
+<li><a href="{% url 'ref08_plasticc_and_kaggle' %}" target="_blank">PLAsTiCC and the Kaggle Dataset...</a></li>
+<li><a href="{% url 'ref04_variety_of_approaches' %}" target="_blank">Variety of Approaches...</a></li>
+<li><a href="{% url 'ref06_building_a_model' %}" target="_blank">To Build a Model...</a></li>
+<li><a href="{% url 'ref09_metrics' %}" target="_blank">Metrics and Why They're Important</a></li>
 {% endblock %}
