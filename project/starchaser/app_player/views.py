@@ -32,14 +32,14 @@ def pick_star(request):
     qs_star = PlasticcStar.objects.random_set(chooser_list_size)
 
     return render(
-            request=request,
-            template_name="app_player/pick_star.html",
-            context={
-                'qs_star': qs_star
-                }
+        request=request,
+        template_name="app_player/pick_star.html",
+        context={
+            'qs_star': qs_star
+        }
     )
 
-    ############# the rest is not currently used
+    # the rest is not currently used
     columns = [
         'star_id', 'ra', 'decl', 'hostgal_specz', 'target']
     qs_star = PlasticcStar.objects.random_set(chooser_list_size)
@@ -77,9 +77,9 @@ def pick_star(request):
 
 @login_required
 def place_bet(request, id):
-    
+
     #logger = logging.getLogger(__name__)
-    #logger.debug("\n---here8")
+    # logger.debug("\n---here8")
     #logger.debug("\n" + str(request))
 
     star = get_object_or_404(PlasticcStar, pk=id)
@@ -93,10 +93,10 @@ def place_bet(request, id):
         bet_form_set_reduction_fields(form, request)
 
         if form.is_valid():
-            form.save()  # save to db.. to be implemented becuase this is not based on model...
+            # save to db.. to be implemented becuase this is not based on model...
+            form.save()
             return redirect('player_well_done')
-        #pass
-
+        # pass
 
 
     ###### GET #####
@@ -106,16 +106,16 @@ def place_bet(request, id):
         df_btrotta = pd.DataFrame(
             data=np.random.randint(0, 100, size=(1, 14)),
             columns=['a', 'b', 'c', 'd', 'e', 'f',
-                    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+                     'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
         )
         df_kboone = pd.DataFrame(
             data=np.random.randint(0, 100, size=(1, 14)),
             columns=['a', 'b', 'c', 'd', 'e', 'f',
-                    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+                     'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
         )
 
         form = BetForm()
-        #bet_form_set_enabled_fields(form)
+        # bet_form_set_enabled_fields(form)
         bet_form_set_disabled_fields(form, request, star)
         bet_form_set_reduction_fields(form, request)
 
@@ -131,7 +131,7 @@ def place_bet(request, id):
 
 # on the bet form, set the fields that are enabled
 # this only needs to happen on GET as a POST provides this data in request.POST
-#def bet_form_set_enabled_fields(form):
+# def bet_form_set_enabled_fields(form):
 #
 #    form.fields['bid_a1'].initial = 0
 #    form.fields['bid_b1'].initial = 0
@@ -148,7 +148,7 @@ def bet_form_set_disabled_fields(form, request, star):
     form.fields['star'].disabled = True
     form.fields['star'].initial = star
 
-    form.fields['bid_a2'].initial = 1 #btrotta
+    form.fields['bid_a2'].initial = 1  # btrotta
     form.fields['bid_b2'].initial = 2
     form.fields['bid_c2'].initial = 3
     form.fields['bid_d2'].initial = 4
@@ -161,9 +161,7 @@ def bet_form_set_disabled_fields(form, request, star):
     form.fields['bid_k2'].initial = 11
     form.fields['bid_l2'].initial = 12
     form.fields['bid_m2'].initial = 13
-
-
-    form.fields['bid_a3'].initial = 5 #kboone
+    form.fields['bid_a3'].initial = 5  # kboone
     form.fields['bid_b3'].initial = 6
     form.fields['bid_c3'].initial = 7
     form.fields['bid_d3'].initial = 8
@@ -181,7 +179,7 @@ def bet_form_set_disabled_fields(form, request, star):
 def bet_form_set_reduction_fields(form, request):
 
     if request.method == "POST":
-        #sum = int(request.POST.get("bid_a")) + \
+        # sum = int(request.POST.get("bid_a")) + \
         #    int(request.POST.get("bid_b")) + \
         #    int(request.POST.get("bid_c"))
         #form.fields['sum_1'].initial = sum
@@ -264,3 +262,15 @@ def new_gameplay_round(request):
     else:
         form = GameplayRoundForm()
     return render(request, "app_player/new_gameplay_round_form.html", {'form': form})
+
+
+@login_required
+def zz_temp(request):
+
+    arg1 = 5
+    arg2 = 6
+
+    return render(request, "app_player/zz_temp.html",
+                  {'arg1': arg1,
+                   'arg2': arg2}
+                  )

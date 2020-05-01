@@ -27,13 +27,9 @@ from views import ref09_metrics
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #url(r'^admin/', include(admin.site.urls)),
     path('',  welcome, name='star_chaser_welcome'),
-    #url(r'^$', welcome, name='star_chaser_welcome'),
     path('info/', info, name="star_chaser_info"),
     path('player/', include('app_player.urls')),
-    #path('login', auth_views.login, name='login'),
-    #path('logout', auth_views.logout, name='logout'),
     path('signup', signup, name='signup'),
 
     path('ref01_why_game', ref01_why_game, name='ref01_why_game'),
