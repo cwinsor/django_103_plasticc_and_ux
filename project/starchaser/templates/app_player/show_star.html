@@ -58,6 +58,7 @@
             // Create the data table.
             var data_2 = new google.visualization.DataTable();
             //data_2.addColumn('date', "mjd")
+            data_2.addColumn('number', "mjd")
             data_2.addColumn('number', '1');
             data_2.addColumn('number', '2');
             data_2.addColumn('number', '3');
@@ -67,7 +68,7 @@
 
             // Set chart options
             var options_2 = {
-                'title': 'Another Chart',
+                'title': 'Flux by Passband vs Day',
                 'width': 400,
                 'height': 300,
                 'interpolateNulls': true

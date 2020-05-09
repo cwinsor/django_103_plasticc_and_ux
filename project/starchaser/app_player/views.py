@@ -284,11 +284,12 @@ def show_star(request, id):
 
     #logger.debug("\n---here7")    
     #logger.debug("\n" + str(df.shape))
-    #logger.debug("\n---here8")  
-    #logger.debug("\n" + str(df))
+    logger.debug("\n---here8")  
+    logger.debug("\n" + str(df))
 
     #df2 = df.pivot(index="mjd", columns='passband', values="flux")
-    df2 = df.pivot(columns='passband', values="flux")
+    ####df2 = df.pivot(columns='passband', values="flux")
+    df2 = df.pivot(index='mjd', columns='passband', values='flux')
     #df2 = df.pivot(index="mjd", columns='passband')
     #df2 = df.pivot(index="id", columns='passband', values=(['mjd','flux']))
     #df2 = df.pivot(columns='passband')
@@ -323,12 +324,28 @@ def show_star(request, id):
     #temp1 = np.array([[1, 1, 6, 7, 8], [2, 2, 6, 7, 8], [3, 4, 6, 7, 8]])
     #temp1 = np.array([[1, 1, "null", 7, 8], [2, 2, 6, 7, 8], [3, 4, 6, 7, 8]])
     #temp1 = np.array([[1, 2, 6, 7, 8], [2, 2, 6, 7, 8], [3, 4, 6, 7, 8]])
+
+    temp0 = df2.index.to_numpy()
+    temp0b = np.reshape(temp0,(temp0.size, 1))
     temp1 = df2.to_numpy()
+    logger.debug("\n---hereX")  
+    logger.debug("\n" + str(type(temp0)))
+    logger.debug("\n" + str(type(temp1)))
+    logger.debug("\n" + str(temp0.shape))
+    logger.debug("\n" + str(temp0b.shape))
+    logger.debug("\n" + str(temp1.shape))
+
+
+    temp01 = np.concatenate((temp0b, temp1), axis=1)
+    #temp01 = np.concatenate((temp0, temp1))
+
+    #logger.debug("\n---hereB")  
+    #logger.debug("\n" + str(df2.index))
 
     #temp = '[[1, 2, 6, 7, 8], [2, null, 6, 7, 8], [3, 4, 6, 7, 8]]'
     #temp = str(repr(temp1))
     np.set_printoptions(nanstr='null')
-    temp = np.array2string(temp1, separator=', ')
+    temp = np.array2string(temp01, separator=', ')
     #temp = np.array2string(temp1, separator=', ', formatter={'void': lambda x: 'whatever'})
 
     logger.debug("\n---hereC")  
