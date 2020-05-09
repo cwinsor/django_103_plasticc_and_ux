@@ -277,82 +277,35 @@ def show_star(request, id):
     df = read_frame(qs_samples)
 
     logger = logging.getLogger(__name__)
-
-    #logger.debug("\n---here6")  
-    #for index, row in df.iterrows():
-    #    print(index, row)
-
-    #logger.debug("\n---here7")    
-    #logger.debug("\n" + str(df.shape))
     logger.debug("\n---here8")  
     logger.debug("\n" + str(df))
 
-    #df2 = df.pivot(index="mjd", columns='passband', values="flux")
-    ####df2 = df.pivot(columns='passband', values="flux")
     df2 = df.pivot(index='mjd', columns='passband', values='flux')
-    #df2 = df.pivot(index="mjd", columns='passband')
-    #df2 = df.pivot(index="id", columns='passband', values=(['mjd','flux']))
-    #df2 = df.pivot(columns='passband')
 
     logger.debug("\n---here9")  
     logger.debug("\n" + str(type(df2)))
     logger.debug("\n" + str(df2.shape))
     logger.debug("\n" + str(df2))
 
-    #df2_numpy = df2.to_numpy()
-    #logger.debug("\n---hereA")  
-    #logger.debug("\n" + str(type(df2_numpy)))
-    #logger.debug("\n" + str(df2_numpy))
-
-    #df2_temp = df2.to_csv(
-    #    sep=',',
-    #    na_rep='null',
-    #    # float_format='None'
-    #    header=False,
-    #    index=False,
-    #    # index_label=None,
-    #    # date_format=
-    #)
-
-    #temp = np.array(df2.to_dict())
-    #temp = df2.to_dict()
-    #logger.debug("\n---hereB")  
-    #logger.debug("\n" + str(type(temp)))
-    #logger.debug("\n" + str(temp))
-
-    #import array as arr
-    #temp1 = np.array([[1, 1, 6, 7, 8], [2, 2, 6, 7, 8], [3, 4, 6, 7, 8]])
-    #temp1 = np.array([[1, 1, "null", 7, 8], [2, 2, 6, 7, 8], [3, 4, 6, 7, 8]])
-    #temp1 = np.array([[1, 2, 6, 7, 8], [2, 2, 6, 7, 8], [3, 4, 6, 7, 8]])
-
-    temp0 = df2.index.to_numpy()
-    temp0b = np.reshape(temp0,(temp0.size, 1))
+    temp0a = df2.index.to_numpy()
+    temp0b = np.reshape(temp0a,(temp0a.size, 1))
     temp1 = df2.to_numpy()
-    logger.debug("\n---hereX")  
-    logger.debug("\n" + str(type(temp0)))
-    logger.debug("\n" + str(type(temp1)))
-    logger.debug("\n" + str(temp0.shape))
-    logger.debug("\n" + str(temp0b.shape))
-    logger.debug("\n" + str(temp1.shape))
-
+    #logger.debug("\n---hereX")  
+    #logger.debug("\n" + str(type(temp0)))
+    #logger.debug("\n" + str(type(temp1)))
+    #logger.debug("\n" + str(temp0.shape))
+    #logger.debug("\n" + str(temp0b.shape))
+    #logger.debug("\n" + str(temp1.shape))
 
     temp01 = np.concatenate((temp0b, temp1), axis=1)
-    #temp01 = np.concatenate((temp0, temp1))
-
-    #logger.debug("\n---hereB")  
-    #logger.debug("\n" + str(df2.index))
-
-    #temp = '[[1, 2, 6, 7, 8], [2, null, 6, 7, 8], [3, 4, 6, 7, 8]]'
-    #temp = str(repr(temp1))
+ 
     np.set_printoptions(nanstr='null')
     temp = np.array2string(temp01, separator=', ')
-    #temp = np.array2string(temp1, separator=', ', formatter={'void': lambda x: 'whatever'})
 
-    logger.debug("\n---hereC")  
-    logger.debug("\n" + str(type(temp1)))
-    logger.debug("\n" + str(type(temp)))
-    logger.debug("\n" + str(temp))
-
+    #logger.debug("\n---hereC")  
+    #logger.debug("\n" + str(type(temp1)))
+    #logger.debug("\n" + str(type(temp)))
+    #logger.debug("\n" + str(temp))
 
     context = {}
     context['star'] = star
