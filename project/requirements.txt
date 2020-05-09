@@ -9,4 +9,7 @@ pandas
 Django
 django-crispy-forms
 
+django-tables2
+django-pandas
+
 

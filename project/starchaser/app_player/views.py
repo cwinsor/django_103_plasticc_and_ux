@@ -5,8 +5,9 @@ import logging
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django_pandas.io import read_frame
 
-from app_gameplay.models import GameplayRound, PlasticcStar
+from app_gameplay.models import GameplayRound, PlasticcStar, PlasticcSample
 from app_gameplay.present_pick_star import PresentPickStar
 from .forms import PlasticcStarForm, PlasticcSampleForm, GameplayRoundForm, BetForm
 
@@ -90,6 +91,7 @@ def place_bet(request, id):
 
         form = BetForm(data=request.POST)
         bet_form_set_disabled_fields(form, request, star)
+        bet_form_set_values_for_non_db_fields(form, request, star)
         bet_form_set_reduction_fields(form, request)
 
         if form.is_valid():
@@ -115,8 +117,8 @@ def place_bet(request, id):
         )
 
         form = BetForm()
-        # bet_form_set_enabled_fields(form)
         bet_form_set_disabled_fields(form, request, star)
+        bet_form_set_values_for_non_db_fields(form, request, star)
         bet_form_set_reduction_fields(form, request)
 
     context = {}
@@ -148,6 +150,8 @@ def bet_form_set_disabled_fields(form, request, star):
     form.fields['star'].disabled = True
     form.fields['star'].initial = star
 
+
+def bet_form_set_values_for_non_db_fields(form, request, star):
     form.fields['bid_a2'].initial = 1  # btrotta
     form.fields['bid_b2'].initial = 2
     form.fields['bid_c2'].initial = 3
@@ -161,6 +165,7 @@ def bet_form_set_disabled_fields(form, request, star):
     form.fields['bid_k2'].initial = 11
     form.fields['bid_l2'].initial = 12
     form.fields['bid_m2'].initial = 13
+
     form.fields['bid_a3'].initial = 5  # kboone
     form.fields['bid_b3'].initial = 6
     form.fields['bid_c3'].initial = 7
@@ -265,12 +270,98 @@ def new_gameplay_round(request):
 
 
 @login_required
-def zz_temp(request):
+def show_star(request, id):
 
-    arg1 = 5
-    arg2 = 6
+    star = get_object_or_404(PlasticcStar, pk=id)
+    qs_samples = PlasticcSample.objects.filter(star=star)
+    df = read_frame(qs_samples)
 
-    return render(request, "app_player/zz_temp.html",
-                  {'arg1': arg1,
-                   'arg2': arg2}
-                  )
+    logger = logging.getLogger(__name__)
+
+    #logger.debug("\n---here6")  
+    #for index, row in df.iterrows():
+    #    print(index, row)
+
+    #logger.debug("\n---here7")    
+    #logger.debug("\n" + str(df.shape))
+    #logger.debug("\n---here8")  
+    #logger.debug("\n" + str(df))
+
+    #df2 = df.pivot(index="mjd", columns='passband', values="flux")
+    df2 = df.pivot(columns='passband', values="flux")
+    #df2 = df.pivot(index="mjd", columns='passband')
+    #df2 = df.pivot(index="id", columns='passband', values=(['mjd','flux']))
+    #df2 = df.pivot(columns='passband')
+
+    logger.debug("\n---here9")  
+    logger.debug("\n" + str(type(df2)))
+    logger.debug("\n" + str(df2.shape))
+    logger.debug("\n" + str(df2))
+
+    #df2_numpy = df2.to_numpy()
+    #logger.debug("\n---hereA")  
+    #logger.debug("\n" + str(type(df2_numpy)))
+    #logger.debug("\n" + str(df2_numpy))
+
+    #df2_temp = df2.to_csv(
+    #    sep=',',
+    #    na_rep='null',
+    #    # float_format='None'
+    #    header=False,
+    #    index=False,
+    #    # index_label=None,
+    #    # date_format=
+    #)
+
+    #temp = np.array(df2.to_dict())
+    #temp = df2.to_dict()
+    #logger.debug("\n---hereB")  
+    #logger.debug("\n" + str(type(temp)))
+    #logger.debug("\n" + str(temp))
+
+    #import array as arr
+    #temp1 = np.array([[1, 1, 6, 7, 8], [2, 2, 6, 7, 8], [3, 4, 6, 7, 8]])
+    #temp1 = np.array([[1, 1, "null", 7, 8], [2, 2, 6, 7, 8], [3, 4, 6, 7, 8]])
+    #temp1 = np.array([[1, 2, 6, 7, 8], [2, 2, 6, 7, 8], [3, 4, 6, 7, 8]])
+    temp1 = df2.to_numpy()
+
+    #temp = '[[1, 2, 6, 7, 8], [2, null, 6, 7, 8], [3, 4, 6, 7, 8]]'
+    #temp = str(repr(temp1))
+    np.set_printoptions(nanstr='null')
+    temp = np.array2string(temp1, separator=', ')
+    #temp = np.array2string(temp1, separator=', ', formatter={'void': lambda x: 'whatever'})
+
+    logger.debug("\n---hereC")  
+    logger.debug("\n" + str(type(temp1)))
+    logger.debug("\n" + str(type(temp)))
+    logger.debug("\n" + str(temp))
+
+
+    context = {}
+    context['star'] = star
+    context['qs_samples'] = qs_samples
+    context['df2'] = df2
+    context['temp'] = temp
+
+    return render(
+        request=request,
+        template_name="app_player/show_star.html",
+        context=context
+        )
+
+    #return render(
+    #    request=request,
+    #    template_name="app_player/pick_star.html",
+    #    context={
+    #        'qs_star': qs_star
+    #    }
+    #)
+
+    #context = {}
+    #context['form'] = form
+    #context['star_id'] = star.star_id
+
+    #return render(
+    #    request=request,
+    #    template_name="app_player/bet_form.html",
+    #    context=context)

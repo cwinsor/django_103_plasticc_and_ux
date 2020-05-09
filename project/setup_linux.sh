@@ -8,11 +8,13 @@ pip install -r requirements.txt
 
 echo '
 
-To initialize and run the server, some or all of the following commands:
+To initialize the database some or all of the following commands:
  python starchaser/manage.py import_metadata starchaser/training_set_metadata.csv
  python starchaser/manage.py import_timeseries starchaser/training_set.csv
  python starchaser/manage.py createsu
  python starchaser/manage.py makemigrations
  python starchaser/manage.py migrate
+
+To run the server:
  python starchaser/manage.py runserver
 '

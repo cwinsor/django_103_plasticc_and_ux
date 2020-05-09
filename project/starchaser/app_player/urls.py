@@ -1,10 +1,10 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
-from .views import home, pick_star, place_bet, well_done
+from .views import home, pick_star, show_star, place_bet, well_done
 from .views import game_info, game_help
 from .views import new_plasticc_star, new_plasticc_sample, new_gameplay_round
-from .views import zz_temp
+
 
 urlpatterns = [
     path(
@@ -27,9 +27,9 @@ urlpatterns = [
         name="place_bet"),
 
     path(
-        route='place_bet2/<int:id>',
-        view=place_bet,
-        name="place_bet"),
+        route='show_star/<int:id>',
+        view=show_star,
+        name="show_star"),
 
     path(
         route='well_done/',
@@ -70,10 +70,5 @@ urlpatterns = [
         route='add_gamplay_round/',
         view=new_gameplay_round,
         name="new_gameplay_round"),
-
-    path(
-        route='zz_temp/',
-        view=zz_temp,
-        name="zz_temp"),
 
 ]
