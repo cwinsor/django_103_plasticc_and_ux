@@ -18,21 +18,59 @@ fmt_i3 = '{:3}'
 class PlasticcStarQuerySet(models.QuerySet):
 
     def random_set(self, num):
-        # temp = self.only("star_id")
-        # return temp.order_by("?")[:num]
 
-        # queryset = User.objects.filter(
-        #    first_name__startswith='R'
-        #    ).only("first_name", "last_name")
+        #qs = self.filter(target__exact=92)
+        # order_by("?").first()
+        #star42 = self.filter(target__exact=42).order_by("?").first()
+        #star4 = qs.order_by("?").first()
 
-        # return self.all.only("star_id", "ra")
-        return self.all()
-        # return self.only("ra")
+        star00 = self.filter(target__exact=90).order_by("?").first()
+        star01 = self.filter(target__exact=42).order_by("?").first()
+        star02 = self.filter(target__exact=65).order_by("?").first()
+        star03 = self.filter(target__exact=16).order_by("?").first()
+        star04 = self.filter(target__exact=15).order_by("?").first()
+        star05 = self.filter(target__exact=62).order_by("?").first()
+        star06 = self.filter(target__exact=88).order_by("?").first()
+        star07 = self.filter(target__exact=92).order_by("?").first()
+        star08 = self.filter(target__exact=67).order_by("?").first()
+        star09 = self.filter(target__exact=52).order_by("?").first()
+        star10 = self.filter(target__exact=95).order_by("?").first()
+        star11 = self.filter(target__exact=6).order_by("?").first()
+        star12 = self.filter(target__exact=64).order_by("?").first()
+        star13 = self.filter(target__exact=53).order_by("?").first()
 
-    # def rounds_this_player(self, user):
-    #    return self.filter(
-    #        Q(player=user)
-    #    )
+        #90   (2313, 12)
+        #42   (1193, 12)
+        #65   (981, 12)
+        #16   (924, 12)
+        #15   (495, 12)
+        #62   (484, 12)
+        #88   (370, 12)
+        #92   (239, 12)
+        #67   (208, 12)
+        #52   (183, 12)
+        #95   (175, 12)
+        #6    (151, 12)
+        #64   (102, 12)
+        #53   (30, 12)
+
+        return ([
+            star00,
+            star01,
+            star02,
+            star03,
+            star04,
+            star05,
+            star06,
+            star07,
+            star08,
+            star09,
+            star10,
+            star11,
+            star12,
+            star13,
+        ])
+        # return self.all()
 
 
 class PlasticcStar(models.Model):

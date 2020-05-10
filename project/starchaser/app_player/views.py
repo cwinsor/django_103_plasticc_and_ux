@@ -40,40 +40,6 @@ def pick_star(request):
         }
     )
 
-    # the rest is not currently used
-    columns = [
-        'star_id', 'ra', 'decl', 'hostgal_specz', 'target']
-    qs_star = PlasticcStar.objects.random_set(chooser_list_size)
-    qs_star_values_allfields = qs_star.values(*columns)
-
-    df_btrotta = pd.DataFrame(
-        data=np.random.randint(0, 100, size=(chooser_list_size, 14)),
-        columns=['a', 'b', 'c', 'd', 'e', 'f',
-                 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
-        #columns=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-    )
-    df_btrotta.loc[[0], ['a']] = 100
-    df_btrotta.loc[[1], ['a']] = 101
-
-    df_kboone = pd.DataFrame(
-        data=np.random.randint(0, 100, size=(chooser_list_size, 14)),
-        columns=['a', 'b', 'c', 'd', 'e', 'f',
-                 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
-        # columns=['0','1','2','3','4','5','6','7','8','9','10','11','12','13']
-        #columns=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-    )
-    df_kboone.loc[[0], ['a']] = 100
-    df_kboone.loc[[1], ['a']] = 101
-
-    present_pick_star = PresentPickStar(qs_star, df_btrotta, df_kboone)
-
-    return render(
-        request,
-        "app_player/pick_star.html",
-        {
-            'present_pick_star': present_pick_star
-        }
-    )
 
 
 @login_required
@@ -288,7 +254,7 @@ def show_star(request, id):
     logger.debug("\n" + str(df2))
 
     temp0a = df2.index.to_numpy()
-    temp0b = np.reshape(temp0a,(temp0a.size, 1))
+    temp0b = np.reshape(temp0a, (temp0a.size, 1))
     temp1 = df2.to_numpy()
     #logger.debug("\n---hereX")  
     #logger.debug("\n" + str(type(temp0)))
@@ -300,12 +266,12 @@ def show_star(request, id):
     temp01 = np.concatenate((temp0b, temp1), axis=1)
  
     np.set_printoptions(nanstr='null')
-    temp = np.array2string(temp01, separator=', ')
+    temp = np.array2string(temp01, separator=',', threshold=10000)
 
-    #logger.debug("\n---hereC")  
+    logger.debug("\n---hereC")  
     #logger.debug("\n" + str(type(temp1)))
     #logger.debug("\n" + str(type(temp)))
-    #logger.debug("\n" + str(temp))
+    logger.debug("\n" + str(temp))
 
     context = {}
     context['star'] = star
@@ -318,20 +284,3 @@ def show_star(request, id):
         template_name="app_player/show_star.html",
         context=context
         )
-
-    #return render(
-    #    request=request,
-    #    template_name="app_player/pick_star.html",
-    #    context={
-    #        'qs_star': qs_star
-    #    }
-    #)
-
-    #context = {}
-    #context['form'] = form
-    #context['star_id'] = star.star_id
-
-    #return render(
-    #    request=request,
-    #    template_name="app_player/bet_form.html",
-    #    context=context)
