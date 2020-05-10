@@ -17,33 +17,6 @@
         // draws it.
         function drawChart() {
 
-            // Create the data table.
-            var data_1 = new google.visualization.DataTable();
-            data_1.addColumn('number', 'Date');
-            data_1.addColumn('number', 'Slices');
-            data_1.addColumn('number', 'Blah');
-            //[2, 3, null],
-            data_1.addRows([
-                [1, 3, 9],
-                [2, 3, null],
-                [5, 3, 7],
-                [6, 3, 6],
-                [7, 2, 6]
-            ]);
-
-            // Set chart options
-            var options_1 = {
-                'title': 'How Much Pizza I Ate Last Night',
-                'width': 400,
-                'height': 300,
-                'interpolateNulls': true
-            };
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart_1 = new google.visualization.LineChart(document.getElementById('chart_div_1'));
-            chart_1.draw(data_1, options_1);
-
- 
             ////////////////////////////////////////////////
             // Create the data table.
             var data_2 = new google.visualization.DataTable();
@@ -55,13 +28,13 @@
             data_2.addColumn('number', '3');
             data_2.addColumn('number', '4');
             data_2.addColumn('number', '5');
-            data_2.addRows( {{ temp }} )
+            data_2.addRows( {{ timeseries_data }} )
 
             // Set chart options
             var options_2 = {
-                'title': 'Flux by Passband vs Day',
-                'width': 1000,
-                'height': 200,
+                'title': 'Fl3 by Passband vs Day',
+                'width': 300,
+                'height': 600,
                 'interpolateNulls': true
             };
 
@@ -76,15 +49,12 @@
 
 <body>
 
+    <h1>
+        A Chart
+    </h1>
+  <p>
     <label>Star: </label> {{ star.star_id }}
-
-    <p>
-        {{ df2.columns }}
-    </p>
-
-
-    <!--Div that will hold the pie chart-->
-    <div id="chart_div_1"></div>
+  </p>
 
     <!--Div that will hold the star chart-->
     <div id="chart_div_2"></div>

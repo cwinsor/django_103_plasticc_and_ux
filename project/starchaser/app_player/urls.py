@@ -17,9 +17,14 @@ urlpatterns = [
         name="player_home"),
 
     path(
-        route='pick_star/',
+        route='pick_star',
         view=pick_star,
         name="player_pick_star"),
+
+    path(
+        route='pick_star/<int:id>',
+        view=pick_star,
+        name="player_pick_star_w_id"),
 
     path(
         route='place_bet/<int:id>',

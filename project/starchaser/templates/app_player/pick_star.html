@@ -16,24 +16,35 @@ Star Chaser
 
 <div class='row'>
     <div class='col-md-6'>
-
         <h3>Available:</h3>
-        <!-- the following could become a 'snippet' -->
-        <div class="list-group bg-info">
-            {% for star in qs_star %}
-            <a class="list-group-item list-group-item-info" href="{% url 'place_bet' id=star.star_id %}">
 
-                Star {{ star.star_id }} ra: {{ star.ra }} decl: {{ star.decl }}
-                <span class="badge">{{ star.star_id }}</span>
-            </a>
-            {% endfor %}
+
+
+
+        <div>
+            <ul>
+                <div class="row">
+                    <div class="col-sm-2"> <b>Star ID</b> </div>
+                    <div class="col-sm-2"> <b>View</b></div>
+                    <div class="col-sm-2"> <b>Select</b> </div>
+                </div>
+
+                {% for star in qs_star %}
+
+                <li>
+                    <div class="col-sm-2"> {{ star.star_id }} </a></div>
+                    <div class="col-sm-2"><a href="{% url 'player_pick_star_w_id' id=star.star_id %}">View</a></div>
+                    <div class="col-sm-2"><a href="{% url 'place_bet' id=star.star_id %}">Select</a></div>
+                </li>
+
+                {% endfor %}
+
+            </ul>
         </div>
 
+        <div class='col-md-6'>
+            <h3>Charts:</h3>
+        </div>
     </div>
 
-    <div class='col-md-6'>
-        <h3>Charts:</h3>
-    </div>
-</div>
-
-{% endblock %}
+    {% endblock %}

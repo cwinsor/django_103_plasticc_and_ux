@@ -27,7 +27,11 @@ def home(request):
 
 
 @login_required
-def pick_star(request):
+def pick_star(request, view_star_id=''):
+
+    #star_list = request.GET['star_list']
+    #Code to filter products whose price is less than price_lte i.e. 5000
+
 
     chooser_list_size = 2
     qs_star = PlasticcStar.objects.random_set(chooser_list_size)
@@ -275,9 +279,9 @@ def show_star(request, id):
 
     context = {}
     context['star'] = star
-    context['qs_samples'] = qs_samples
-    context['df2'] = df2
-    context['temp'] = temp
+    #context['qs_samples'] = qs_samples
+    #context['df2'] = df2
+    context['timeseries_data'] = temp
 
     return render(
         request=request,
