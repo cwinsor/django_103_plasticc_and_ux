@@ -8,12 +8,18 @@ pip install -r requirements.txt
 
 echo '
 
-To initialize the database some or all of the following commands:
- python starchaser/manage.py import_metadata starchaser/training_set_metadata.csv
- python starchaser/manage.py import_timeseries starchaser/training_set.csv
+To initialize the database:
  python starchaser/manage.py createsu
  python starchaser/manage.py makemigrations
  python starchaser/manage.py migrate
+
+To populate the database with small subset of data:
+ python starchaser/manage.py import_metadata   starchaser/training_set_metadata.csv
+ python starchaser/manage.py import_timeseries starchaser/training_set.csv
+
+To populate the database with all training data:
+ python starchaser/manage.py import_metadata   ../../code_kaggle_plasticc___shared_data/PLAsTiCC-2018/training_set_metadata.csv
+ python starchaser/manage.py import_timeseries ../../code_kaggle_plasticc___shared_data/PLAsTiCC-2018/training_set.csv
 
 To run the server:
  python starchaser/manage.py runserver

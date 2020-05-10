@@ -23,7 +23,7 @@ Star Chaser
             {% for star in qs_star %}
             <a class="list-group-item list-group-item-info" href="{% url 'place_bet' id=star.star_id %}">
 
-                Star {{ star.star_id }} ra: {{ star.ra }} decl: {{ star.decl }} 
+                Star {{ star.star_id }} ra: {{ star.ra }} decl: {{ star.decl }}
                 <span class="badge">{{ star.star_id }}</span>
             </a>
             {% endfor %}
@@ -37,4 +37,3 @@ Star Chaser
 </div>
 
 {% endblock %}
-
