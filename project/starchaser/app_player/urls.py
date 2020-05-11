@@ -16,15 +16,25 @@ urlpatterns = [
         view=home,
         name="player_home"),
 
+# path('articles/<slug:title>/', views.article, name='article-detail'),
+
     path(
         route='pick_star',
         view=pick_star,
         name="player_pick_star"),
 
-    path(
-        route='pick_star/<int:id>',
-        view=pick_star,
-        name="player_pick_star_w_id"),
+    #path(url(r'^viewspecs/itemdetails/(?P<param1>[\w-]+)/(?P<param2>[\w-]+)/$',
+    # views.specsView),
+
+    #    route='pick_star/?P<param1>[\w+]$',
+
+    #    view=pick_star,
+    #    name="player_pick_star"),
+
+    #path(
+    #    route='pick_star/<int:id>',
+    #    view=pick_star,
+    #    name="player_pick_star"),
 
     path(
         route='place_bet/<int:id>',

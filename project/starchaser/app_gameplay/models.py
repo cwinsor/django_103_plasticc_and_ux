@@ -1,3 +1,5 @@
+import numpy as np
+
 from django.db import models
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -17,27 +19,27 @@ fmt_i3 = '{:3}'
 # a subclass of QuerySet representing a subset of PlasticcStar
 class PlasticcStarQuerySet(models.QuerySet):
 
-    def random_set(self, num):
+    def random_set(self):
 
         #qs = self.filter(target__exact=92)
         # order_by("?").first()
         #star42 = self.filter(target__exact=42).order_by("?").first()
         #star4 = qs.order_by("?").first()
 
-        star00 = self.filter(target__exact=90).order_by("?").first()
-        star01 = self.filter(target__exact=42).order_by("?").first()
-        star02 = self.filter(target__exact=65).order_by("?").first()
-        star03 = self.filter(target__exact=16).order_by("?").first()
-        star04 = self.filter(target__exact=15).order_by("?").first()
-        star05 = self.filter(target__exact=62).order_by("?").first()
-        star06 = self.filter(target__exact=88).order_by("?").first()
-        star07 = self.filter(target__exact=92).order_by("?").first()
-        star08 = self.filter(target__exact=67).order_by("?").first()
-        star09 = self.filter(target__exact=52).order_by("?").first()
-        star10 = self.filter(target__exact=95).order_by("?").first()
-        star11 = self.filter(target__exact=6).order_by("?").first()
-        star12 = self.filter(target__exact=64).order_by("?").first()
-        star13 = self.filter(target__exact=53).order_by("?").first()
+        star00 = self.filter(target__exact=90).order_by("?").first().star_id
+        star01 = self.filter(target__exact=42).order_by("?").first().star_id
+        star02 = self.filter(target__exact=65).order_by("?").first().star_id
+        star03 = self.filter(target__exact=16).order_by("?").first().star_id
+        star04 = self.filter(target__exact=15).order_by("?").first().star_id
+        star05 = self.filter(target__exact=62).order_by("?").first().star_id
+        star06 = self.filter(target__exact=88).order_by("?").first().star_id
+        star07 = self.filter(target__exact=92).order_by("?").first().star_id
+        star08 = self.filter(target__exact=67).order_by("?").first().star_id
+        star09 = self.filter(target__exact=52).order_by("?").first().star_id
+        star10 = self.filter(target__exact=95).order_by("?").first().star_id
+        star11 = self.filter(target__exact=6).order_by("?").first().star_id
+        star12 = self.filter(target__exact=64).order_by("?").first().star_id
+        star13 = self.filter(target__exact=53).order_by("?").first().star_id
 
         #90   (2313, 12)
         #42   (1193, 12)
@@ -54,7 +56,7 @@ class PlasticcStarQuerySet(models.QuerySet):
         #64   (102, 12)
         #53   (30, 12)
 
-        return ([
+        return np.array([
             star00,
             star01,
             star02,
@@ -69,7 +71,7 @@ class PlasticcStarQuerySet(models.QuerySet):
             star11,
             star12,
             star13,
-        ])
+       ])
         # return self.all()
 
 

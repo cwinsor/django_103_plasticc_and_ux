@@ -10,15 +10,15 @@ Star Chaser
     Choose a star:
 </h1>
 
-<!--
-{{ qs_star }}
--->
 
 <div class='row'>
     <div class='col-md-6'>
         <h3>Available:</h3>
 
-
+        <br>
+        {{ star_id_list }}
+        <br>
+        {{ star_id_list_string }}
 
 
         <div>
@@ -29,11 +29,16 @@ Star Chaser
                     <div class="col-sm-2"> <b>Select</b> </div>
                 </div>
 
-                {% for star in qs_star %}
+                {% for star in star_list %}
 
                 <li>
                     <div class="col-sm-2"> {{ star.star_id }} </a></div>
-                    <div class="col-sm-2"><a href="{% url 'player_pick_star_w_id' id=star.star_id %}">View</a></div>
+                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}?param1={{ star_id_list_string }} ">ViewNew</a></div>
+
+               
+
+                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}">View</a></div>
+
                     <div class="col-sm-2"><a href="{% url 'place_bet' id=star.star_id %}">Select</a></div>
                 </li>
 

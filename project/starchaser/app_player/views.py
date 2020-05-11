@@ -27,20 +27,44 @@ def home(request):
 
 
 @login_required
-def pick_star(request, view_star_id=''):
+def pick_star(request):
 
-    #star_list = request.GET['star_list']
-    #Code to filter products whose price is less than price_lte i.e. 5000
+    logger = logging.getLogger(__name__)
+    logger.debug("\n---here4")
+
+    # param1 = list of starts to choose from
+    if 'param1' in request.GET:
+        param1 = request.GET['param1']
+        star_id_list = np.fromstring(param1, dtype=int, sep=',')
+    else:
+        star_id_list = PlasticcStar.objects.random_set()
+
+    np.set_printoptions(nanstr='null')
+    star_id_list_string = np.array2string(star_id_list, separator=',', sign='-', threshold=10000)
+
+    logger.debug("\n" + str(type(star_id_list)))
+    logger.debug("\n" + str(star_id_list))
+
+    star_list = []
+    for star_id in star_id_list:
+        star_list.append(PlasticcStar.objects.get(star_id=star_id))
 
 
-    chooser_list_size = 2
-    qs_star = PlasticcStar.objects.random_set(chooser_list_size)
+
+    # param2 = star to display
+    if 'param2' in request.GET:
+        star_to_display = request.GET['param2']
+    else:
+        star_to_display = None
+
 
     return render(
         request=request,
         template_name="app_player/pick_star.html",
         context={
-            'qs_star': qs_star
+            'star_id_list': star_id_list,
+            'star_id_list_string': star_id_list_string,
+            'star_list': star_list
         }
     )
 
