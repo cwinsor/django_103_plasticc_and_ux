@@ -35,21 +35,21 @@ def pick_star(request):
     # param1 = list of starts to choose from
     if 'param1' in request.GET:
         param1 = request.GET['param1']
-        star_id_list = np.fromstring(param1, dtype=int, sep=',')
+        starlist_np = np.fromstring(param1, dtype=int, sep=',')
     else:
-        star_id_list = PlasticcStar.objects.random_set()
+        starlist_np = PlasticcStar.objects.random_set()
 
-    np.set_printoptions(nanstr='null')
-    star_id_list_string = np.array2string(star_id_list, separator=',', sign='-', threshold=10000)
+    # build a list of star objects, and comma-delimited string (for GET to reproduce page)
+    starlist_obj = []
+    for star_id in starlist_np:
+        starlist_obj.append(PlasticcStar.objects.get(star_id=star_id))
 
-    logger.debug("\n" + str(type(star_id_list)))
-    logger.debug("\n" + str(star_id_list))
+    starlist_string = ''
+    for star_id in starlist_np:
+        starlist_string = '{}{},'.format(starlist_string, star_id)
 
-    star_list = []
-    for star_id in star_id_list:
-        star_list.append(PlasticcStar.objects.get(star_id=star_id))
-
-
+    #logger.debug("\n" + str(type(starlist_string)))
+    #logger.debug("\n" + str(starlist_string))
 
     # param2 = star to display
     if 'param2' in request.GET:
@@ -62,9 +62,8 @@ def pick_star(request):
         request=request,
         template_name="app_player/pick_star.html",
         context={
-            'star_id_list': star_id_list,
-            'star_id_list_string': star_id_list_string,
-            'star_list': star_list
+            'starlist_string': starlist_string,
+            'starlist_obj': starlist_obj
         }
     )
 
