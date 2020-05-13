@@ -53,9 +53,11 @@ def pick_star(request):
 
     # param2 = star to display
     if 'param2' in request.GET:
+        logger.debug("\n" + "here1")
         star_to_display = request.GET['param2']
     else:
-        star_to_display = None
+        logger.debug("\n" + "here2")
+        star_to_display = ''
 
 
     return render(
@@ -63,7 +65,8 @@ def pick_star(request):
         template_name="app_player/pick_star.html",
         context={
             'starlist_string': starlist_string,
-            'starlist_obj': starlist_obj
+            'starlist_obj': starlist_obj,
+            'star_to_display': star_to_display
         }
     )
 

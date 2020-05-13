@@ -17,6 +17,8 @@ Star Chaser
 
         <br>
         {{ starlist_string }}
+        <br>
+        {{ star_to_display }}
 
 
         <div>
@@ -24,20 +26,18 @@ Star Chaser
                 <div class="row">
                     <div class="col-sm-2"> <b>Star ID</b> </div>
                     <div class="col-sm-2"> <b>View</b></div>
-                    <div class="col-sm-2"> <b>Select</b> </div>
+                    <div class="col-sm-2"> <b>Refresh</b> </div>
+                    <div class="col-sm-2"> <b>Bet</b> </div>
                 </div>
 
                 {% for star in starlist_obj %}
 
                 <li>
                     <div class="col-sm-2"> {{ star.star_id }} </a></div>
-                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}?param1={{ starlist_string }} ">ViewNew</a></div>
+                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}?param1={{ starlist_string }}&param2={{ star.star_id }}">View</a></div>
+                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}?param1={{ starlist_string }}&param2={{ star_to_display }}">Refresh</a></div>
 
-               
-
-                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}">View</a></div>
-
-                    <div class="col-sm-2"><a href="{% url 'place_bet' id=star.star_id %}">Select</a></div>
+                    <div class="col-sm-2"><a href="{% url 'place_bet' id=star.star_id %}">Bet</a></div>
                 </li>
 
                 {% endfor %}
