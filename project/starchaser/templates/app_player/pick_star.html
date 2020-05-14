@@ -15,27 +15,23 @@ Star Chaser
     <div class='col-md-6'>
         <h3>Available:</h3>
 
-        <br>
-        {{ starlist_string }}
-        <br>
-        {{ star_to_display }}
-
-
         <div>
             <ul>
                 <div class="row">
                     <div class="col-sm-2"> <b>Star ID</b> </div>
-                    <div class="col-sm-2"> <b>View</b></div>
-                    <div class="col-sm-2"> <b>Refresh</b> </div>
-                    <div class="col-sm-2"> <b>Bet</b> </div>
+                    <div class="col-sm-2"> <b>Show Chart</b></div>
+                    <div class="col-sm-2"> <b>New Deal</b> </div>
+                    <div class="col-sm-2"> <b>Place Bet</b> </div>
                 </div>
 
                 {% for star in starlist_obj %}
 
                 <li>
                     <div class="col-sm-2"> {{ star.star_id }} </a></div>
-                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}?param1={{ starlist_string }}&param2={{ star.star_id }}">View</a></div>
-                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}?param1={{ starlist_string }}&param2={{ star_to_display }}">Refresh</a></div>
+                    <div class="col-sm-2"><a
+                            href="{% url 'player_pick_star' %}?param1={{ starlist_string }}&param2={{ star.star_id }}">Chart</a>
+                    </div>
+                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}">Deal</a></div>
 
                     <div class="col-sm-2"><a href="{% url 'place_bet' id=star.star_id %}">Bet</a></div>
                 </li>
@@ -49,5 +45,5 @@ Star Chaser
             <h3>Charts:</h3>
         </div>
     </div>
-
-    {% endblock %}
+</div>
+{% endblock %}

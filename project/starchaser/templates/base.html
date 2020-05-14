@@ -30,12 +30,47 @@
             </div>
             <ul class='nav navbar-nav navbar-right'>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'player_logout' %}">Logout</a></li>
+                <li class="nav-item">
+                    <a href="{% url 'player_logout' %}">Logout</a>
+                </li>
                 {% else %}
-                <li><a href="{% url 'signup' %}">Create Account</a></li>
-                <li><a href="{% url 'player_login' %}">Log In</a></li>
+                <li class="nav-item">
+                    <a href="{% url 'signup' %}">Create Account</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'player_login' %}">Log In</a>
+                </li>
                 {% endif %}
-            </ul>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown">Why...</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'ref01_why_game' %}" target="_blank">Why Make a Game?</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'ref05_this_web_application' %}" target="_blank">The
+                            Design</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'ref08_plasticc_and_kaggle' %}" target="_blank">PLAsTiCC
+                            and the Kaggle Dataset...</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'ref04_variety_of_approaches' %}" target="_blank">Variety
+                            of Approaches...</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'ref06_building_a_model' %}" target="_blank">To Build a
+                            Model...</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'ref09_metrics' %}" target="_blank">Metrics and Why
+                            They're Important</a>
+                        <div class="dropdown-divider"></div>
+                </li>
+
+
+        </div>
+        </li>
+
+
+        </ul>
         </div>
     </nav>
 

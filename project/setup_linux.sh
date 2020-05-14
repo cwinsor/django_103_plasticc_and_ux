@@ -24,8 +24,8 @@ To populate the database with all training data:
 To run the server:
  python starchaser/manage.py runserver
 
-If you get "the site can't be reached"
-confirm postgres is running - from start -> "pgadmin" and open the database
+If you get "could not connect to server: Connection refused"
+then confirm postgres is running - from start -> "pgadmin" and open the database
 to start postgres:
  su postgres
  cd
@@ -35,5 +35,5 @@ to start postgres:
  sudo chmod 777 /run/postgresql/
  mkdir /run/postgresql/10-wsl_cluster.pg_stat_tmp
  /usr/lib/postgresql/10/bin/pg_ctl -D /etc/postgresql/10/wsl_cluster/    -l logfile start
- 
+ exit 
 '
