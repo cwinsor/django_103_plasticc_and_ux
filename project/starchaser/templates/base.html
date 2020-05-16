@@ -20,6 +20,13 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
     <script src="{% static 'js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- load my charting javascript -->
+    <script> data_from_django = "{{ timeseries_data }}"  </script>
+    <script type="text/javascript"  href="{% static 'js/chart_timeseries' %}"></script>
+
 </head>
 
 <body>
@@ -85,6 +92,9 @@
     <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 
     <script src="{% static 'js/main.js' %}"></script>
+
+    <script src="{% static 'js/chart_timeseries.js' %}"></script>
+
 </body>
 
 </html>

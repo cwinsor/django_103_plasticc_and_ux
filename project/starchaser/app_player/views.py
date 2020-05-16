@@ -29,10 +29,6 @@ def home(request):
 @login_required
 def pick_star(request):
 
-    logger = logging.getLogger(__name__)
-    logger.debug("\n---here4")
-
-    # param1 = list of starts to choose from
     if 'param1' in request.GET:
         param1 = request.GET['param1']
         starlist_np = np.fromstring(param1, dtype=int, sep=',')
@@ -48,27 +44,46 @@ def pick_star(request):
     for star_id in starlist_np:
         starlist_string = '{}{},'.format(starlist_string, star_id)
 
-    #logger.debug("\n" + str(type(starlist_string)))
-    #logger.debug("\n" + str(starlist_string))
+
 
     # param2 = star to display
     if 'param2' in request.GET:
-        logger.debug("\n" + "here1")
         star_to_display = request.GET['param2']
     else:
-        logger.debug("\n" + "here2")
         star_to_display = ''
 
+    #context={}
+    context = dict()
+    context['starlist_string'] = starlist_string
+    context['starlist_obj'] = starlist_obj
+    context['star_to_display'] = star_to_display
+
+    #logger = logging.getLogger(__name__)
+    #logger.debug("\n---here4")
+    #logger.debug("\n" + str(starlist_string))
+    #logger.debug("\n---here5")
+    #logger.debug("\n" + str(starlist_obj))
+    #logger.debug("\n" + str(context))
+    #logger.debug("\n------------------")
+
+    # --------------------------------------------
+    # for charting - get chart data
+    [star_obj, timeseries_data_str] = get_chart_data(star_to_display)
+    #context['star'] = star_obj
+    #context['timeseries_data'] = timeseries_data_str
+
+    context['star_obj'] = star_obj
+    context['timeseries_data_str'] = timeseries_data_str
 
     return render(
         request=request,
         template_name="app_player/pick_star.html",
-        context={
-            'starlist_string': starlist_string,
-            'starlist_obj': starlist_obj,
-            'star_to_display': star_to_display
-        }
-    )
+        context = context)
+        #context={
+        #    'starlist_string': starlist_string,
+        #    'starlist_obj': starlist_obj,
+        #    'star_to_display': star_to_display}
+        #    )
 
 
 
@@ -263,6 +278,33 @@ def new_gameplay_round(request):
     else:
         form = GameplayRoundForm()
     return render(request, "app_player/new_gameplay_round_form.html", {'form': form})
+
+
+def get_chart_data(id):
+
+    logger = logging.getLogger(__name__)
+    logger.debug("\n---here22")  
+    logger.debug("\n" + str(id))
+
+    if (id is None) or (id == ''):
+        return [None, '']
+
+    star_obj = get_object_or_404(PlasticcStar, pk=id)
+    qs_samples = PlasticcSample.objects.filter(star=star_obj)
+    df = read_frame(qs_samples)
+
+
+
+    df2 = df.pivot(index='mjd', columns='passband', values='flux')
+    temp0a = df2.index.to_numpy()
+    temp0b = np.reshape(temp0a, (temp0a.size, 1))
+    temp1 = df2.to_numpy()
+    temp01 = np.concatenate((temp0b, temp1), axis=1)
+ 
+    np.set_printoptions(nanstr='null')
+    timeseries_data_str = np.array2string(temp01, separator=',', threshold=10000)
+
+    return [star_obj, timeseries_data_str]
 
 
 @login_required
