@@ -72,13 +72,19 @@ def pick_star(request):
     #context['star'] = star_obj
     #context['timeseries_data'] = timeseries_data_str
 
+    #logger = logging.getLogger(__name__)
+    #logger.debug("\n---here4")
+    #logger.debug("\n" + str(timeseries_data_str))
+    #logger.debug("\n---here5")
+
     context['star_obj'] = star_obj
     context['timeseries_data_str'] = timeseries_data_str
+
 
     return render(
         request=request,
         template_name="app_player/pick_star.html",
-        context = context)
+        context=context)
         #context={
         #    'starlist_string': starlist_string,
         #    'starlist_obj': starlist_obj,

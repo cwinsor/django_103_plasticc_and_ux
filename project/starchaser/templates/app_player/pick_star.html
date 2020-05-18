@@ -1,8 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
 Star Chaser
 {% endblock %}
+
+
 
 {% block content %}
 
@@ -29,7 +32,9 @@ Star Chaser
 
                 <li>
                     <div class="col-sm-2"> {{ star.star_id }} </div>
-                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}?param1={{ starlist_string }}&param2={{ star.star_id }}">Chart</a></div>
+                    <div class="col-sm-2"><a
+                            href="{% url 'player_pick_star' %}?param1={{ starlist_string }}&param2={{ star.star_id }}">Chart</a>
+                    </div>
                     <div class="col-sm-2"><a href="{% url 'player_pick_star' %}">Deal</a></div>
                     <div class="col-sm-2"><a href="{% url 'place_bet' id=star.star_id %}">Bet</a></div>
 
