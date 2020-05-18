@@ -52,7 +52,6 @@ def pick_star(request):
     else:
         star_to_display = ''
 
-    #context={}
     context = dict()
     context['starlist_string'] = starlist_string
     context['starlist_obj'] = starlist_obj
@@ -61,21 +60,10 @@ def pick_star(request):
     #logger = logging.getLogger(__name__)
     #logger.debug("\n---here4")
     #logger.debug("\n" + str(starlist_string))
-    #logger.debug("\n---here5")
-    #logger.debug("\n" + str(starlist_obj))
-    #logger.debug("\n" + str(context))
-    #logger.debug("\n------------------")
 
     # --------------------------------------------
     # for charting - get chart data
     [star_obj, timeseries_data_str] = get_chart_data(star_to_display)
-    #context['star'] = star_obj
-    #context['timeseries_data'] = timeseries_data_str
-
-    #logger = logging.getLogger(__name__)
-    #logger.debug("\n---here4")
-    #logger.debug("\n" + str(timeseries_data_str))
-    #logger.debug("\n---here5")
 
     context['star_obj'] = star_obj
     context['timeseries_data_str'] = timeseries_data_str
@@ -85,20 +73,10 @@ def pick_star(request):
         request=request,
         template_name="app_player/pick_star.html",
         context=context)
-        #context={
-        #    'starlist_string': starlist_string,
-        #    'starlist_obj': starlist_obj,
-        #    'star_to_display': star_to_display}
-        #    )
-
 
 
 @login_required
 def place_bet(request, id):
-
-    #logger = logging.getLogger(__name__)
-    # logger.debug("\n---here8")
-    #logger.debug("\n" + str(request))
 
     star = get_object_or_404(PlasticcStar, pk=id)
     user = request.user

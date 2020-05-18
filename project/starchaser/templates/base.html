@@ -91,31 +91,13 @@
     <script src="{% static 'js/main.js' %}"></script>
 
     <!-- load my charting javascript -->
-    <script type="text/javscript">
-    var temp3 = [[1, 2, 3, 4, 5, 6, 7],[2, 3, 4, 5, 6, 7, 8],[3, 4, 5, 6, 7, 8, 9]];
-    </script>
-
-    {% if DJdata %}
     <script type="text/javascript">
-            (function () { window.DJdata = {{ DJdata | safe } };}) ();
+        {% if timeseries_data_str %}
+        (function () { window.temp5 = {{ timeseries_data_str }} ; }) ();
+        {% else %}
+        (function () { window.temp5 = []; })();
+        {% endif %}
     </script>
-    {% endif %}
-
-    <script type="text/javascript">
-        (function () { window.temp4 = [[1, 2, 3, 4, 5, 6, 7], [2, 3, 4, 5, 6, 7, null], [3, 4, 5, 6, 7, 8, 30]]; })();
-    </script>
-
-    <script type="text/javascript">
-        (function () { window.temp5 = {{ timeseries_data_str }} ; })();
-    </script>
-
-<!--
-    <br>
-    [[1, 2, 3, 4, 5, 6, 7], [2, 3, 4, 5, 6, 7, null], [3, 4, 5, 6, 7, 8, 30]]
-    <br>
-    {{ timeseries_data_str }}
-    <br>
--->
 
     <script src="{% static 'js/chart_timeseries.js' %}"></script>
 
