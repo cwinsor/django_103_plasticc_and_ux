@@ -156,33 +156,33 @@ def bet_form_set_disabled_fields(form, request, star):
 
 
 def bet_form_set_values_for_non_db_fields(form, request, star):
-    form.fields['bid_a2'].initial = 1  # btrotta
-    form.fields['bid_b2'].initial = 2
+    form.fields['bid_a2'].initial = 0  # btrotta
+    form.fields['bid_b2'].initial = 0
     form.fields['bid_c2'].initial = 3
-    form.fields['bid_d2'].initial = 4
-    form.fields['bid_e2'].initial = 5
-    form.fields['bid_f2'].initial = 6
-    form.fields['bid_g2'].initial = 7
-    form.fields['bid_h2'].initial = 8
-    form.fields['bid_i2'].initial = 9
-    form.fields['bid_j2'].initial = 10
-    form.fields['bid_k2'].initial = 11
-    form.fields['bid_l2'].initial = 12
-    form.fields['bid_m2'].initial = 13
+    form.fields['bid_d2'].initial = 20
+    form.fields['bid_e2'].initial = 35
+    form.fields['bid_f2'].initial = 25
+    form.fields['bid_g2'].initial = 10
+    form.fields['bid_h2'].initial = 7
+    form.fields['bid_i2'].initial = 0
+    form.fields['bid_j2'].initial = 0
+    form.fields['bid_k2'].initial = 0
+    form.fields['bid_l2'].initial = 0
+    form.fields['bid_m2'].initial = 0
 
-    form.fields['bid_a3'].initial = 5  # kboone
-    form.fields['bid_b3'].initial = 6
-    form.fields['bid_c3'].initial = 7
+    form.fields['bid_a3'].initial = 0  # kboone
+    form.fields['bid_b3'].initial = 0
+    form.fields['bid_c3'].initial = 0
     form.fields['bid_d3'].initial = 8
-    form.fields['bid_e3'].initial = 9
+    form.fields['bid_e3'].initial = 2
     form.fields['bid_f3'].initial = 10
-    form.fields['bid_g3'].initial = 11
-    form.fields['bid_h3'].initial = 12
-    form.fields['bid_i3'].initial = 13
-    form.fields['bid_j3'].initial = 14
-    form.fields['bid_k3'].initial = 15
-    form.fields['bid_l3'].initial = 16
-    form.fields['bid_m3'].initial = 17
+    form.fields['bid_g3'].initial = 40
+    form.fields['bid_h3'].initial = 35
+    form.fields['bid_i3'].initial = 5
+    form.fields['bid_j3'].initial = 0
+    form.fields['bid_k3'].initial = 0
+    form.fields['bid_l3'].initial = 0
+    form.fields['bid_m3'].initial = 0
 
 
 def bet_form_set_reduction_fields(form, request):
