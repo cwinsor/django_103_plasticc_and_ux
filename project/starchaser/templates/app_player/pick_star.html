@@ -12,61 +12,47 @@ Star Chaser
 </h1>
 
 <div class='row'>
-    <div class='col-md-6'>
+    <div class="col-sm-4">
         <h3>Available:</h3>
 
-        <div>
-            <ul>
-                <div class="row">
-                    <div class="col-sm-2"> <b>Star ID</b> </div>
-                    <div class="col-sm-2"> <b>Show Chart</b></div>
-                    <div class="col-sm-2"> <b>New Deal</b> </div>
-                    <div class="col-sm-2"> <b>Place Bet</b> </div>
+        <ul>
+            <div class="row">
+                <div class="col-sm-4"> <b>Star ID</b> </div>
+                <div class="col-sm-2"> <b>Show Chart</b></div>
+                <div class="col-sm-2"> <b>New Deal</b> </div>
+                <div class="col-sm-2"> <b>Place Bet</b> </div>
+            </div>
+
+            <br>
+            {% for star in starlist_obj %}
+
+            <li>
+                <div class="col-sm-4"> {{ star.star_id }} </div>
+                <div class="col-sm-2"><a
+                        href="{% url 'player_pick_star' %}?param1={{ starlist_string }}&param2={{ star.star_id }}">Chart</a>
                 </div>
+                <div class="col-sm-2"><a href="{% url 'player_pick_star' %}">Deal</a></div>
+                <div class="col-sm-2"><a href="{% url 'place_bet' id=star.star_id %}">Bet</a></div>
 
-                <br>
-                {% for star in starlist_obj %}
+            </li>
 
-                <li>
-                    <div class="col-sm-2"> {{ star.star_id }} </div>
-                    <div class="col-sm-2"><a
-                            href="{% url 'player_pick_star' %}?param1={{ starlist_string }}&param2={{ star.star_id }}">Chart</a>
-                    </div>
-                    <div class="col-sm-2"><a href="{% url 'player_pick_star' %}">Deal</a></div>
-                    <div class="col-sm-2"><a href="{% url 'place_bet' id=star.star_id %}">Bet</a></div>
+            {% endfor %}
 
-                </li>
+        </ul>
+    </div>
 
-                {% endfor %}
+    <!--Div that will hold the chart-->
+    <div class="col-sm-6">
+        <h3>Chart:</h3>
 
-            </ul>
-        </div>
-
-        <div class='col-md-2'>
-            <h3>Chart:</h3>
-
-            <body>
-                <!--Div that will hold the pie chart-->
-                <div id="chart_div_1"></div>
-                <div id="chart_div_2"></div>
-
-                <!-- load my charting javascript -->
-                {% if timeseries_data_str %}
-                <script type="text/javascript">
-                    (function () { window.temp5 = {{ timeseries_data_str }} ; }) ();
-                </script>
-                <script src="{% static 'js/chart_timeseries.js' %}"></script>
-                {% endif %}
-
-
-
-
-
-
-            </body>
-
-            </html>
-
+        <div id="chart_div_2">
+            <!-- load my charting javascript -->
+            {% if timeseries_data_str %}
+            <script type="text/javascript">
+                (function () { window.temp5 = {{ timeseries_data_str }} ; }) ();
+            </script>
+            <script src="{% static 'js/chart_timeseries.js' %}"></script>
+            {% endif %}
         </div>
     </div>
 </div>

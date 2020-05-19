@@ -28,12 +28,12 @@ function drawChart2() {
     // Set chart options
     var options_2 = {
         title: 'Flux by Passband vs MJD',
-        width: 800,
-        height: 600,
         interpolateNulls: true,
         hAxis: {title: 'Modified Julian Date'},
-        vAxis: {title: 'Flux'},
         pointSize: 3,
+        width: 800,
+        height: 400,
+        chartArea:{left:50,width:'50%',height:'75%'}
     };
 
     // Instantiate and draw our chart, passing in some options.
