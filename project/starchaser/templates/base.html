@@ -90,16 +90,7 @@
 
     <script src="{% static 'js/main.js' %}"></script>
 
-    <!-- load my charting javascript -->
-    <script type="text/javascript">
-        {% if timeseries_data_str %}
-        (function () { window.temp5 = {{ timeseries_data_str }} ; }) ();
-        {% else %}
-        (function () { window.temp5 = []; })();
-        {% endif %}
-    </script>
 
-    <script src="{% static 'js/chart_timeseries.js' %}"></script>
 
 </body>
 

@@ -266,9 +266,9 @@ def new_gameplay_round(request):
 
 def get_chart_data(id):
 
-    logger = logging.getLogger(__name__)
-    logger.debug("\n---here22")  
-    logger.debug("\n" + str(id))
+    #logger = logging.getLogger(__name__)
+    #logger.debug("\n---here22")  
+    #logger.debug("\n" + str(id))
 
     if (id is None) or (id == ''):
         return [None, '']
@@ -277,14 +277,12 @@ def get_chart_data(id):
     qs_samples = PlasticcSample.objects.filter(star=star_obj)
     df = read_frame(qs_samples)
 
-
-
     df2 = df.pivot(index='mjd', columns='passband', values='flux')
     temp0a = df2.index.to_numpy()
     temp0b = np.reshape(temp0a, (temp0a.size, 1))
     temp1 = df2.to_numpy()
     temp01 = np.concatenate((temp0b, temp1), axis=1)
- 
+
     np.set_printoptions(nanstr='null')
     timeseries_data_str = np.array2string(temp01, separator=',', threshold=10000)
 
@@ -298,16 +296,16 @@ def show_star(request, id):
     qs_samples = PlasticcSample.objects.filter(star=star)
     df = read_frame(qs_samples)
 
-    logger = logging.getLogger(__name__)
-    logger.debug("\n---here8")  
-    logger.debug("\n" + str(df))
+    #logger = logging.getLogger(__name__)
+    #logger.debug("\n---here8")  
+    #logger.debug("\n" + str(df))
 
     df2 = df.pivot(index='mjd', columns='passband', values='flux')
 
-    logger.debug("\n---here9")  
-    logger.debug("\n" + str(type(df2)))
-    logger.debug("\n" + str(df2.shape))
-    logger.debug("\n" + str(df2))
+    #logger.debug("\n---here9")  
+    #logger.debug("\n" + str(type(df2)))
+    #logger.debug("\n" + str(df2.shape))
+    #logger.debug("\n" + str(df2))
 
     temp0a = df2.index.to_numpy()
     temp0b = np.reshape(temp0a, (temp0a.size, 1))
@@ -324,15 +322,13 @@ def show_star(request, id):
     np.set_printoptions(nanstr='null')
     temp = np.array2string(temp01, separator=',', threshold=10000)
 
-    logger.debug("\n---hereC")  
+    #logger.debug("\n---hereC")  
     #logger.debug("\n" + str(type(temp1)))
     #logger.debug("\n" + str(type(temp)))
-    logger.debug("\n" + str(temp))
+    #logger.debug("\n" + str(temp))
 
     context = {}
     context['star'] = star
-    #context['qs_samples'] = qs_samples
-    #context['df2'] = df2
     context['timeseries_data'] = temp
 
     return render(
