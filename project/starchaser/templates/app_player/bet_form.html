@@ -1,174 +1,178 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Star Chaser
 {% endblock %}
 
 {% block content %}
+
 <h1>Place your Bets!</h1>
-Guidance is provided by B.Trotta and K.Boone using TensorFlow AI.
-<br>
-You can preview your score (but that would cheating).
+Guidance is provided by astronomers B.Trotta and K.Boone using TensorFlow AI.
 <br>
 <br>
-
-
 
 <form method="post" action="{% url 'place_bet' id=star_id %}">
-    <label>User1: </label> {{ form.user }}
-    <br>
-    <label>Star: </label> {{ form.star }}
-    <br>
 
-    <br>
-    <div class="row">
-        <div class="col-sm-2"> <b>Class</b> </div>
-        <div class="col-sm-1"> <b>Your Bet ($) </b></div>
-        <div class="col-sm-1"> <b>B.Trotta</b> </div>
-        <div class="col-sm-1"> <b>K.Boone</b> </div>
+
+
+    <div class='row'>
+        <div class="col-sm-6">
+
+            <br>
+            <div class="row">
+                <div class="col-sm-3"> <b>Class</b> </div>
+                <div class="col-sm-2"> <b>B.Trotta's Bet</b> </div>
+                <div class="col-sm-2"> <b>K.Boone's Bet</b> </div>
+                <div class="col-sm-2"> <b>Your Bet ($) </b></div>
+                <div class="col-sm-1"> <b></b> </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> Supernova A123 </div>
+                <div class="col-sm-2"> {{ form.bid_a2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_a3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_a }} </div>
+                <div class="col-sm-1"> {{ form.bid_a.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> Supernova type B </div>
+                <div class="col-sm-2"> {{ form.bid_b2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_b3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_b }} </div>
+                <div class="col-sm-1"> {{ form.bid_b.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type c</div>
+                <div class="col-sm-2"> {{ form.bid_c2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_c3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_c }} </div>
+                <div class="col-sm-1"> {{ form.bid_c.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type d</div>
+                <div class="col-sm-2"> {{ form.bid_d2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_d3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_d }} </div>
+                <div class="col-sm-1"> {{ form.bid_d.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type e</div>
+                <div class="col-sm-2"> {{ form.bid_e2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_e3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_e }} </div>
+                <div class="col-sm-1"> {{ form.bid_e.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type f</div>
+                <div class="col-sm-2"> {{ form.bid_f2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_f3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_f }} </div>
+                <div class="col-sm-1"> {{ form.bid_f.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type g</div>
+                <div class="col-sm-2"> {{ form.bid_g2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_g3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_g }} </div>
+                <div class="col-sm-1"> {{ form.bid_g.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type h</div>
+                <div class="col-sm-2"> {{ form.bid_h2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_h3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_h }} </div>
+                <div class="col-sm-1"> {{ form.bid_h.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type i</div>
+                <div class="col-sm-2"> {{ form.bid_i2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_i3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_i }} </div>
+                <div class="col-sm-1"> {{ form.bid_i.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type j</div>
+                <div class="col-sm-2"> {{ form.bid_j2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_j3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_j }} </div>
+                <div class="col-sm-1"> {{ form.bid_j.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type k</div>
+                <div class="col-sm-2"> {{ form.bid_k2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_k3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_k }} </div>
+                <div class="col-sm-1"> {{ form.bid_k.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type l</div>
+                <div class="col-sm-2"> {{ form.bid_l2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_l3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_l }} </div>
+                <div class="col-sm-1"> {{ form.bid_l.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> type m</div>
+                <div class="col-sm-2"> {{ form.bid_m2 }} </div>
+                <div class="col-sm-2"> {{ form.bid_m3 }} </div>
+                <div class="col-sm-2"> {{ form.bid_m }} </div>
+                <div class="col-sm-1"> {{ form.bid_m.errors }} </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3"> Total Bet</div>
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-2"> {{ form.sum_1 }} </div>
+                <div class="col-sm-1"> </div>
+            </div>
+
+        </div>
+
+        <!--Div that will hold the chart-->
+        <div class="col-sm-2">
+            <h3>{{ star_id }}</h3>
+
+       
+
+            <div id="chart_div_2">
+                <!-- load my charting javascript -->
+                {% if timeseries_data_str %}
+                <script type="text/javascript">
+                    (function () { window.temp5 = {{ timeseries_data_str }} ; }) ();
+                </script>
+                <script src="{% static 'js/chart_timeseries.js' %}"></script>
+                {% endif %}
+            </div>
+        </div>
+
     </div>
-
-    <div class="row">
-        <div class="col-sm-2"> Supernova type A </div>
-        <div class="col-sm-1"> {{ form.bid_a }} </div>
-        <div class="col-sm-1"> {{ form.bid_a2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_a3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_a.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> Supernova type B </div>
-        <div class="col-sm-1"> {{ form.bid_b }} </div>
-        <div class="col-sm-1"> {{ form.bid_b2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_b3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_b.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type c</div>
-        <div class="col-sm-1"> {{ form.bid_c }} </div>
-        <div class="col-sm-1"> {{ form.bid_c2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_c3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_c.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type d</div>
-        <div class="col-sm-1"> {{ form.bid_d }} </div>
-        <div class="col-sm-1"> {{ form.bid_d2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_d3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_d.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type e</div>
-        <div class="col-sm-1"> {{ form.bid_e }} </div>
-        <div class="col-sm-1"> {{ form.bid_e2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_e3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_e.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type f</div>
-        <div class="col-sm-1"> {{ form.bid_f }} </div>
-        <div class="col-sm-1"> {{ form.bid_f2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_f3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_f.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type g</div>
-        <div class="col-sm-1"> {{ form.bid_g }} </div>
-        <div class="col-sm-1"> {{ form.bid_g2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_g3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_g.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type h</div>
-        <div class="col-sm-1"> {{ form.bid_h }} </div>
-        <div class="col-sm-1"> {{ form.bid_h2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_h3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_h.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type i</div>
-        <div class="col-sm-1"> {{ form.bid_i }} </div>
-        <div class="col-sm-1"> {{ form.bid_i2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_i3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_i.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type j</div>
-        <div class="col-sm-1"> {{ form.bid_j }} </div>
-        <div class="col-sm-1"> {{ form.bid_j2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_j3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_j.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type k</div>
-        <div class="col-sm-1"> {{ form.bid_k }} </div>
-        <div class="col-sm-1"> {{ form.bid_k2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_k3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_k.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type l</div>
-        <div class="col-sm-1"> {{ form.bid_l }} </div>
-        <div class="col-sm-1"> {{ form.bid_l2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_l3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_l.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> type m</div>
-        <div class="col-sm-1"> {{ form.bid_m }} </div>
-        <div class="col-sm-1"> {{ form.bid_m2 }} </div>
-        <div class="col-sm-1"> {{ form.bid_m3 }} </div>
-        <div class="col-sm-4"> {{ form.bid_m.errors }} </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"> Total Bet -----> </div>
-        <div class="col-sm-1"> {{ form.sum_1 }} </div>
-    </div>
-
-    <font color="green">
-        <h3>Your Projected Winnings $123</h3>
-    </font>
 
     <font color="red"> <b> {{ form.non_field_errors }} </b> </font>
 
     {% csrf_token %}
-    <br>
-    <button type="submit">Preview</button>
-    <br>
+
     <button type="submit">Submit</button>
 
     <br>
 
-    <!--
-
-    {% if form.errors %}
-    <h1>Errors:</h1>
-    {% for field in form %}
-    {% for error in field.errors %}
-    <br>
-    {{ field.label }}: {{ error }}
-    {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-    <br>
-    hmm: {{ error }}
-    {% endfor %}
-    {% endif %}
-        
-    -->
 
 </form>
+
+
+
 
 {% endblock %}

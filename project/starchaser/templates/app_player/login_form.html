@@ -7,19 +7,7 @@ Star Chaser
 
 {% block content %}
 
-<form role="form" action="{% url 'player_login' %}" method="post">
 
-    {% csrf_token %}
-
-    <p>Please login.</p>
-
-    {{ form }}
-<!--  { { form | crispy } }  -->  
-
-    <button type="submit" class="btn btn-success">Sign in</button>
-</form>
-
-===================
 
 <h2>Login Form</h2>
 <form action="{% url 'player_login' %}"   method="post">

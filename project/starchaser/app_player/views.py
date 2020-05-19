@@ -120,6 +120,15 @@ def place_bet(request, id):
     context['form'] = form
     context['star_id'] = star.star_id
 
+    # --------------------------------------------
+    # for charting - get chart data
+    [star_obj, timeseries_data_str] = get_chart_data(id)
+
+    context['star_obj'] = star_obj
+    context['timeseries_data_str'] = timeseries_data_str
+
+
+
     return render(
         request=request,
         template_name="app_player/bet_form.html",
