@@ -23,6 +23,9 @@ To populate the database with all training data:
 
 To run the server:
  python starchaser/manage.py runserver
+<or on AWS>
+ python starchaser/manage.py runserver 0.0.0.0:8000
+ curl ec2-3-22-167-114.us-east-2.compute.amazonaws.com:8000
 
 If you get "could not connect to server: Connection refused"
 then confirm postgres is running - from start -> "pgadmin" and open the database
