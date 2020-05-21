@@ -33,15 +33,17 @@ DEBUG = passwords['django']['debug']
 
 #ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
 #ALLOWED_HOSTS = ['Starchaser-dev.us-east-2.elasticbeanstalk.com']
+#ALLOWED_HOSTS = [
+#    'localhost',
+#    '127.0.0.1',
+#    'ec2-3-22-167-114.us-east-2.compute.amazonaws.com',
+#    ]
+
 ALLOWED_HOSTS = [
+    'ec2-3-22-167-114.us-east-2.compute.amazonaws.com',
     'localhost',
-    '127.0.0.1',
-    'starchaser-dev.us-east-2.elasticbeanstalk.com',
-    '.elasticbeanstalk.com',
-    '172.31.10.77',
-    '172.31.19.165',
-    'awseb-awseb-16zn1aeks9bag-150722902.us-east-2.elb.amazonaws.com',
-    ]
+    '3.22.167.114',
+]
 
 # Application definition
 
