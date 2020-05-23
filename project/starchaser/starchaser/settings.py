@@ -43,6 +43,7 @@ ALLOWED_HOSTS = [
     'ec2-3-22-167-114.us-east-2.compute.amazonaws.com',
     'localhost',
     '3.22.167.114',
+    '127.0.0.1',
 ]
 
 # Application definition

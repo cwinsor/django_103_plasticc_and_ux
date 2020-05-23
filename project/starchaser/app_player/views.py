@@ -29,24 +29,24 @@ def home(request):
 @login_required
 def pick_star(request):
 
+    # param 1 - list of star IDs comma delimited
     if 'param1' in request.GET:
         param1 = request.GET['param1']
         starlist_np = np.fromstring(param1, dtype=int, sep=',')
     else:
         starlist_np = PlasticcStar.objects.random_set()
 
-    # build a list of star objects, and comma-delimited string (for GET to reproduce page)
+    # build list of objects
     starlist_obj = []
     for star_id in starlist_np:
         starlist_obj.append(PlasticcStar.objects.get(star_id=star_id))
 
+    # build comma-delimited string
     starlist_string = ''
     for star_id in starlist_np:
         starlist_string = '{}{},'.format(starlist_string, star_id)
 
-
-
-    # param2 = star to display
+    # param2 = star to display chart
     if 'param2' in request.GET:
         star_to_display = request.GET['param2']
     else:
@@ -57,17 +57,11 @@ def pick_star(request):
     context['starlist_obj'] = starlist_obj
     context['star_to_display'] = star_to_display
 
-    #logger = logging.getLogger(__name__)
-    #logger.debug("\n---here4")
-    #logger.debug("\n" + str(starlist_string))
-
-    # --------------------------------------------
-    # for charting - get chart data
+    # for charting - get data for chart
     [star_obj, timeseries_data_str] = get_chart_data(star_to_display)
 
     context['star_obj'] = star_obj
     context['timeseries_data_str'] = timeseries_data_str
-
 
     return render(
         request=request,
@@ -79,7 +73,6 @@ def pick_star(request):
 def place_bet(request, id):
 
     star = get_object_or_404(PlasticcStar, pk=id)
-    user = request.user
 
     ###### POST #####
     if request.method == "POST":
@@ -90,11 +83,8 @@ def place_bet(request, id):
         bet_form_set_reduction_fields(form, request)
 
         if form.is_valid():
-            # save to db.. to be implemented becuase this is not based on model...
             form.save()
             return redirect('player_well_done')
-        # pass
-
 
     ###### GET #####
     else:
@@ -127,21 +117,10 @@ def place_bet(request, id):
     context['star_obj'] = star_obj
     context['timeseries_data_str'] = timeseries_data_str
 
-
-
     return render(
         request=request,
         template_name="app_player/bet_form.html",
         context=context)
-
-
-# on the bet form, set the fields that are enabled
-# this only needs to happen on GET as a POST provides this data in request.POST
-# def bet_form_set_enabled_fields(form):
-#
-#    form.fields['bid_a1'].initial = 0
-#    form.fields['bid_b1'].initial = 0
-#    form.fields['bid_c1'].initial = 0
 
 
 # on the bet form, set the fields that are not user_editable
