@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# This is setup script and instructions to deploy StarChaser on AWS including the PostgreSQL data subset
+# It is intended to be run on the EC2
+
 export PYTHONPATH=$(pwd):$(pwd)/starchaser:$(pwd)/starchaser/starchaser:
 python -m pip install virtualenv
 python -m virtualenv pymote_env_linux
@@ -7,6 +11,9 @@ dos2unix requirements.txt
 pip install -r requirements.txt
 
 echo '
+
+This is setup script and instructions to deploy StarChaser on AWS including the PostgreSQL data subset
+It is intended to be run on the EC2  
 
 To initialize the database:
  python starchaser/manage.py makemigrations
