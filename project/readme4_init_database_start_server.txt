@@ -27,6 +27,12 @@ pip install -r requirements.txt
  python starchaser/manage.py runserver
 <or on AWS>
  python starchaser/manage.py runserver 0.0.0.0:8000
+### to send output to null and background...
+ python starchaser/manage.py runserver 0.0.0.0:8000 > /dev/null 2>&1
+<ctrl-z>
+bg
+
+### to check...
  curl ec2-3-22-167-114.us-east-2.compute.amazonaws.com:8000
 
 ### Basic access is at
