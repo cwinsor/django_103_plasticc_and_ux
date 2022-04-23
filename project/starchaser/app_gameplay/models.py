@@ -34,11 +34,11 @@ class PlasticcStarQuerySet(models.QuerySet):
         star06 = self.filter(target__exact=88).order_by("?").first().star_id
         star07 = self.filter(target__exact=92).order_by("?").first().star_id
         star08 = self.filter(target__exact=67).order_by("?").first().star_id
-        star09 = self.filter(target__exact=52).order_by("?").first().star_id
-        star10 = self.filter(target__exact=95).order_by("?").first().star_id
-        star11 = self.filter(target__exact=6).order_by("?").first().star_id
-        star12 = self.filter(target__exact=64).order_by("?").first().star_id
-        star13 = self.filter(target__exact=53).order_by("?").first().star_id
+        star09 = self.filter(target__exact=67).order_by("?").first().star_id
+        star10 = self.filter(target__exact=67).order_by("?").first().star_id
+        star11 = self.filter(target__exact=67).order_by("?").first().star_id
+        star12 = self.filter(target__exact=67).order_by("?").first().star_id
+        star13 = self.filter(target__exact=67).order_by("?").first().star_id
 
         #90   (2313, 12)
         #42   (1193, 12)

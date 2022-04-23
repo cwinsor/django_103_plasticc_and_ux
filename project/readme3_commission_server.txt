@@ -1,6 +1,13 @@
 Step by step instructions - to stand up an EC2 running this game...
 
-start the EC2 - Ubuntu 20 with SSH and HTTP.
+Commission the EC2 (Ubuntu 20 tier 2). Include SSH but do **NOT** include HTTP (this will install and start Apache which we don't want)
+
+In addition to the baseline security group - add the "Starchaser" security group.  This adds 5432 (SQL) and 8000 (the port our Django server will answer on)
+iIPv4	All ICMP - IPv4	ICMP	All	0.0.0.0/0	–
+IPv4	PostgreSQL	TCP	5432	0.0.0.0/0	–
+IPv4	Custom TCP	TCP	8000	0.0.0.0/0	–
+
+
 log in
 
 ############# prelinary ###################
@@ -116,3 +123,6 @@ i
 cp starchaser/passwords.yml.EXAMPLE  starchaser/passwords.yml
 vi starchaser/passwords.yml
 
+####################
+### in the starchaser project - edit settings.yml to include the IP addresses in "allowed hosts"
+ '3.17.110.181' ['*']

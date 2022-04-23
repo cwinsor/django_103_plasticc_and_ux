@@ -29,22 +29,10 @@ pip install -r requirements.txt
  python starchaser/manage.py runserver 0.0.0.0:8000
  curl ec2-3-22-167-114.us-east-2.compute.amazonaws.com:8000
 
+### Basic access is at
+http://3.17.110.181:8000
+### Admin is at:
+http://3.17.110.181:8000/admin/login/?next=/admin/
 
 
 
-
-
-
-If you get "could not connect to server: Connection refused"
-then confirm postgres is running - from start -> "pgadmin" and open the database
-to start postgres:
- su postgres
- cd
- service postgresql status
- mv logfile logfile200510
- sudo mkdir /run/postgresql
- sudo chmod 777 /run/postgresql/
- mkdir /run/postgresql/10-wsl_cluster.pg_stat_tmp
- /usr/lib/postgresql/10/bin/pg_ctl -D /etc/postgresql/10/wsl_cluster/    -l logfile start
- exit 
-'
