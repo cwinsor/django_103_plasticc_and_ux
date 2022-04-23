@@ -6,7 +6,7 @@ psycopg2-binary
 
 numpy
 pandas
-Django==3
+Django==3.1.14
 django-crispy-forms
 
 django-tables2
