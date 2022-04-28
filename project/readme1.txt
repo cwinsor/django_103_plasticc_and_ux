@@ -1,5 +1,7 @@
 This git implements a web-application using Django backend with PostgreSQL.  It's designed as a game where the user is challenged to predict whether a star will explode (i.e. become a super-Nova) or remain stable.
 
+To set up and run the application see readme2, readme3. This file is an overview giving context.
+
 The dataset originates from the Photometric LSST Astronomical Time Series Classification Challenge (PLAsTiCC) on Kaggle.  The competition was held in anticipation of "first light" for the Large Synoptic Survey Telescope (LSST) (2).
 
 The LSST endeavors to study transient objects, stars that vary in brightness over time.  Examples of transients are super-novas, pulsars, binary stars, and lensing.  LSST will be evaluating the southern hemisphere, about 37 billion stars and galaxies.  It is expected about 10 million (one in four thousand) stars will be a transient.  To find these anomolies the telescope will capture 20 Terabytes of data each night.  It will be necessary to process the data, the goal is 60 minutes from observation to notify astronomers of newly detected events.  It is a staggering proposition!

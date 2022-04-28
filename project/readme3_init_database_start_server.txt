@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ### initial migration, migrate and create superuser
  python starchaser/manage.py makemigrations
  python starchaser/manage.py migrate
- python starchaser/manage.py createsu
+ python starchaser/manage.py createsuperuser
 
 ### populate the database with small subset of data:
  python starchaser/manage.py import_metadata   starchaser/training_set_metadata.csv
